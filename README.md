@@ -5,7 +5,9 @@ Welcome to the Technician Work Order Portal project repository. Please make sure
 
 ###Running Project Locally
 To run the project locally execute the setup script located at from the repository *root* directory: 
-```./setup/dev-environment.sh```
+```
+./setup/dev-environment.sh
+```
 
 The script will install all the necessary dependencies to run the project and instantiate a local server with hot reloading.
 ---
