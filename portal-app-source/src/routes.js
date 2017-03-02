@@ -1,5 +1,5 @@
 // Import Parent Compontents
-import homeMain from './components/parent-templates/home.vue';
+import Dashboard from './components/parent-templates/dashboard.vue';
 import AuthComponent from './components/auth/Authentication.vue';
 import LoginComponent from './components/auth/Login.vue';
 import RegisterComponent from './components/auth/Register.vue';
@@ -9,7 +9,7 @@ import RegisterComponent from './components/auth/Register.vue';
 export const routes = [
   {
     path: '',
-    component: homeMain
+    component: Dashboard
   },
   {
     path:'/auth',
@@ -28,10 +28,10 @@ export const routes = [
   },
   {
     path: '/home1',
-    component: homeMain
+    component: Dashboard
   },
   {
     path: '/home2',
-    component: homeMain
+    component: Dashboard
   }
 ];

@@ -21,7 +21,5 @@
 </script>
 
 <style lang="scss" scoped>
-  .mdev-main-wrapper {
-    padding-top: 200px;
-  }
+
 </style>
