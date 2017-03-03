@@ -10,7 +10,7 @@ import ResetComponent from './components/auth/Reset.vue';
 export const routes = [
   {
     path: '',
-    component: Dashboard
+    redirect: '/auth'
   },
   {
     path:'/auth',
@@ -30,6 +30,10 @@ export const routes = [
         component: ResetComponent
       }
     ]
+  },
+  {
+    path: '/dashboard',
+    component: Dashboard
   },
   {
     path: '/home1',

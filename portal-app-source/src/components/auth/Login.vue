@@ -30,8 +30,12 @@
     login: function() {
       this.$http.post("user.json", this.user)
         .then(function(res){
+          // Notify User
           alertify.success('You have Successfully Created a User.');
-          alertify.success('You will be redirected to Login shortly...');
+          // Store Token
+          this.$auth.setToken('abcd', Date.now() + 14400000);
+          // Redirect
+          this.$router.push('/auth/reset');
         });
       console.log(this.user);
     }

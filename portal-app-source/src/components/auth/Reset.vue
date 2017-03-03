@@ -28,8 +28,7 @@
     register: function() {
       this.$http.post("user.json", this.user)
         .then(function(res){
-          alertify.success('You have Successfully Created a User.');
-          alertify.success('You will be redirected to Login shortly...');
+          alertify.success('You have Successfully Reset your Password');
         });
       console.log(this.user);
     }
