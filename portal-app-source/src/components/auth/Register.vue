@@ -3,7 +3,8 @@
     <h2>Register</h2>
 
     <input v-model="user.email" type="email" placeholder="Email" >
-    <input v-model="user.username" type="text" placeholder="Username" >
+    <input v-model="user.firstname" type="text" placeholder="First name" >
+    <input v-model="user.lastname" type="text" placeholder="Last name" >
     <input v-model="user.password" type="password" placeholder="Password" >
     <button @click="register">Register</button>
     <hr>
@@ -21,22 +22,19 @@
     return{
       user: {
         email: "",
-        username: "",
+        firstname: "",
+        lastname: "",
         password: ""
       }
     };
    },
    methods: {
     register: function() {
-      this.$http.post("user.json", this.user)
+      this.$http.post("/user.json", this.user)
         .then(function(res){
-          //Success
-          console.log('success');
-        })
-        .catch(function(res){
-          //Fail
-          console.log('fail');
-        });
+          alertify.success('You have Successfully Created a User.');
+          alertify.success('You will be redirected to Login shortly...');
+        }).done();
       
       console.log(this.user);
     }

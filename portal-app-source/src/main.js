@@ -53,7 +53,15 @@ Vue.http.options.root = 'https://vuejs-http-resource.firebaseio.com/';
 // Set Global Intercept 
 Vue.http.interceptors.push( (request, next) => {
   console.log(request);
-  next(); 
+  // To use when defining a single API that is not firebase
+  //if (request.url[0] === '/'){
+  //  request.url = "https:apiurl:3030" + request.url;
+  //}
+  next( function(response){
+    if (response.status == 404){
+      alertify.error('Sorry, Our systems are not responding right now.');
+    }
+  }); 
 });
 //--------------------------------------[ vue-resource ]
 
