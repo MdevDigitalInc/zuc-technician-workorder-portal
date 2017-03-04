@@ -1,6 +1,6 @@
 <template>
   <section class="mdev-main-content">
-    <hero-main></hero-main>
+    <h1>CRAZY TEST</h1>
   </section>
 </template>
 
