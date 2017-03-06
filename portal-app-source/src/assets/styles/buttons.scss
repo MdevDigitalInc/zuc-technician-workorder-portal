@@ -22,12 +22,12 @@
 
 .mdev-action-btn {
   color: $charcoal-grey;
-  background: $escavator-yellow;
-  border: 1px solid rgba(242,170,0,0);
+  background: $zucora-green;
+  border: 1px solid rgba(122,193,66,0);
 
   &:hover {
-    color: $escavator-yellow;
+    color: $zucora-green;
     background: $charcoal-grey;
-    border: 1px solid rgba(242,170,0,1);
+    border: 1px solid rgba(122,193,66,1);
   }
 }
