@@ -180,7 +180,7 @@
     }
 
     .--active {
-      color: $escavator-yellow;
+      color: $zucora-green;
     }
   }
 
