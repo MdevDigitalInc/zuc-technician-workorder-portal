@@ -1,9 +1,10 @@
 <template>
   <main id="app">
-    <main-navigation></main-navigation>
+    <main-navigation v-if="showNav"></main-navigation>
     <transition name="fade">
       <router-view></router-view>
     </transition>
+    <main-footer></main-footer>
   </main>
 </template>
 
@@ -14,11 +15,41 @@
   
   //Local Component registration
   import MainNavigation from './components/shared/navigation.vue';
-  
+  import MainFooter from './components/shared/footer.vue';
+
   export default{
+    name: 'MainNavigation',
+
+    data: function() {
+      return{
+        showNav: true
+      };
+    },
+    
+    watch: {
+      '$route'(to, from) {
+        this.determineVisibility(to.path);
+      }
+    },
+    
+    mounted: function(){
+      this.determineVisibility(this.$route.path);
+    },
+
+    methods: {
+      determineVisibility(path) {
+        if (path.search(/auth/) ) {
+          this.showNav = false;
+        }
+        else {
+          this.showNav = true;
+        }
+      }
+    },
 
     components: {
-      'main-navigation' : MainNavigation
+      'main-navigation' : MainNavigation,
+      'main-footer'     : MainFooter
     }
   };
 </script>

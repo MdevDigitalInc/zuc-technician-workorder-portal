@@ -1,1 +1,14 @@
 
+// Alertify.js Global Overrides
+// http://http://alertifyjs.com/
+//
+
+.ajs-message {
+  color: $white;
+  font-weight: 700;
+  border-radius: 4px;
+}
+
+.alertify-notifier.ajs-bottom {
+  bottom: 60px;
+}

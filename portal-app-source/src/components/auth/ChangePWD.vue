@@ -1,9 +1,9 @@
 <template>
   <div class="mdev-form-group">
-    <h1 class="mdev-form-title">Work Order Portal Login</h1>
-    <input v-model="user.email" type="text" placeholder="Email">
-    <input v-model="user.password" type="password" placeholder="Password">
-    <router-link to="/auth/reset" class="--reset_link">forgot password?</router-link>
+    <h1>Change Password</h1>
+    <input v-model="user.oldPassword" type="text" placeholder="Old Password">
+    <input v-model="user.newPassword" type="password" placeholder="New Password">
+    <input v-model="user.newPasswordConfirm" type="password" placeholder="Confirm New Password">
     <div class="mdev-action-group u-text-center">
       <button @click="login" class="mdev-base-btn mdev-action-btn"> Log In </button>
     </div>
@@ -12,13 +12,14 @@
 
 <script>
   export default {
-   name: "LoginComponent",
+   name: "ChangePwdComponent",
 
    data: function() {
     return{
       user:{
-        email     : "",
-        password  : ""
+        oldPassword         : "",
+        newPassword         : "",
+        newPasswordConfirm  : ""
       }
     };
    },

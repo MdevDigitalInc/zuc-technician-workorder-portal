@@ -1,15 +1,11 @@
 <template>
- <div class="mdev-main-wrapper">
-    <div class="">
-      <h2> Reset </h2>
-      <input v-model="user.email" type="text" placeholder="Email">
-      <button @click="reset"> reset </button>
-      <hr>
-      <p>
-        Don't have an account? <router-link to="/auth/register"> Sign Up! </router-link>
-      </p>
+  <div class="mdev-form-group">
+    <h1>Password Reset</h1>
+    <input v-model="user.email" type="text" placeholder="Email">
+    <div class="mdev-action-group u-text-center">
+      <button @click="reset" class="mdev-base-btn mdev-action-btn"> reset </button>
     </div>
- </div> 
+  </div> 
 </template>
 
 <script>
@@ -19,13 +15,13 @@
    data: function() {
     return{
       user:{
-        email: ""
+        email : ""
       }
     };
    },
 
    methods: {
-    register: function() {
+    reset: function() {
       this.$http.post("user.json", this.user)
         .then(function(res){
           alertify.success('You have Successfully Reset your Password');
@@ -36,6 +32,6 @@
   };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 
 </style>
