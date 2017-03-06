@@ -1,15 +1,16 @@
 // Import Parent Compontents
-import homeMain from './components/parent-templates/home.vue';
+import Dashboard from './components/parent-templates/dashboard.vue';
 import AuthComponent from './components/auth/Authentication.vue';
 import LoginComponent from './components/auth/Login.vue';
 import RegisterComponent from './components/auth/Register.vue';
+import ResetComponent from './components/auth/Reset.vue';
 
 // Export routes as named constant array.
 // Routes consist of desired path + bound parent component
 export const routes = [
   {
     path: '',
-    component: homeMain
+    redirect: '/auth'
   },
   {
     path:'/auth',
@@ -23,15 +24,23 @@ export const routes = [
       {
         path: "register",
         component: RegisterComponent
+      },
+      {
+        path: "reset",
+        component: ResetComponent
       }
     ]
   },
   {
+    path: '/dashboard',
+    component: Dashboard
+  },
+  {
     path: '/home1',
-    component: homeMain
+    component: Dashboard
   },
   {
     path: '/home2',
-    component: homeMain
+    component: Dashboard
   }
 ];
