@@ -3,8 +3,13 @@ form {
   position: relative;
 }
 
+
 /* stylelint-disable */
 /* Disabled because it is valid and I need this level of control*/
+.mdev-error {
+  border: 2px solid red!important;
+  color: red!important;
+}
 input {
   &[type="text"],
   &[type="email"],

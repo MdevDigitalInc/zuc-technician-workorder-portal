@@ -29,6 +29,10 @@ export const routes = [
       {
         path: "reset",
         component: ResetComponent
+      },
+      {
+        path: "changepwd",
+        component: ChangePwdComponent
       }
     ]
   },

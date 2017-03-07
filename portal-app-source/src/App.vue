@@ -38,7 +38,7 @@
 
     methods: {
       determineVisibility(path) {
-        if (path.search(/auth/) ) {
+        if ( path.includes("auth") ) {
           this.showNav = false;
         }
         else {

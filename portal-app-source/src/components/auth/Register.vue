@@ -28,13 +28,32 @@
    },
    methods: {
     register: function() {
-      this.$http.post("/user.json", this.user)
-        .then(function(res){
-          alertify.success('You have Successfully Created a User.');
-          alertify.success('You will be redirected to Login shortly...');
-        }).done();
+
+      // Clear Any Errors
+      this.$validate.clearErrors();
+      // Collect Fields
+      var formFields = $('input:not([type="submit"]):not([type="button"])');
       
-      console.log(this.user);
+      // Validate Fields
+      if (this.$validate.validateFields(formFields)) {      
+        if (this.$validate.validateEmail(emailField)) {
+          this.$http.post("user.json", this.user)
+            .then(function(res){
+              // Notify User
+              alertify.success('You have Successfully Created a User.');
+              // Store Token
+              this.$auth.setToken('abcd', Date.now() + 14400000);
+              // Redirect
+              //this.$router.push('/auth/reset');
+            });
+         }
+         else {
+          alertify.error('Please use a valid e-mail address.');
+         }
+      }
+      else {
+        alertify.error('Please ensure the form is completely filled in.');
+      }
     }
    }
   };

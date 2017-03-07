@@ -37,7 +37,7 @@
         return require('../../assets/images/' + path);
       },
       determineVisibility(path) {
-        if (path === "/auth/register") {
+        if (path === "/auth/register" || path === "/auth/changepwd") {
           this.showRegister = false;
         } 
         else {
