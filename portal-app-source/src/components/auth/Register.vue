@@ -2,10 +2,10 @@
   <div class="mdev-form-group">
     <h1>Work Order Portal Registration</h1>
 
-    <input v-model="user.email" type="email" placeholder="Email" >
-    <input v-model="user.firstname" type="text" placeholder="First name" >
-    <input v-model="user.lastname" type="text" placeholder="Last name" >
-    <input v-model="user.password" type="password" placeholder="Password" >
+    <input data-required v-model="user.email" type="email" placeholder="Email" >
+    <input data-required v-model="user.firstname" type="text" placeholder="First name" >
+    <input data-required v-model="user.lastname" type="text" placeholder="Last name" >
+    <input data-required v-model="user.password" type="password" placeholder="Password" >
     <div class="mdev-action-group u-text-center">
       <button @click="register" class="mdev-base-btn mdev-action-btn">Register</button>
     </div>
@@ -32,7 +32,8 @@
       // Clear Any Errors
       this.$validate.clearErrors();
       // Collect Fields
-      var formFields = $('input:not([type="submit"]):not([type="button"])');
+      var formFields = $('[data-required]');
+      var emailField = $('input[type="email"]');
       
       // Validate Fields
       if (this.$validate.validateFields(formFields)) {      
@@ -40,7 +41,7 @@
           this.$http.post("user.json", this.user)
             .then(function(res){
               // Notify User
-              alertify.success('You have Successfully Created a User.');
+              alertify.success(this.$t("validation.messages.success.register"));
               // Store Token
               this.$auth.setToken('abcd', Date.now() + 14400000);
               // Redirect
@@ -48,11 +49,11 @@
             });
          }
          else {
-          alertify.error('Please use a valid e-mail address.');
+          alertify.error(this.$t("validation.errors.email"));
          }
       }
       else {
-        alertify.error('Please ensure the form is completely filled in.');
+        alertify.error(this.$t("validation.errors.form"));
       }
     }
    }

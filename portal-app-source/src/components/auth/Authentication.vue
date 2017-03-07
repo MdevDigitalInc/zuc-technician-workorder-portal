@@ -65,7 +65,7 @@
   .mdev-auth-module {
     $top-padding-var: 35px;
     $border-top-size: 8px;
-    position:absolute;
+    position: absolute;
     min-width: 320px;
     max-width: 380px;
     width: 40%;

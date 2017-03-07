@@ -1,7 +1,7 @@
 <template>
   <div class="mdev-form-group">
     <h1>Password Reset</h1>
-    <input v-model="user.email" type="email" placeholder="Email">
+    <input data-required v-model="user.email" type="email" placeholder="Email">
     <div class="mdev-action-group u-text-center">
       <button @click="reset" class="mdev-base-btn mdev-action-btn"> reset </button>
     </div>
@@ -25,7 +25,8 @@
       
       this.$validate.clearErrors();
       // Collect Fields
-      var formFields = $('input:not([type="submit"]):not([type="button"])');
+      var formFields = $('[data-required]');
+      var emailField = $('input[type="email"]');
       
       // Validate Fields
       if (this.$validate.validateFields(formFields)) { 
@@ -33,7 +34,7 @@
           this.$http.post("user.json", this.user)
             .then(function(res){
               // Notify User
-              alertify.success('You have Successfully Created a User.');
+              alertify.success(this.$t("validation.messages.success.reset"));
               // Store Token
               this.$auth.setToken('abcd', Date.now() + 14400000);
               // Redirect
@@ -41,11 +42,11 @@
             });
          }
          else {
-          alertify.error('Please use a valid e-mail address.');
+          alertify.error(this.$t("validation.errors.email"));
          }
       }
       else {
-        alertify.error('Please make sure to fill in your email');
+        alertify.error(this.$t("validation.errors.form"));
       }
     }
    }

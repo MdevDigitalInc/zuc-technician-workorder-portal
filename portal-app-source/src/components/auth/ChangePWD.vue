@@ -1,9 +1,9 @@
 <template>
   <div class="mdev-form-group">
     <h1>Change Password</h1>
-    <input v-model="user.oldPassword" type="email" placeholder="Old Password">
-    <input v-model="user.newPassword" type="password" placeholder="New Password">
-    <input v-model="user.newPasswordConfirm" type="password" placeholder="Confirm New Password">
+    <input data-required v-model="user.oldPassword" type="email" placeholder="Old Password">
+    <input data-required v-model="user.newPassword" type="password" placeholder="New Password">
+    <input data-required v-model="user.newPasswordConfirm" type="password" placeholder="Confirm New Password">
     <div class="mdev-action-group u-text-center">
       <button @click="changePwd" class="mdev-base-btn mdev-action-btn"> Change </button>
     </div>
@@ -30,27 +30,27 @@
       // Clear Any Errors
       this.$validate.clearErrors();
       // Collect Fields
-      var formFields = $('input:not([type="submit"]):not([type="button"])');
+      var formFields = $('[data-required]');
       
       // Validate Fields
       if (this.$validate.validateFields(formFields)) {
-        if (this.$validate.validateEmail(emailField)) {
+        if (this.$validate.validateMatch(this.user.newPassword, this.user.newPasswordConfirm)) {
           this.$http.post("user.json", this.user)
             .then(function(res){
               // Notify User
-              alertify.success('You have Successfully Created a User.');
+              alertify.success(this.$t("validation.messages.success.change"));
               // Store Token
               this.$auth.setToken('abcd', Date.now() + 14400000);
               // Redirect
               //this.$router.push('/auth/reset');
             });
-         }
-         else {
-          alertify.error('Please use a valid e-mail address.');
-         }
+        }
+        else {
+          alertify.error(this.$t("validation.errors.match"));   
+        }
       }
       else {
-        alertify.error('Please make sure the form is correct.');
+        alertify.error(this.$t("validation.errors.form"));
       }
     }
    }

@@ -32,14 +32,39 @@ var ValidatePlugin = {
   },
 
   validateEmail: function(payload) {
-    console.log(payload[0].value);
-    console.log(payload);
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(payload[0].value)){
+    // Initiate Loop Var
+    var i;
+    // Initialize Flag
+    var errorPresent = false;
+
+    for (i = 0; i < payload.length; i++){
+      if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(payload[0].value)){
+        errorPresent = false;
+      }
+      else {
+        $(payload[i]).addClass('mdev-error');
+        errorPresent = true;
+      }
+    }
+    
+    if (errorPresent === true) {
+      return false;
+    }
+    else {
+      return true;
+    }
+  },
+
+  validateMatch: function (set, match){
+    console.log(set);
+    console.log(match);
+    if( set === match) {
       return true;
     }
     else {
       return false;
     }
+    
   },
 
   clearErrors: function(){

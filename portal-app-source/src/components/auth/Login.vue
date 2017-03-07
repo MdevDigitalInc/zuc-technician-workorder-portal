@@ -1,8 +1,8 @@
 <template>
   <div class="mdev-form-group">
     <h1 class="mdev-form-title">Work Order Portal Login</h1>
-    <input v-model="user.email" type="email" placeholder="Email">
-    <input v-model="user.password" type="password" placeholder="Password">
+    <input data-required v-model="user.email" type="email" placeholder="Email">
+    <input data-required v-model="user.password" type="password" placeholder="Password">
     <router-link to="/auth/reset" class="--reset_link">forgot password?</router-link>
     <div class="mdev-action-group u-text-center">
       <button @click="login" class="mdev-base-btn mdev-action-btn"> Log In </button>
@@ -29,7 +29,7 @@
       // Clear Any Errors
       this.$validate.clearErrors();
       // Collect Fields
-      var formFields = $('input:not([type="submit"]):not([type="button"])');
+      var formFields = $('[data-required]');
       var emailField = $('input[type="email"]');
       
       // Validate Fields
@@ -38,7 +38,7 @@
           this.$http.post("user.json", this.user)
             .then(function(res){
               // Notify User
-              alertify.success('You have Successfully Created a User.');
+              alertify.success(this.$t("validation.messages.success.login"));
               // Store Token
               this.$auth.setToken('abcd', Date.now() + 14400000);
               // Redirect
@@ -46,11 +46,11 @@
             });
          }
          else {
-          alertify.error('Please use a valid e-mail address.');
+          alertify.error(this.$t("validation.errors.email"));
          }
       }
       else {
-        alertify.error('Please check the form and try again.');
+        alertify.error(this.$t("validation.errors.form"));
       }
     }
    }
