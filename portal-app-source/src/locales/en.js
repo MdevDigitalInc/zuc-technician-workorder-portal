@@ -3,7 +3,8 @@ export default {
     errors: {
       form: "I think you missed something, please check the form.",
       email: "Please provide a valid Email address.",
-      match: "New Passwords do not match."
+      match: "New Passwords do not match.",
+      pwdTooShort: "Passwords need a minimum of 6 characters."
     },
     messages: {
       success: { 

@@ -1,9 +1,9 @@
 <template>
   <div class="mdev-auth-module">
   <!-- Brand -->
-    <div class="mdev-auth-brand">
+    <router-link class="mdev-auth-brand" to="/auth">
       <img :src="loadImage(mainBrand)">
-    </div>
+    </router-link>
     <!-- Form  -->
     <router-view class="mdev-auth-forms"></router-view>
     <!-- Reset -->
@@ -103,6 +103,7 @@
   }
 
   .mdev-auth-brand {
+    display: block;
     width: 60%;
     margin: 0 auto 30px auto;
   }

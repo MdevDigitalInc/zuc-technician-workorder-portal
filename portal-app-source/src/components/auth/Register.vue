@@ -36,24 +36,20 @@
       var emailField = $('input[type="email"]');
       
       // Validate Fields
-      if (this.$validate.validateFields(formFields)) {      
-        if (this.$validate.validateEmail(emailField)) {
-          this.$http.post("user.json", this.user)
-            .then(function(res){
-              // Notify User
-              alertify.success(this.$t("validation.messages.success.register"));
-              // Store Token
-              this.$auth.setToken('abcd', Date.now() + 14400000);
-              // Redirect
-              //this.$router.push('/auth/reset');
-            });
-         }
-         else {
-          alertify.error(this.$t("validation.errors.email"));
-         }
-      }
-      else {
-        alertify.error(this.$t("validation.errors.form"));
+      if (
+        this.$validate.validateFields(formFields, this.$t("validation.errors.form")) &&
+        this.$validate.validatePassword(this.user.password, this.$t("validation.errors.pwdTooShort")) &&
+        this.$validate.validateEmail(emailField, this.$t("validation.errors.email"))
+      ){      
+        this.$http.post("user.json", this.user)
+          .then(function(res){
+            // Notify User
+            alertify.success(this.$t("validation.messages.success.register"));
+            // Store Token
+            this.$auth.setToken('abcd', Date.now() + 14400000);
+            // Redirect
+            //this.$router.push('/auth/reset');
+          });
       }
     }
    }

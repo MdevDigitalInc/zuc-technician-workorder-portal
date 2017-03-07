@@ -33,24 +33,21 @@
       var formFields = $('[data-required]');
       
       // Validate Fields
-      if (this.$validate.validateFields(formFields)) {
-        if (this.$validate.validateMatch(this.user.newPassword, this.user.newPasswordConfirm)) {
-          this.$http.post("user.json", this.user)
-            .then(function(res){
-              // Notify User
-              alertify.success(this.$t("validation.messages.success.change"));
-              // Store Token
-              this.$auth.setToken('abcd', Date.now() + 14400000);
-              // Redirect
-              //this.$router.push('/auth/reset');
-            });
-        }
-        else {
-          alertify.error(this.$t("validation.errors.match"));   
-        }
-      }
-      else {
-        alertify.error(this.$t("validation.errors.form"));
+      if (
+        this.$validate.validateFields(formFields, this.$t("validation.errors.form")) &&
+        this.$validate.validatePassword(this.user.newPassword, this.$t("validation.errors.pwdTooShort")) &&
+        this.$validate.validateMatch(this.user.newPassword, this.user.newPasswordConfirm, this.$t("validation.errors.match"))
+      ){
+
+        this.$http.post("user.json", this.user)
+          .then(function(res){
+            // Notify User
+            alertify.success(this.$t("validation.messages.success.change"));
+            // Store Token
+            this.$auth.setToken('abcd', Date.now() + 14400000);
+            // Redirect
+            //this.$router.push('/auth/reset');
+          });
       }
     }
    }
