@@ -1,16 +1,14 @@
 <template>
-  <div class="mdev-main-wrapper">
-    <h2>Register</h2>
+  <div class="mdev-form-group">
+    <h1>Work Order Portal Registration</h1>
 
-    <input v-model="user.email" type="email" placeholder="Email" >
-    <input v-model="user.firstname" type="text" placeholder="First name" >
-    <input v-model="user.lastname" type="text" placeholder="Last name" >
-    <input v-model="user.password" type="password" placeholder="Password" >
-    <button @click="register">Register</button>
-    <hr>
-    <p>
-      Already have an account? <router-link to="/auth/login">Login! </router-link>
-    </p>
+    <input data-required v-model="user.email" type="email" placeholder="Email" >
+    <input data-required v-model="user.firstname" type="text" placeholder="First name" >
+    <input data-required v-model="user.lastname" type="text" placeholder="Last name" >
+    <input data-required v-model="user.password" type="password" placeholder="Password" >
+    <div class="mdev-action-group u-text-center">
+      <button @click="register" class="mdev-base-btn mdev-action-btn">Register</button>
+    </div>
   </div>
 </template>
 
@@ -21,27 +19,43 @@
    data: function(){
     return{
       user: {
-        email: "",
-        firstname: "",
-        lastname: "",
-        password: ""
+        email     : "",
+        firstname : "",
+        lastname  : "",
+        password  : ""
       }
     };
    },
    methods: {
     register: function() {
-      this.$http.post("/user.json", this.user)
-        .then(function(res){
-          alertify.success('You have Successfully Created a User.');
-          alertify.success('You will be redirected to Login shortly...');
-        }).done();
+
+      // Clear Any Errors
+      this.$validate.clearErrors();
+      // Collect Fields
+      var formFields = $('[data-required]');
+      var emailField = $('input[type="email"]');
       
-      console.log(this.user);
+      // Validate Fields
+      if (
+        this.$validate.validateFields(formFields, this.$t("validation.errors.form")) &&
+        this.$validate.validatePassword(this.user.password, this.$t("validation.errors.pwdTooShort")) &&
+        this.$validate.validateEmail(emailField, this.$t("validation.errors.email"))
+      ){      
+        this.$http.post("user.json", this.user)
+          .then(function(res){
+            // Notify User
+            alertify.success(this.$t("validation.messages.success.register"));
+            // Store Token
+            this.$auth.setToken('abcd', Date.now() + 14400000);
+            // Redirect
+            //this.$router.push('/auth/reset');
+          });
+      }
     }
    }
   };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 
 </style>

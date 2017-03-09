@@ -1,15 +1,11 @@
 <template>
- <div class="mdev-main-wrapper">
-    <div class="">
-      <h2> Reset </h2>
-      <input v-model="user.email" type="text" placeholder="Email">
-      <button @click="reset"> reset </button>
-      <hr>
-      <p>
-        Don't have an account? <router-link to="/auth/register"> Sign Up! </router-link>
-      </p>
+  <div class="mdev-form-group">
+    <h1>Password Reset</h1>
+    <input data-required v-model="user.email" type="email" placeholder="Email">
+    <div class="mdev-action-group u-text-center">
+      <button @click="reset" class="mdev-base-btn mdev-action-btn"> reset </button>
     </div>
- </div> 
+  </div> 
 </template>
 
 <script>
@@ -19,23 +15,39 @@
    data: function() {
     return{
       user:{
-        email: ""
+        email : ""
       }
     };
    },
 
    methods: {
-    register: function() {
-      this.$http.post("user.json", this.user)
-        .then(function(res){
-          alertify.success('You have Successfully Reset your Password');
-        });
-      console.log(this.user);
+    reset: function() {
+      
+      this.$validate.clearErrors();
+      // Collect Fields
+      var formFields = $('[data-required]');
+      var emailField = $('input[type="email"]');
+      
+      // Validate Fields
+      if (
+        this.$validate.validateFields(formFields, this.$t("validation.errors.form")) &&
+        this.$validate.validateEmail(emailField, this.$t("validation.errors.email"))
+      ){
+        this.$http.post("user.json", this.user)
+          .then(function(res){
+            // Notify User
+            alertify.success(this.$t("validation.messages.success.reset"));
+            // Store Token
+            this.$auth.setToken('abcd', Date.now() + 14400000);
+            // Redirect
+            //this.$router.push('/auth/reset');
+          });
+       }
     }
    }
   };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 
 </style>

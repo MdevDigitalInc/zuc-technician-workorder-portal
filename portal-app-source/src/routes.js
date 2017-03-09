@@ -4,6 +4,7 @@ import AuthComponent from './components/auth/Authentication.vue';
 import LoginComponent from './components/auth/Login.vue';
 import RegisterComponent from './components/auth/Register.vue';
 import ResetComponent from './components/auth/Reset.vue';
+import ChangePwdComponent from './components/auth/ChangePWD.vue';
 
 // Export routes as named constant array.
 // Routes consist of desired path + bound parent component
@@ -28,6 +29,10 @@ export const routes = [
       {
         path: "reset",
         component: ResetComponent
+      },
+      {
+        path: "changepwd",
+        component: ChangePwdComponent
       }
     ]
   },
