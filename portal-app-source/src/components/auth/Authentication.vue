@@ -1,13 +1,13 @@
 <template>
-  <div class="mdev-auth-module">
+  <div class="mdev-auth-module" aria-label="Authentication Form">
   <!-- Brand -->
-    <router-link class="mdev-auth-brand" to="/auth">
-      <img :src="loadImage(mainBrand)">
+    <router-link class="mdev-auth-brand" to="/auth" title="Zucora Inc. Technician Work Order Portal" aria-label="Technician Work Order Portal Home Link.">
+      <img :src="loadImage(mainBrand)" alt="Zucora Inc. Logo" >
     </router-link>
     <!-- Form  -->
-    <router-view class="mdev-auth-forms"></router-view>
+    <router-view class="mdev-auth-forms" aria-label="Primary Form Window"></router-view>
     <!-- Reset -->
-    <router-link v-if="showRegister" to="/auth/register"> register </router-link>
+    <router-link v-if="showRegister" to="/auth/register" title="Register new technician account." aria-label="Register new technician account."> register </router-link>
   </div>
 </template>
 
@@ -66,7 +66,7 @@
     $top-padding-var: 35px;
     $border-top-size: 8px;
     position: absolute;
-    min-width: 320px;
+    min-width: 300px;
     max-width: 380px;
     width: 40%;
     padding:($top-padding-var + $border-top-size) 30px 30px 30px;

@@ -1,9 +1,20 @@
 <template>
   <div class="mdev-form-group">
     <h1>Password Reset</h1>
-    <input data-required v-model="user.email" type="email" placeholder="Email">
+    
+    <input
+      data-required
+      aria-required="true"
+      aria-label="Email"
+      v-model="user.email"
+      type="email"
+      placeholder="Email">
+    
     <div class="mdev-action-group u-text-center">
-      <button @click="reset" class="mdev-base-btn mdev-action-btn"> reset </button>
+      <button
+        @click="reset"
+        aria-label="Reset Password"
+        class="mdev-base-btn mdev-action-btn"> reset </button>
     </div>
   </div> 
 </template>

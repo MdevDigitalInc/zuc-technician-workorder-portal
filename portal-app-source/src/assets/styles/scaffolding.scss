@@ -23,3 +23,23 @@
     max-width: 1600px; 
   }
 }
+
+// Content Container
+
+.mdev-main-content-frame {
+  width: 100%;
+  height: auto;
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 15px;
+}
+
+.mdev-frame-header {
+  width: 100%;
+  display: block;
+  background: $zucora-blue;
+  color: $white;
+  padding: 15px;
+  font-weight: $heading-weight; 
+  @include font-size($h3-font-sizes);
+}
