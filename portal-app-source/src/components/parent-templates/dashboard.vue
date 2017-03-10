@@ -1,6 +1,7 @@
 <template>
   <section class="mdev-main-content">
     <h1>CRAZY TEST</h1>
+    <router-view></router-view>
   </section>
 </template>
 

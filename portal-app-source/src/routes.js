@@ -1,10 +1,12 @@
 // Import Parent Compontents
 import Dashboard from './components/parent-templates/dashboard.vue';
-import AuthComponent from './components/auth/Authentication.vue';
-import LoginComponent from './components/auth/Login.vue';
-import RegisterComponent from './components/auth/Register.vue';
-import ResetComponent from './components/auth/Reset.vue';
-import ChangePwdComponent from './components/auth/ChangePWD.vue';
+import Auth from './components/auth/Authentication.vue';
+import Login from './components/auth/Login.vue';
+import Register from './components/auth/Register.vue';
+import Reset from './components/auth/Reset.vue';
+import ChangePwd from './components/auth/ChangePWD.vue';
+import WorkOrderList from './components/modules/work-order-list.vue';
+import WorkOrderDetail from './components/modules/work-order-details.vue';
 
 // Export routes as named constant array.
 // Routes consist of desired path + bound parent component
@@ -15,30 +17,41 @@ export const routes = [
   },
   {
     path:'/auth',
-    component: AuthComponent,
+    component: Auth,
     redirect: '/auth/login',
     children: [
       {
         path: "login",
-        component: LoginComponent
+        component: Login
       },
       {
         path: "register",
-        component: RegisterComponent
+        component: Register
       },
       {
         path: "reset",
-        component: ResetComponent
+        component: Reset
       },
       {
         path: "changepwd",
-        component: ChangePwdComponent
+        component: ChangePwd
       }
     ]
   },
   {
     path: '/dashboard',
-    component: Dashboard
+    component: Dashboard,
+    redirect: 'dashboard/list',
+    children: [
+      {
+        path: 'list',
+        component: WorkOrderList
+      },
+      {
+        path: 'workorder/:id',
+        component: WorkOrderDetail
+      }
+    ]
   },
   {
     path: '/home1',
