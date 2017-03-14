@@ -1,6 +1,6 @@
 <template>
-  <section class="mdev-main-content">
-    <h1>CRAZY TEST</h1>
+  <section class="mdev-main-content mdev-main-wrapper">
+    <search-component></search-component>
     <router-view></router-view>
   </section>
 </template>
@@ -11,12 +11,12 @@
 <script>
   
   //Local Component registration
-  import HeroMain       from '../modules/hero-main.vue';
+  import SearchComponent  from '../shared/search-bar.vue';
   
   export default{
 
     components: {
-      'hero-main'       : HeroMain
+      'search-component'  : SearchComponent
     }
   };
 </script>
@@ -33,7 +33,9 @@
 	/*--------------------------------------*/
 	/* Main Component Styles                */
 	/*--------------------------------------*/
-
+  .mdev-table-container {
+    background: $white;
+  }
 
 	/*--------------------------------------*/
 

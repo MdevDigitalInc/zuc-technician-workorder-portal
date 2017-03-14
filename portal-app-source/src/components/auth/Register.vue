@@ -2,12 +2,43 @@
   <div class="mdev-form-group">
     <h1>Work Order Portal Registration</h1>
 
-    <input data-required v-model="user.email" type="email" placeholder="Email" >
-    <input data-required v-model="user.firstname" type="text" placeholder="First name" >
-    <input data-required v-model="user.lastname" type="text" placeholder="Last name" >
-    <input data-required v-model="user.password" type="password" placeholder="Password" >
+    <input 
+      data-required
+      aria-required="true"
+      aria-label="Email Field"
+      v-model="user.email" 
+      type="email" 
+      placeholder="Email" >
+
+    <input 
+      data-required
+      aria-required="true"
+      aria-label="First Name"
+      v-model="user.firstname" 
+      type="text" 
+      placeholder="First name" >
+
+    <input 
+      data-required 
+      aria-required="true"
+      aria-label="Last Name"
+      v-model="user.lastname" 
+      type="text" 
+      placeholder="Last name" >
+    
+    <input 
+      data-required 
+      aria-required="true"
+      aria-label="Password"
+      v-model="user.password" 
+      type="password" 
+      placeholder="Password" >
+    
     <div class="mdev-action-group u-text-center">
-      <button @click="register" class="mdev-base-btn mdev-action-btn">Register</button>
+      <button
+        aria-label="Submit Registration"
+        @click="register" 
+        class="mdev-base-btn mdev-action-btn">Register</button>
     </div>
   </div>
 </template>
