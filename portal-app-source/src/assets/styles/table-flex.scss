@@ -1,0 +1,25 @@
+.mdev-table-container {
+  width: 100%;
+  position: relative;
+
+  .mdev-table-head {
+    width: 100%;
+    position: relative;
+    padding: 10px 30px;
+    justify-content: space-between;
+    align-items: middle;
+  }
+
+  .mdev-table-row{
+    padding: 10px 30px;
+    justify-content:space-between;
+    border-top: 2px solid $bkg-light-grey;
+    align-items: flex-start;
+  }
+
+  .mdev-table-cell{
+    text-align: left;
+  }
+  
+
+}

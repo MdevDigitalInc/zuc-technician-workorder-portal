@@ -1,11 +1,30 @@
 <template>
   <div class="mdev-form-group">
     <h1 class="mdev-form-title">Work Order Portal Login</h1>
-    <input data-required v-model="user.email" type="email" placeholder="Email">
-    <input data-required v-model="user.password" type="password" placeholder="Password">
-    <router-link to="/auth/reset" class="--reset_link">forgot password?</router-link>
+    
+    <input 
+      data-required
+      aria-required="true"
+      aria-label="Email"
+      v-model="user.email"
+      type="email"
+      placeholder="Email">
+    
+    <input
+      data-required
+      aria-required="true"
+      aria-label="Password"
+      v-model="user.password"
+      type="password"
+      placeholder="Password">
+    
+    <router-link to="/auth/reset" class="--reset_link" title="Reset your password.">forgot password?</router-link>
+    
     <div class="mdev-action-group u-text-center">
-      <button @click="login" class="mdev-base-btn mdev-action-btn"> Log In </button>
+      <button 
+        aria-label="Login To Zucora Technician Work Order Portal"
+        @click="login" 
+        class="mdev-base-btn mdev-action-btn"> Log In </button>
     </div>
   </div> 
 </template>

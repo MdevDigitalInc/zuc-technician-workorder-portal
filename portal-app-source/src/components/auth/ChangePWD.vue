@@ -1,11 +1,36 @@
 <template>
   <div class="mdev-form-group">
     <h1>Change Password</h1>
-    <input data-required v-model="user.oldPassword" type="email" placeholder="Old Password">
-    <input data-required v-model="user.newPassword" type="password" placeholder="New Password">
-    <input data-required v-model="user.newPasswordConfirm" type="password" placeholder="Confirm New Password">
+    
+    <input
+      data-required
+      aria-required="true"
+      aria-label="Old Password"
+      v-model="user.oldPassword"
+      type="email"
+      placeholder="Old Password">
+    
+    <input
+      data-required
+      aria-required="true"
+      aria-label="New password"
+      v-model="user.newPassword"
+      type="password"
+      placeholder="New Password">
+    
+    <input
+      data-required
+      aria-required="true"
+      aria-label="Confirm new password"
+      v-model="user.newPasswordConfirm"
+      type="password"
+      placeholder="Confirm New Password">
+    
     <div class="mdev-action-group u-text-center">
-      <button @click="changePwd" class="mdev-base-btn mdev-action-btn"> Change </button>
+      <button
+        aria-label="Change Password"
+        @click="changePwd"
+        class="mdev-base-btn mdev-action-btn"> Change </button>
     </div>
   </div> 
 </template>
