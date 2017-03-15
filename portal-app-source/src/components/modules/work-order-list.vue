@@ -1,7 +1,8 @@
 <template>
-i <!-- Main Container -->
+  <!-- Main Container -->
   <section class="mdev-main-content-frame">
-    <span class="mdev-frame-header">Manage Open Work Orders</span>
+    <!-- Header [FLEX] -->
+    <div class="mdev-frame-header flex flex-start flex-hor-between">Manage Open Work Orders</div>
     <!-- Table Container --> 
     <div class="mdev-table-container">
       <!-- Table Head [FLEX] -->
