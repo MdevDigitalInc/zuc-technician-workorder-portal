@@ -1,7 +1,5 @@
 <template>
-  <div class="mdev-search-form">
-    <input type="text" :placeholder="placeholder" aria-label="Search">
-  </div>
+  <input class="mdev-search-form" type="text" :placeholder="placeholder" aria-label="Search">
 </template>
 
 <script>
@@ -16,7 +14,7 @@ export default {
 
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
 	/*-----/
 	Global Main
@@ -29,18 +27,10 @@ export default {
 
 
 
-  .mdev-search-form {
-    margin: 15px 0;
-    width: 100%;
-    padding: 15px 15px 15px 50px;
-    border-radius: 3px;
+  input{
+    margin: 15px 0 0 0;
+    padding: 20px;
     background: $white;
-  
-    input {
-      background: transparent;
-      border: none;
-      margin-bottom: 0;
-    }
   }
 
 	/*--------------------------------------*/
