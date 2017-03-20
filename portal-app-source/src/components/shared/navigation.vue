@@ -4,10 +4,11 @@
       <a :href="homeLink" :title="homeTitle" class="mdev-main-nav-branding">
         <img :src="loadImage(homeBrand)">
       </a>
-      <div class="mdev-main-nav-links u-uppercase">
+      <div class="mdev-main-nav-links u-capitalize">
         <router-link 
           v-for="link in links" 
-          :to="link.route" 
+          :to="link.route"
+          class ="mdev-nav-link"
           active-class="--active" 
           :title="link.linkTitle" 
           aria-role="menuitem" 
@@ -32,23 +33,28 @@
         // Refer to routes.js file for available routes.
         links: [
           {
-            linkName: 'Link 1',
-            linkTitle: 'Link 1',
-            route: '/'
+            linkName: 'Work Orders',
+            linkTitle: 'Available Work Orders',
+            route: '/dashboard/list'
           },
           {
-            linkName: 'Link 2',
-            linkTitle: 'Link 2',
-            route: '/home1'
+            linkName: 'Billing',
+            linkTitle: 'Billing Report',
+            route: '#'
           },
           {
-            linkName: 'Link 3',
-            linkTitle: 'Link 3',
-            route: '/home2'
+            linkName: 'Contact',
+            linkTitle: 'Contact Information',
+            route: '#'
+          },
+          {
+            linkName: 'User',
+            linkTitle: 'User Menu',
+            route: '#'
           }
         ],
 
-        homeLink: '#',
+        homeLink: '/',
         homeTitle: 'Home',
         homeBrand: 'zucora-white.svg'
       };
@@ -136,14 +142,15 @@
     padding: 35px 0;
     z-index: 10;
     transition: all, .3s;
-    background: rgba(51,51,51,0);
+    opacity: 1;
+    background: $white;
 
     img{
       width: 100%;
     }
 
     .mdev-main-nav-branding {
-      max-width: 83px;
+      max-width: 125px;
       min-width: 73px;
       height: auto;
       width: 10%;
@@ -157,21 +164,23 @@
     }
 
     .mdev-main-nav-links {
-      color: $white;
-      font-weight: $heading-weight;
+      color: $charcoal-grey;
+      font-weight: $body-weight;
     }
 
-    .mdev-main-nav-links a {
-      margin: 0 10px;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0);
+    .mdev-nav-link {
+      margin: 0 5px;
       transition: all, .3s;
+      padding: 6px 15px;
+      background: rgba(230,231,233, 0);
+      border-radius: 3px;
 
       @media screen and ('$tablet-up-comp') {
-        margin: 0 30px;
+        margin: 0 15px;
       }
 
       &:hover {
-        text-shadow: 1px 1px 3px rgba(0,0,0,.6);
+        background: rgba(230,231,233, 1);
       }
 
       &:last-child {
@@ -180,15 +189,14 @@
     }
 
     .--active {
-      color: $escavator-yellow;
+      background: rgba(230,231,233, 1);
     }
   }
 
   .mdev-main-nav-visibility {
-    background: rgba(51,51,51,.6);
-
+    opacity: .6;
     &:hover {
-      background: rgba(51,51,51,.9);
+      opacity: 1;
     }
   }
 

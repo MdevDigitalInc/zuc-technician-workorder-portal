@@ -6,7 +6,8 @@
 body {
   font-family: $main-font;
   font-size: 16px;
-  color: $black;
+  color: $zucora-blue;
+  background-color: $bkg-light-grey;
 }
 
 /* Headings & Body Copy */
@@ -34,27 +35,27 @@ $p-font-sizes: (
 );
 
 $h1-font-sizes: (
-  null  : 25px,
-  $tablet-up : 28px,
-  $desktop-up: 70px
+  null  : 4.5vw,
+  $tablet-up : 1.5vw,
+  $desktop-up: 2vw
 );
 
 $h2-font-sizes: (
   null  : 30px,
   $tablet-up : 32px,
-  $desktop-up: 35px
+  $desktop-up: 1.5vw
 );
 
 $h3-font-sizes: (
   null  : 20px,
   $tablet-up : 22px,
-  $desktop-up: 25px
+  $desktop-up: 1.1vw
 );
 
 $h4-font-sizes: (
   null  : 60%,
   $tablet-up : 90%,
-  $desktop-up: 18px
+  $desktop-up: .8vw
 );
 
 $h5-font-sizes: (
@@ -67,9 +68,10 @@ $h6-font-sizes: (
 
 // Links
 $link-font-sizes: (
-  null  : 16px,
-  $tablet-up : 17px,
-  $desktop-up: 18px
+  null  : 4vw,
+  $tablet-up : 2vw,
+  $laptop-up : 1.2vw,
+  $desktop-up: 1vw
 );
 
 // Responsive Font-Size Mixing (Function Only)

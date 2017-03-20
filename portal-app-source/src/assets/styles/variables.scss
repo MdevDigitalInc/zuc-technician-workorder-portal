@@ -2,18 +2,29 @@
  * VARIABLES - PROJECT WIDE
 /-------------------------------------*/
 
-// Main colors
-$escavator-yellow: #f2aa00;
+// Zucora colors
+$zucora-green: #76be43;
+$zucora-blue: #091f40; 
+
+// General Colors
 $charcoal-grey: #333;
+$bkg-light-grey: #e6e7e8;
 $black: #000;
 $white: #fff;
 
+// States
+$active-orange: #ec5513;
+$active-blue: #1375d7;
+$active-grey: #808285;
+$inactive-grey: #cfcfcf;
 
-//Main Font
-$main-font: 'Titillium Web', 'Helvetica', sans-serif;
+// Main Font
+$main-font: 'Open Sans', 'Helvetica', sans-serif;
 $heading-weight: 700;
 $subheading-weight: 500;
 $body-weight: 300;
 
-
-
+// Spacing
+$small-spacing: 10px;
+$medium-spacing: 15px;
+$large-spacing: 30px;
