@@ -143,7 +143,4 @@
     width: 14%;
   }
 
-  .unreachable {
-    background: orange;
-  }
 </style>

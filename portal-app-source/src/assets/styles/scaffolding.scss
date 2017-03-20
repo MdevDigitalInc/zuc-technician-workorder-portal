@@ -42,3 +42,9 @@
   font-weight: $heading-weight; 
   @include font-size($h3-font-sizes);
 }
+
+// Columns
+
+.mdev-half-column {
+  width: 50%;
+}

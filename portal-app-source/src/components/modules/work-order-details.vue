@@ -86,55 +86,55 @@
 
     <!-- Order Information -->
     <div class="mdev-order-info">
-      <h3>Order Information</h3>
-      <!-- Delivery -->
-      <div class="mdev-info-field">
-        <span>Delivery:</span>
-        <span> {{ orderDetails.order.deliveryDate  }}</span>
-      </div>
+        <div class="mdev-order-wrapper">
+          <h3>Order Information</h3>
+          <!-- Delivery -->
+          <div class="mdev-info-field">
+            <span>Delivery:</span>
+            <span> {{ orderDetails.order.deliveryDate  }}</span>
+          </div>
 
-      <!-- Order Id -->
-      <div class="mdev-info-field">
-        <span>Order#:</span>
-        <span> {{ orderDetails.order.orderId  }}</span>
-      </div>
+          <!-- Order Id -->
+          <div class="mdev-info-field">
+            <span>Order#:</span>
+            <span> {{ orderDetails.order.orderId  }}</span>
+          </div>
 
-      <!-- Store -->
-      <div class="mdev-info-field">
-        <span>Store:</span>
-        <span> {{ orderDetails.order.store  }} </span>
-      </div>
+          <!-- Store -->
+          <div class="mdev-info-field">
+            <span>Store:</span>
+            <span> {{ orderDetails.order.store  }} </span>
+          </div>
+        <!-- SKU's -->
+        <div class="mdev-light-table">
+          <div class="mdev-light-table-head flex flex-hor-start flex-hor-between">
+            <span>QTY</span>
+            <span>SKU</span>
+            <span>Description</span>
+            <span> Value </span>
+          </div>
 
-      <!-- SKU's -->
-      <div class="mdev-light-table">
-        <div class="mdev-light-table-head flex flex-hor-start flex-hor-between">
-          <span>QTY</span>
-          <span>SKU</span>
-          <span>Description</span>
-          <span> Value </span>
+          <div
+            v-for= "sku in orderDetails.order.skus"
+            class="mdev-light-table-row flex flex-hor-start flex-hor-between">
+            <span> {{ sku.quantity  }}</span>
+            <span> {{ sku.sku  }}</span>
+            <span> {{ sku.description  }}</span>
+            <span> {{ sku.value  }}</span>
+          </div>
+        </div>
+        <!-- Order Notes -->
+        <div class="mdev-order-notes">
+          <h3>Notes</h3>
+          <p>
+            {{ orderDetails.notes  }}
+          </p>
         </div>
 
-        <div
-          v-for= "sku in orderDetails.order.skus"
-          class="mdev-light-table-row flex flex-hor-start flex-hor-between">
-          <span> {{ sku.quantity  }}</span>
-          <span> {{ sku.sku  }}</span>
-          <span> {{ sku.description  }}</span>
-          <span> {{ sku.value  }}</span>
-        </div>
+        <!-- Print -->
+        <button class="mdev-base-btn"> Print </button>
       </div>
     </div>
-
-    <!-- Order Notes -->
-    <div class="mdev-order-notes">
-      <h3>Notes</h3>
-      <p>
-        {{ orderDetails.notes  }}
-      </p>
-    </div>
-
-    <!-- Print -->
-    <button class="mdev-base-btn"> Print </button>
 
 
   </section>
@@ -196,4 +196,28 @@
 
 <style lang="scss">
 
+  /*--------------------------------------*/
+  /* Lean Import for Components           */
+  /*--------------------------------------*/
+
+  /* Disable because they are already linted */
+  /* stylelint-disable */
+  @import '../../assets/styles/component-lean-main.scss';
+  /* stylelint-enable */
+
+  /*--------------------------------------*/
+  /* Main Component Styles                */
+  /*--------------------------------------*/
+ 
+  .mdev-frame-header {
+    margin-bottom: $large-spacing;
+  }
+
+  .mdev-order-header, .mdev-order-wrapper {
+    padding: 0 $large-spacing;
+  }
+
+  .mdev-order-info, .mdev-order-header {
+    margin-bottom: $large-spacing;
+  }
 </style>

@@ -33,8 +33,12 @@
 	/*--------------------------------------*/
 	/* Main Component Styles                */
 	/*--------------------------------------*/
-  .mdev-table-container {
+  .mdev-main-content-frame {
     background: $white;
+  }
+
+  .unreachable {
+    background: orange;
   }
 
 	/*--------------------------------------*/
