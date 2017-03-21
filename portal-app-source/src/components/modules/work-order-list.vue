@@ -2,7 +2,7 @@
   <!-- Main Container -->
   <section class="mdev-main-content-frame">
     <!-- Header [FLEX] -->
-    <div class="mdev-frame-header flex flex-start flex-hor-between">Manage Open Work Orders</div>
+    <div class="mdev-frame-header flex flex-start flex-hor-between">{{ $t("orderDetails.title") }}</div>
     <!-- Table Container --> 
     <div class="mdev-table-container">
       <!-- Table Head [FLEX] -->
@@ -50,7 +50,7 @@
 
         <span class="mdev-table-cell" aria-labeledby="statusColumn">
           <button 
-            :class="['mdev-base-btn',{ unreachable: orders.unreachable}]"> Unreachable </button>
+            :class="['mdev-base-btn',{ unreachable: orders.unreachable}]"> {{ $t("general.unreachable") }} </button>
         </span>
 
       </div>
@@ -60,7 +60,8 @@
 
 <script>
   export default {
-    
+    name: "workOrderList",
+
     data: function (){
       return{
         // Header Titles for view. Can be replaced with props.

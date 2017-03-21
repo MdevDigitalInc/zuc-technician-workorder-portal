@@ -28,6 +28,8 @@
 <script>
   export default{
     // <router-link> element is a custom element derived from vue-router. use :to - to bind. 
+    name: "navigation",
+
     data: function(){
       return{
         // Refer to routes.js file for available routes.
@@ -40,7 +42,7 @@
           {
             linkName: 'Billing',
             linkTitle: 'Billing Report',
-            route: '#'
+            route: '/dashboard/billing'
           },
           {
             linkName: 'Contact',

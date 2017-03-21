@@ -1,6 +1,6 @@
 <template>
   <div class="mdev-form-group">
-    <h1 class="mdev-form-title">Work Order Portal Login</h1>
+    <h1 class="mdev-form-title">{{ $t("auth.login.title") }}</h1>
     
     <input 
       data-required
@@ -8,7 +8,7 @@
       aria-label="Email"
       v-model="user.email"
       type="email"
-      placeholder="Email">
+      :placeholder="$t('auth.login.email')">
     
     <input
       data-required
@@ -18,13 +18,13 @@
       type="password"
       placeholder="Password">
     
-    <router-link to="/auth/reset" class="--reset_link" title="Reset your password.">forgot password?</router-link>
+    <router-link to="/auth/reset" class="--reset_link" title="Reset your password.">{{ $t("auth.login.reset") }}</router-link>
     
     <div class="mdev-action-group u-text-center">
       <button 
         aria-label="Login To Zucora Technician Work Order Portal"
         @click="login" 
-        class="mdev-base-btn mdev-action-btn"> Log In </button>
+        class="mdev-base-btn mdev-action-btn"> {{ $t("auth.login.action") }} </button>
     </div>
   </div> 
 </template>

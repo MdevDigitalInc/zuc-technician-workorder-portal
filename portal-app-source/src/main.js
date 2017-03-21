@@ -10,7 +10,7 @@ import App from './App.vue';
 
 // Import Routes & Central Stores
 import { routes  } from './routes.js';
-import store from './store/store.js';
+//import store from './store/store.js';
 
 // Import Auth Plugin
 import Auth from './plugins/auth.js';
@@ -105,6 +105,6 @@ new Vue({
     }
   },
   router,
-  store,
+  //store,
   render: h => h(App)
 });

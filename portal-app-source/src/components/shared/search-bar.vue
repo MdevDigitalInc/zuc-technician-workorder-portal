@@ -1,15 +1,11 @@
 <template>
-  <input class="mdev-search-form" type="text" :placeholder="placeholder" aria-label="Search">
+  <input class="mdev-search-form" type="text" :placeholder="$t('general.search')" aria-label="Search">
 </template>
 
 <script>
 
 export default {
-  data: function() {
-    return {
-      placeholder : "Customer Name, Order Number, Date(MM/DD/YYYY)"
-    };
-  }
+  name: "search"
 };
 
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="mdev-form-group">
-    <h1>Work Order Portal Registration</h1>
+    <h1>{{ $t("auth.register.title") }}</h1>
 
     <input 
       data-required
@@ -8,7 +8,7 @@
       aria-label="Email Field"
       v-model="user.email" 
       type="email" 
-      placeholder="Email" >
+      :placeholder="$t('auth.register.email')" >
 
     <input 
       data-required
@@ -16,7 +16,7 @@
       aria-label="First Name"
       v-model="user.firstname" 
       type="text" 
-      placeholder="First name" >
+      :placeholder="$t('auth.register.firstName')" >
 
     <input 
       data-required 
@@ -24,7 +24,7 @@
       aria-label="Last Name"
       v-model="user.lastname" 
       type="text" 
-      placeholder="Last name" >
+      :placeholder="$t('auth.register.lastName')" >
     
     <input 
       data-required 
@@ -32,13 +32,13 @@
       aria-label="Password"
       v-model="user.password" 
       type="password" 
-      placeholder="Password" >
+      :placeholder="$t('auth.register.pwd')" >
     
     <div class="mdev-action-group u-text-center">
       <button
         aria-label="Submit Registration"
         @click="register" 
-        class="mdev-base-btn mdev-action-btn">Register</button>
+        class="mdev-base-btn mdev-action-btn">{{ $t("auth.register.action") }}</button>
     </div>
   </div>
 </template>

@@ -14,7 +14,7 @@
   import SearchComponent  from '../shared/search-bar.vue';
   
   export default{
-
+    name: "dashboard",
     components: {
       'search-component'  : SearchComponent
     }

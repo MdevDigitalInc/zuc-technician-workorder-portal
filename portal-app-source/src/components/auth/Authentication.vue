@@ -1,13 +1,18 @@
 <template>
-  <div class="mdev-auth-module" aria-label="Authentication Form">
-  <!-- Brand -->
-    <router-link class="mdev-auth-brand" to="/auth" title="Zucora Inc. Technician Work Order Portal" aria-label="Technician Work Order Portal Home Link.">
-      <img :src="loadImage(mainBrand)" alt="Zucora Inc. Logo" >
-    </router-link>
-    <!-- Form  -->
-    <router-view class="mdev-auth-forms" aria-label="Primary Form Window"></router-view>
-    <!-- Reset -->
-    <router-link v-if="showRegister" to="/auth/register" title="Register new technician account." aria-label="Register new technician account."> register </router-link>
+  <div class="mdev-auth-wrapper">
+    <div class="mdev-auth-module" aria-label="Authentication Form">
+    <!-- Brand -->
+      <router-link class="mdev-auth-brand" to="/auth" title="Zucora Inc. Technician Work Order Portal" aria-label="Technician Work Order Portal Home Link.">
+        <img :src="loadImage(mainBrand)" alt="Zucora Inc. Logo" >
+      </router-link>
+      <!-- Form  -->
+      <router-view class="mdev-auth-forms" aria-label="Primary Form Window"></router-view>
+      <!-- Reset -->
+      <router-link v-if="showRegister" to="/auth/register" title="Register new technician account." aria-label="Register new technician account."> 
+        {{ $t("auth.register.action") }} 
+      </router-link>
+    </div>
+    <div class="mdev-splash-bkg"></div>
   </div>
 </template>
 
@@ -62,6 +67,13 @@
   /*--------------------------------------*/
   /* Main Component Styles                */
   /*--------------------------------------*/
+  .mdev-auth-wrapper {
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    position: absolute;
+  }
   .mdev-auth-module {
     $top-padding-var: 35px;
     $border-top-size: 8px;
@@ -77,6 +89,7 @@
     border-top: solid $border-top-size $zucora-green;
     top: 50%;
     left: 50%;
+    z-index: 10;
     transform: translate3D(-50%, -50%, 0);
 
 
@@ -110,6 +123,31 @@
 
   .mdev-action-group {
     margin: 20px 0 10px 0;
+  }
+
+  .mdev-splash-bkg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: url("../../assets/images/login-bkg.jpg");
+    background-size: cover;
+    background-position: center;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    filter: blur(2px);
+
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: $white;
+      opacity: .5;
+      width: 100vw;
+      height: 100vh;
+    }
   }
 
 

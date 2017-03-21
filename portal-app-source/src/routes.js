@@ -7,6 +7,7 @@ import Reset from './components/auth/Reset.vue';
 import ChangePwd from './components/auth/ChangePWD.vue';
 import WorkOrderList from './components/modules/work-order-list.vue';
 import WorkOrderDetail from './components/modules/work-order-details.vue';
+import billingView from './components/modules/billing.vue';
 
 // Export routes as named constant array.
 // Routes consist of desired path + bound parent component
@@ -50,6 +51,10 @@ export const routes = [
       {
         path: 'workorder/:id',
         component: WorkOrderDetail
+      },
+      {
+        path: 'billing',
+        component: billingView
       }
     ]
   },

@@ -3,15 +3,15 @@
   <section class="mdev-main-content-frame">
     <!-- Header [FLEX] -->
     <div class="mdev-frame-header flex flex-hor-start flex-hor-between">
-      <span>Manage Open Work Orders</span>
-      <router-link to="/dashboard/list">Back</router-link>
+      <span>{{ $t("orderDetails.title") }}</span>
+      <router-link to="/dashboard/list">{{ $t("general.navBack") }}</router-link>
     </div>
 
     <!-- Customer / Appointment [ Top Section ] -->
     <div class="mdev-order-header flex flex-start flex-vert-start">
       <!-- Customer Info -->
       <div class="mdev-half-column">
-        <h3>Customer Information </h3>
+        <h3>{{ $t("orderDetails.custInfo") }}</h3>
         <span class="mdev-customer-name">
           {{ orderDetails.customer.custName }}
         </span>
@@ -19,7 +19,7 @@
         
         <!-- Address -->
         <div class="mdev-info-field">
-          <span class="mdev-info-label">Address:</span>
+          <span class="mdev-info-label">{{ $t("general.address") }}</span>
           <span class="mdev-info-content">
             {{ orderDetails.customer.address  }}
           </span>
@@ -27,7 +27,7 @@
         
         <!-- Phone -->
         <div class="mdev-info-field">
-          <span class="mdev-info-label">Phone:</span>
+          <span class="mdev-info-label">{{ $t("general.phone") }}</span>
           <span class="mdev-info-content">
             {{ orderDetails.customer.phone  }}
           </span>
@@ -35,7 +35,7 @@
         
         <!-- Business Phone -->
         <div class="mdev-info-field">
-          <span class="mdev-info-label">Business:</span>
+          <span class="mdev-info-label">{{ $t("general.business") }}</span>
           <span class="mdev-info-content">
             {{ orderDetails.customer.bizPhone  }}
           </span>
@@ -43,7 +43,7 @@
         
         <!-- Customer ID: -->
         <div class="mdev-info-field">
-          <span class="mdev-info-label">Customer ID:</span>
+          <span class="mdev-info-label">{{ $t("general.custId") }}</span>
           <span class="mdev-info-content">
             {{ orderDetails.customer.customerId  }}
           </span>
@@ -51,7 +51,7 @@
         
         <!-- Date Added -->
         <div class="mdev-info-field">
-          <span class="mdev-info-label">Date Added:</span>
+          <span class="mdev-info-label">{{ $t("general.dateAdd") }}</span>
           <span class="mdev-info-content">
             {{ orderDetails.customer.dateAdded  }}
           </span>
@@ -60,15 +60,15 @@
 
       <!-- Appointment Info -->
       <div class="mdev-half-column">
-        <h3>Appointment Details</h3>
+        <h3>{{ $t("orderDetails.apptDetails") }}</h3>
         <!-- Date -->
         <div class="mdev-info-field">
-          <span>Date:</span>
+          <span>{{ $t("general.date") }}</span>
           <span> {{ orderDetails.appointment.time }}</span>
         </div>
         <!-- Time -->
         <div class="mdev-info-field">
-          <span>Time:</span>
+          <span>{{$t("general.time") }}</span>
           <span> {{ orderDetails.appointment.time }}</span>
         </div>
         
@@ -77,7 +77,7 @@
             <input type="text" placeholder="DD/MM/YYYY" v-model="orderDetails.serviceDate">
             <button 
               :class="['mdev-base-btn',{ unreachable: orderDetails.unreachable}]">
-               Unreachable </button>
+               {{ $t("general.unreachable") }} </button>
   
         </div>
 
@@ -87,31 +87,31 @@
     <!-- Order Information -->
     <div class="mdev-order-info">
         <div class="mdev-order-wrapper">
-          <h3>Order Information</h3>
+          <h3>{{ $t("orderDetails.orderInfo") }}</h3>
           <!-- Delivery -->
           <div class="mdev-info-field">
-            <span>Delivery:</span>
+            <span>{{ $t("general.delivery") }}</span>
             <span> {{ orderDetails.order.deliveryDate  }}</span>
           </div>
 
           <!-- Order Id -->
           <div class="mdev-info-field">
-            <span>Order#:</span>
+            <span>{{ $t("general.orderNum") }}</span>
             <span> {{ orderDetails.order.orderId  }}</span>
           </div>
 
           <!-- Store -->
           <div class="mdev-info-field">
-            <span>Store:</span>
+            <span>{{ $t("general.store") }}</span>
             <span> {{ orderDetails.order.store  }} </span>
           </div>
         <!-- SKU's -->
         <div class="mdev-light-table">
           <div class="mdev-light-table-head flex flex-hor-start flex-hor-between">
-            <span>QTY</span>
-            <span>SKU</span>
-            <span>Description</span>
-            <span> Value </span>
+            <span>{{ $t("orderDetails.table.quantity") }}</span>
+            <span>{{ $t("orderDetails.table.sku") }}</span>
+            <span>{{ $t("orderDetails.table.description") }}</span>
+            <span>{{ $t("orderDetails.table.value") }}</span>
           </div>
 
           <div
@@ -125,14 +125,14 @@
         </div>
         <!-- Order Notes -->
         <div class="mdev-order-notes">
-          <h3>Notes</h3>
+          <h3>{{ $t("orderDetails.notes") }}</h3>
           <p>
             {{ orderDetails.notes  }}
           </p>
         </div>
 
         <!-- Print -->
-        <button class="mdev-base-btn"> Print </button>
+        <button class="mdev-base-btn"> {{ $t("general.print") }} </button>
       </div>
     </div>
 
@@ -142,6 +142,8 @@
 
 <script>
   export default {
+    name: "workOrderDetail",
+
     data: function() {
       return{
         orderDetails: {

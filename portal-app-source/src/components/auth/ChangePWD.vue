@@ -1,6 +1,6 @@
 <template>
   <div class="mdev-form-group">
-    <h1>Change Password</h1>
+    <h1>{{ $t("auth.change.title") }}</h1>
     
     <input
       data-required
@@ -8,7 +8,7 @@
       aria-label="Old Password"
       v-model="user.oldPassword"
       type="email"
-      placeholder="Old Password">
+      :placeholder="$t('auth.change.oldPwd')">
     
     <input
       data-required
@@ -16,7 +16,7 @@
       aria-label="New password"
       v-model="user.newPassword"
       type="password"
-      placeholder="New Password">
+      :placeholder="$t('auth.change.newPwd')">
     
     <input
       data-required
@@ -24,13 +24,13 @@
       aria-label="Confirm new password"
       v-model="user.newPasswordConfirm"
       type="password"
-      placeholder="Confirm New Password">
+      :placeholder="$t('auth.change.confirm')">
     
     <div class="mdev-action-group u-text-center">
       <button
         aria-label="Change Password"
         @click="changePwd"
-        class="mdev-base-btn mdev-action-btn"> Change </button>
+        class="mdev-base-btn mdev-action-btn"> {{ $t("auth.change.action") }} </button>
     </div>
   </div> 
 </template>
