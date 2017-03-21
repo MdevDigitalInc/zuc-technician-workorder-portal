@@ -1,8 +1,10 @@
 <template>
   <!-- Main Container -->
-  <section class="mdev-main-content-frame">
+  <section class="mdev-main-content-frame" aria-labeledby="dashboard-title">
     <!-- Header [FLEX] -->
-    <div class="mdev-frame-header flex flex-start flex-hor-between">{{ $t("orderDetails.title") }}</div>
+    <div class="mdev-frame-header flex flex-start flex-hor-between">
+      <span id="dashboard-title">{{ $t("orderDetails.title") }}</span>
+    </div>
     <!-- Table Container --> 
     <div class="mdev-table-container">
       <!-- Table Head [FLEX] -->

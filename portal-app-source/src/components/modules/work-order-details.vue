@@ -1,17 +1,17 @@
 <template>
   <!-- Main Container -->
-  <section class="mdev-main-content-frame">
+  <section class="mdev-main-content-frame" aria-labelledby="details-title">
     <!-- Header [FLEX] -->
     <div class="mdev-frame-header flex flex-hor-start flex-hor-between">
-      <span>{{ $t("orderDetails.title") }}</span>
-      <router-link to="/dashboard/list">{{ $t("general.navBack") }}</router-link>
+      <span id="details-title">{{ $t("orderDetails.title") }}</span>
+      <router-link to="/dashboard/list" title="Back">{{ $t("general.navBack") }}</router-link>
     </div>
 
     <!-- Customer / Appointment [ Top Section ] -->
     <div class="mdev-order-header flex flex-start flex-vert-start">
       <!-- Customer Info -->
-      <div class="mdev-half-column">
-        <h3>{{ $t("orderDetails.custInfo") }}</h3>
+      <div class="mdev-half-column" aria-labelledby="customer-details">
+        <h3 id="customer-details">{{ $t("orderDetails.custInfo") }}</h3>
         <span class="mdev-customer-name">
           {{ orderDetails.customer.custName }}
         </span>
@@ -19,61 +19,61 @@
         
         <!-- Address -->
         <div class="mdev-info-field">
-          <span class="mdev-info-label">{{ $t("general.address") }}</span>
-          <span class="mdev-info-content">
+          <span class="mdev-info-label" id="address">{{ $t("general.address") }}</span>
+          <span class="mdev-info-content" aria-labelledby="address">
             {{ orderDetails.customer.address  }}
           </span>
         </div>
         
         <!-- Phone -->
         <div class="mdev-info-field">
-          <span class="mdev-info-label">{{ $t("general.phone") }}</span>
-          <span class="mdev-info-content">
+          <span class="mdev-info-label" id="phone">{{ $t("general.phone") }}</span>
+          <span class="mdev-info-content" aria-labelledby="phone">
             {{ orderDetails.customer.phone  }}
           </span>
         </div>
         
         <!-- Business Phone -->
         <div class="mdev-info-field">
-          <span class="mdev-info-label">{{ $t("general.business") }}</span>
-          <span class="mdev-info-content">
+          <span class="mdev-info-label" id="business">{{ $t("general.business") }}</span>
+          <span class="mdev-info-content" aria-labelledby="business">
             {{ orderDetails.customer.bizPhone  }}
           </span>
         </div>
         
         <!-- Customer ID: -->
         <div class="mdev-info-field">
-          <span class="mdev-info-label">{{ $t("general.custId") }}</span>
-          <span class="mdev-info-content">
+          <span class="mdev-info-label" id="custid">{{ $t("general.custId") }}</span>
+          <span class="mdev-info-content" aria-labelledby="custid">
             {{ orderDetails.customer.customerId  }}
           </span>
         </div>
         
         <!-- Date Added -->
         <div class="mdev-info-field">
-          <span class="mdev-info-label">{{ $t("general.dateAdd") }}</span>
-          <span class="mdev-info-content">
+          <span class="mdev-info-label" id="dateadd">{{ $t("general.dateAdd") }}</span>
+          <span class="mdev-info-content" aria-labelledby="dateadd">
             {{ orderDetails.customer.dateAdded  }}
           </span>
         </div>
       </div>
 
       <!-- Appointment Info -->
-      <div class="mdev-half-column">
-        <h3>{{ $t("orderDetails.apptDetails") }}</h3>
+      <div class="mdev-half-column" aria-labelledby="appdetails-title">
+        <h3 id="appdetails-title">{{ $t("orderDetails.apptDetails") }}</h3>
         <!-- Date -->
         <div class="mdev-info-field">
-          <span>{{ $t("general.date") }}</span>
-          <span> {{ orderDetails.appointment.time }}</span>
+          <span id="date">{{ $t("general.date") }}</span>
+          <span aria-labelledby="date"> {{ orderDetails.appointment.time }}</span>
         </div>
         <!-- Time -->
         <div class="mdev-info-field">
-          <span>{{$t("general.time") }}</span>
-          <span> {{ orderDetails.appointment.time }}</span>
+          <span id="time">{{$t("general.time") }}</span>
+          <span aria-labelledby="time"> {{ orderDetails.appointment.time }}</span>
         </div>
         
         <!-- Actions -->
-        <div class="mdev-info-field">
+        <div class="mdev-info-field" aria-label="Actions and Status">
             <input type="text" placeholder="DD/MM/YYYY" v-model="orderDetails.serviceDate">
             <button 
               :class="['mdev-base-btn',{ unreachable: orderDetails.unreachable}]">
@@ -85,54 +85,54 @@
     </div>
 
     <!-- Order Information -->
-    <div class="mdev-order-info">
+    <div class="mdev-order-info" aria-labelledby="orderinfo-title">
         <div class="mdev-order-wrapper">
-          <h3>{{ $t("orderDetails.orderInfo") }}</h3>
+          <h3 id="orderinfo-title">{{ $t("orderDetails.orderInfo") }}</h3>
           <!-- Delivery -->
           <div class="mdev-info-field">
-            <span>{{ $t("general.delivery") }}</span>
-            <span> {{ orderDetails.order.deliveryDate  }}</span>
+            <span id="delivery">{{ $t("general.delivery") }}</span>
+            <span aria-labelledby="delivery"> {{ orderDetails.order.deliveryDate  }}</span>
           </div>
 
           <!-- Order Id -->
           <div class="mdev-info-field">
-            <span>{{ $t("general.orderNum") }}</span>
-            <span> {{ orderDetails.order.orderId  }}</span>
+            <span id="ordernum">{{ $t("general.orderNum") }}</span>
+            <span aria-labelledby="ordernum"> {{ orderDetails.order.orderId  }}</span>
           </div>
 
           <!-- Store -->
           <div class="mdev-info-field">
-            <span>{{ $t("general.store") }}</span>
-            <span> {{ orderDetails.order.store  }} </span>
+            <span id="store">{{ $t("general.store") }}</span>
+            <span aria-labelledby="store"> {{ orderDetails.order.store  }} </span>
           </div>
         <!-- SKU's -->
         <div class="mdev-light-table">
           <div class="mdev-light-table-head flex flex-hor-start flex-hor-between">
-            <span>{{ $t("orderDetails.table.quantity") }}</span>
-            <span>{{ $t("orderDetails.table.sku") }}</span>
-            <span>{{ $t("orderDetails.table.description") }}</span>
-            <span>{{ $t("orderDetails.table.value") }}</span>
+            <span id="head-1">{{ $t("orderDetails.table.quantity") }}</span>
+            <span id="head-2">{{ $t("orderDetails.table.sku") }}</span>
+            <span id="head-3">{{ $t("orderDetails.table.description") }}</span>
+            <span id="head-4">{{ $t("orderDetails.table.value") }}</span>
           </div>
 
           <div
             v-for= "sku in orderDetails.order.skus"
             class="mdev-light-table-row flex flex-hor-start flex-hor-between">
-            <span> {{ sku.quantity  }}</span>
-            <span> {{ sku.sku  }}</span>
-            <span> {{ sku.description  }}</span>
-            <span> {{ sku.value  }}</span>
+            <span aria-labelledby="head-1"> {{ sku.quantity  }}</span>
+            <span aria-labelledby="head-2"> {{ sku.sku  }}</span>
+            <span aria-labelledby="head-3"> {{ sku.description  }}</span>
+            <span aria-labelledby="head-4"> {{ sku.value  }}</span>
           </div>
         </div>
         <!-- Order Notes -->
-        <div class="mdev-order-notes">
-          <h3>{{ $t("orderDetails.notes") }}</h3>
+        <div class="mdev-order-notes" aria-labelledby="notes">
+          <h3 id="notes">{{ $t("orderDetails.notes") }}</h3>
           <p>
             {{ orderDetails.notes  }}
           </p>
         </div>
 
         <!-- Print -->
-        <button class="mdev-base-btn"> {{ $t("general.print") }} </button>
+        <button class="mdev-base-btn" aria-label="Print"> {{ $t("general.print") }} </button>
       </div>
     </div>
 
