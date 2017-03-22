@@ -28,7 +28,9 @@
 
         <!-- Customer Name -->
         <span class="mdev-table-cell" aria-labeledby="customerColumn">
-          {{ orders.orderContent.custName }}
+          <router-link :to="{path:'/dashboard/workorder/' + orders.orderId}" class="mdev-link u-bold">
+            {{ orders.orderContent.custName }}
+          </router-link>
         </span>
 
         <!-- City -->
@@ -47,7 +49,10 @@
 
         
         <span class="mdev-table-cell" aria-labeledby="serviceColumn">
-          <input type="text" placeholder="DD/MM/YYYY" v-model="orders.serviceDate">
+          <div class="mdev-serviced-plugin flex flex-hor-between flex-vert-stretch">
+            <i class="mdev-icon --rounded-icon --size-m --date-icon"></i>
+            <input type="text" placeholder="DD/MM/YYYY" v-model="orders.serviceDate">
+           </div>
         </span>
 
         <span class="mdev-table-cell" aria-labeledby="statusColumn">
@@ -57,7 +62,7 @@
         
         <span class="mdev-table-cell" aria-labeledby="statusColumn">
           <router-link :to="{ path:'/dashboard/workorder/' + orders.orderId}">
-            <i class="mdev-icon --size-s --info"></i>
+            <i class="mdev-icon --rounded-icon --size-m --info-icon"></i>
           </router-link>
         </span>
 
@@ -75,36 +80,36 @@
         // Header Titles for view. Can be replaced with props.
         tableHeaders: [
           {
-            title   : "Date Added",
+            title   : "Date Added:",
             ariaId  : "dateColumn"
           },
           {
-            title: "Customer Name",
+            title: "Customer Name:",
             ariaId  : "customerColumn"
           },
           {
-            title: "City",
+            title: "City:",
             ariaId: "cityColumn"
           },
           {
-            title: "Address",
+            title: "Address:",
             ariaId: "addressColumn"
           },
           {
-            title: "Phone",
+            title: "Phone:",
             ariaId: "phoneColumn"
           },
           {
-            title: "Serviced Date",
+            title: "Serviced Date:",
             ariaId: "serviceColumn"
               
           },
           {
-            title: "Status",
+            title: "Status:",
             ariaId: "statusColumn"
           },          
           {
-            title: "Info",
+            title: "Info:",
             ariaId: "infoColumn"
           }
         ],
@@ -152,11 +157,51 @@
 </script>
 
 <style lang="scss" scoped>
+  
+  /*--------------------------------------*/
+  /* Lean Import for Components           */
+  /*--------------------------------------*/
+
+  /* Disable because they are already linted */
+  /* stylelint-disable */
+  @import '../../assets/styles/component-lean-main.scss';
+  /* stylelint-enable */
+
+  /*--------------------------------------*/
+  /* Main Component Styles                */
+  /*--------------------------------------*/
+ 
   .mdev-table-cell {
     width: 14%;
 
     input {
       margin-top: 0;
+    }
+  }
+
+  .mdev-serviced-plugin {
+    margin: 0 $small-spacing;
+    background: $active-grey;
+    position: relative;
+    border-radius: 3px;
+    overflow: hidden;
+    padding: 2px;
+
+    &:hover {
+      background: $zucora-green;
+    }
+
+    input {
+      width: 80%;
+      margin-left: 5px;
+      padding: 5px;
+      position: relative;
+      background: $white;
+      border: none;
+
+      &:hover {
+        border: none;
+      }
     }
   }
 

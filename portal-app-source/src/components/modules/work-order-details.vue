@@ -212,10 +212,6 @@
   /* Main Component Styles                */
   /*--------------------------------------*/
  
-  .mdev-frame-header {
-    margin-bottom: $large-spacing;
-  }
-
   .mdev-order-header, .mdev-order-wrapper {
     padding: 0 $large-spacing;
   }

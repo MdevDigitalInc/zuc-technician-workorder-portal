@@ -81,6 +81,13 @@ $footer-font-sizes: (
   $desktop-up: .7vw
 );
 
+// Table Header
+$table-header-font-sizes: (
+  null  : 2vw,
+  $tablet-up : 1vw,
+  $laptop-up : .8vw,
+  $desktop-up: .7vw
+);
 // Responsive Font-Size Mixing (Function Only)
 @mixin font-size($fs-map) {
   @each $fs-breakpoint, $fs-font-size in $fs-map {
@@ -134,7 +141,7 @@ h6,
   @include font-size($h6-font-sizes);
 }
 
-// Font Control
+/* Font Control */
 
 .mdev-main-nav-links {
   @include font-size($link-font-sizes);
@@ -142,6 +149,11 @@ h6,
 
 .mdev-footer {
   @include font-size($footer-font-sizes);
+}
+
+.mdev-table-head,
+.mdev-table-row {
+  @include font-size($table-header-font-sizes);
 }
 
 /* Link Reset / Base Inherit */
@@ -158,3 +170,17 @@ a {
   }
 }
 
+/* Generic Link */
+
+.mdev-link {
+  color: $active-blue;
+  font-weight: inherit;
+  font-size: inherit;
+  transition: all, .3s;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: $zucora-green;
+  }
+}

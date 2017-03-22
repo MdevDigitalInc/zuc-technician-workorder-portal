@@ -5,16 +5,20 @@
   .mdev-table-head {
     width: 100%;
     position: relative;
-    padding: 10px 30px;
     justify-content: space-between;
     align-items: middle;
+    background: #f9f9f9;
+    padding: $medium-spacing $large-spacing;
+    color: $active-grey;
+    font-weight: $heading-weight;
   }
 
   .mdev-table-row {
-    padding: 10px 30px;
+    padding: $medium-spacing $large-spacing;
     justify-content: space-between;
-    border-top: 2px solid $bkg-light-grey;
+    border-bottom: 1px solid $bkg-light-grey;
     align-items: flex-start;
+    color: $active-grey;
   }
 
   .mdev-table-cell {
