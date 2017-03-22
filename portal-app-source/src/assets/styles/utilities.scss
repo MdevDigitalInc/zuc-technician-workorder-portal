@@ -47,6 +47,12 @@
   }
 }
 
+.u-hidden-desktop {
+  
+  @media #{$tablet-up} {
+    display: none;
+  }
+}
 .u-bold {
   font-weight: $heading-weight;
 }

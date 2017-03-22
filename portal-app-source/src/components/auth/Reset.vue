@@ -1,6 +1,6 @@
 <template>
   <div class="mdev-form-group">
-    <h1>{{ $t("auth.reset.title") }}</h1>
+    <h1 class="u-text-center">{{ $t("auth.reset.title") }}</h1>
     
     <input
       data-required

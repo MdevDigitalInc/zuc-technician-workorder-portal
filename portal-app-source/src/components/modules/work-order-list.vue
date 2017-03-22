@@ -54,6 +54,12 @@
           <button 
             :class="['mdev-base-btn',{ unreachable: orders.unreachable}]"> {{ $t("general.unreachable") }} </button>
         </span>
+        
+        <span class="mdev-table-cell" aria-labeledby="statusColumn">
+          <router-link :to="{ path:'/dashboard/workorder/' + orders.orderId}">
+            <i class="mdev-icon --size-s --info"></i>
+          </router-link>
+        </span>
 
       </div>
     </div>
@@ -96,6 +102,10 @@
           {
             title: "Status",
             ariaId: "statusColumn"
+          },          
+          {
+            title: "Info",
+            ariaId: "infoColumn"
           }
         ],
 
@@ -109,7 +119,7 @@
               phone: "1-519-555-55555"
             },
             serviceDate: "",
-            orderId: "111111",
+            orderId: "38827199271",
             unreachable: false
           },
           {
@@ -121,7 +131,7 @@
               phone: "1-519-555-55555"
             },
             serviceDate: "",
-            orderId: "111111",
+            orderId: "3768279198",
             unreachable: true
           },          {
             orderContent: {
@@ -144,6 +154,10 @@
 <style lang="scss" scoped>
   .mdev-table-cell {
     width: 14%;
+
+    input {
+      margin-top: 0;
+    }
   }
 
 </style>

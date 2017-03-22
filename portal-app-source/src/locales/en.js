@@ -27,7 +27,7 @@ export default {
     },
     login: {
       title: "Work Order Portal Login",
-      action: "Log In",
+      action: "LogIn",
       reset: "forgot password?",
       email: "Email",
       pwd: "Password"

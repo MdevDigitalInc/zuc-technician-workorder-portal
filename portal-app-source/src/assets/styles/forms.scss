@@ -19,7 +19,7 @@ input {
     width: 100%;
     border-radius: 4px;
     padding: 10px;
-    margin-bottom: 15px;
+    margin-top: 20px;
     border: 2px solid rgba( 122, 193, 66, 0 );
     background: $bkg-light-grey;
     outline: 0;
@@ -35,6 +35,25 @@ input {
     @extend .mdev-base-btn;
   }
 }
+.mdev-auth-module input {
+  &[type="text"],
+  &[type="email"],
+  &[type="password"],
+  &[type="search"],
+  &[type="url"] {
+    background: $bkg-light-grey;
+
+    @media #{$phone-only}{
+      background: $white;
+    }
+  }
+
+  &[type="button"],
+  &[type="submit"] {
+    @extend .mdev-base-btn;
+  }
+  
+}
 /* stylelint-enable */
 
 /* Form Scaffolding */
@@ -49,3 +68,5 @@ input {
   width: 100%;
   position: relative;
 }
+
+

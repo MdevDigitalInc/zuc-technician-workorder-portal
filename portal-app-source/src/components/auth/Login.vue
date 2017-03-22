@@ -1,6 +1,6 @@
 <template>
   <div class="mdev-form-group">
-    <h1 class="mdev-form-title">{{ $t("auth.login.title") }}</h1>
+    <h1 class="mdev-form-title u-text-center">{{ $t("auth.login.title") }}</h1>
     
     <input 
       data-required
@@ -18,7 +18,7 @@
       type="password"
       placeholder="Password">
     
-    <router-link to="/auth/reset" class="--reset_link" title="Reset your password.">{{ $t("auth.login.reset") }}</router-link>
+    <router-link to="/auth/reset" class="--reset_link u-bold" title="Reset your password.">{{ $t("auth.login.reset") }}</router-link>
     
     <div class="mdev-action-group u-text-center">
       <button 

@@ -49,7 +49,8 @@ export const routes = [
         component: WorkOrderList
       },
       {
-        path: 'workorder/:id',
+        name: "details",
+        path: 'workorder/:orderId',
         component: WorkOrderDetail
       },
       {

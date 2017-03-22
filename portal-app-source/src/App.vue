@@ -5,6 +5,7 @@
       <router-view></router-view>
     </transition>
     <main-footer></main-footer>
+    <mobile-navigation v-if="showNav"></mobile-navigation>
   </main>
 </template>
 
@@ -15,6 +16,7 @@
   
   //Local Component registration
   import MainNavigation from './components/shared/navigation.vue';
+  import MobileNavigation from './components/shared/mobile-navigation.vue';
   import MainFooter from './components/shared/footer.vue';
 
   export default{
@@ -48,8 +50,9 @@
     },
 
     components: {
-      'main-navigation' : MainNavigation,
-      'main-footer'     : MainFooter
+      'main-navigation'   : MainNavigation,
+      'mobile-navigation' : MobileNavigation,
+      'main-footer'       : MainFooter
     }
   };
 </script>
@@ -58,23 +61,23 @@
 
 <style lang="scss">
 
-/*-----/
-Global Main
-/-----*/
-@import './assets/styles/global-main.scss';
+  /*-----/
+  Global Main
+  /-----*/
+  @import './assets/styles/global-main.scss';
 
-/*--------------------------------------*/
-/* Main Component Styles                */
-/*--------------------------------------*/
+  /*--------------------------------------*/
+  /* Main Component Styles                */
+  /*--------------------------------------*/
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity .3s;
-}
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity .3s;
+  }
 
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
+  .fade-enter,
+  .fade-leave-to {
+    opacity: 0;
+  }
 
 </style>

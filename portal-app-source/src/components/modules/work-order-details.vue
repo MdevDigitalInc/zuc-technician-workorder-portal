@@ -3,7 +3,7 @@
   <section class="mdev-main-content-frame" aria-labelledby="details-title">
     <!-- Header [FLEX] -->
     <div class="mdev-frame-header flex flex-hor-start flex-hor-between">
-      <span id="details-title">{{ $t("orderDetails.title") }}</span>
+      <span id="details-title">{{ $t("orderDetails.title") }} + {{ orderId }}</span>
       <router-link to="/dashboard/list" title="Back">{{ $t("general.navBack") }}</router-link>
     </div>
 
@@ -146,6 +146,7 @@
 
     data: function() {
       return{
+        orderId: this.$route.params.orderId,
         orderDetails: {
           customer: {
             custName: "John Santos Smith",

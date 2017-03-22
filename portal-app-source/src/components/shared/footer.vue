@@ -60,6 +60,11 @@
     padding: 1vw 0;
     color: $white; 
     z-index: 10;
+    display: none;
+
+    @media screen and ('$tablet-up-comp') {
+      display: block;
+    }
   }
   /*--------------------------------------*/
 

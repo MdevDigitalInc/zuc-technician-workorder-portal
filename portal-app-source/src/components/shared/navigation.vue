@@ -1,21 +1,12 @@
 <template>
   <nav class="mdev-main-nav" aria-role="navigation" role="navigation">
-    <div class="mdev-main-wrapper flex flex-nowrap flex-hor-between flex-vert-end">
+    <div class="mdev-main-wrapper flex flex-nowrap flex-hor-between flex-vert-center">
       <a :href="homeLink" :title="homeTitle" class="mdev-main-nav-branding">
-        <img :src="loadImage(homeBrand)">
+        <img class="u-hidden-phone" :src="loadImage(homeBrand)">
+        <img class="u-hidden-desktop" :src="loadImage(homeBrandReverse)">
       </a>
-      <div class="mdev-main-nav-links u-capitalize">
-        <router-link 
-          v-for="link in links" 
-          :to="link.route"
-          class ="mdev-nav-link"
-          active-class="--active" 
-          :title="link.linkTitle" 
-          aria-role="menuitem" 
-          exact>
-            {{ link.linkName  }}
-       </router-link> 
-      </div>
+      <!-- Navigation Links -->
+      <navlinks></navlinks> 
     </div>
     <!--
     <button @click="change()">CHANGE</button>
@@ -26,6 +17,9 @@
 
 
 <script>
+  //Import Nav Links
+  import NavLinks from './navlinks.vue';
+
   export default{
     // <router-link> element is a custom element derived from vue-router. use :to - to bind. 
     name: "navigation",
@@ -33,33 +27,15 @@
     data: function(){
       return{
         // Refer to routes.js file for available routes.
-        links: [
-          {
-            linkName: 'Work Orders',
-            linkTitle: 'Available Work Orders',
-            route: '/dashboard/list'
-          },
-          {
-            linkName: 'Billing',
-            linkTitle: 'Billing Report',
-            route: '/dashboard/billing'
-          },
-          {
-            linkName: 'Contact',
-            linkTitle: 'Contact Information',
-            route: '#'
-          },
-          {
-            linkName: 'User',
-            linkTitle: 'User Menu',
-            route: '#'
-          }
-        ],
-
         homeLink: '/',
         homeTitle: 'Home',
-        homeBrand: 'zucora-white.svg'
+        homeBrand: 'zucora-white.svg',
+        homeBrandReverse: 'zucora-black.svg'
       };
+    },
+
+    components: {
+      'navlinks' : NavLinks
     },
 
     mounted: function(){
@@ -122,7 +98,7 @@
 
 
 
-<style lang="scss" scoped>
+<style lang="scss">
 
   /*--------------------------------------*/
   /* Lean Import for Components           */
@@ -141,16 +117,30 @@
     position: fixed;
     top: 0;
     left: 0;
-    padding: 35px 0;
+    padding: 15px 0;
     z-index: 10;
     transition: all, .3s;
     opacity: 1;
-    background: $white;
+    background: $zucora-blue;
 
-    img{
-      width: 100%;
+    @media screen and ('$tablet-up-comp') {
+      background: $white;
+      padding: 25px 0;
     }
 
+    img {
+      width: 100%;
+    }
+    
+    .mdev-nav-link {
+      margin: 0 5px;
+
+      @media screen and ('$tablet-up-comp') {
+        padding: 6px $medium-spacing;
+        margin: 0 $medium-spacing;
+      }
+     }
+    
     .mdev-main-nav-branding {
       max-width: 125px;
       min-width: 73px;
@@ -164,41 +154,26 @@
         opacity: .8;
       }
     }
+    
+    .mdev-icon {
+      margin-right: $small-spacing;
+    }
 
     .mdev-main-nav-links {
+      display: none;
       color: $charcoal-grey;
       font-weight: $body-weight;
-    }
-
-    .mdev-nav-link {
-      margin: 0 5px;
-      transition: all, .3s;
-      padding: 6px 15px;
-      background: rgba(230,231,233, 0);
-      border-radius: 3px;
 
       @media screen and ('$tablet-up-comp') {
-        margin: 0 15px;
+        display: flex;
       }
+    }
 
+    .mdev-main-nav-visibility {
+      opacity: .6;
       &:hover {
-        background: rgba(230,231,233, 1);
+        opacity: 1;
       }
-
-      &:last-child {
-        margin-right: 0;
-      }
-    }
-
-    .--active {
-      background: rgba(230,231,233, 1);
-    }
-  }
-
-  .mdev-main-nav-visibility {
-    opacity: .6;
-    &:hover {
-      opacity: 1;
     }
   }
 
