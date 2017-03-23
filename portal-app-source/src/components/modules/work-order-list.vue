@@ -202,7 +202,7 @@
 
     @media screen and ('$tablet-up-comp') {
       margin: 0 $small-spacing;
-      height: 2.2vw;
+      height: 2vw;
     }
 
     &:hover {

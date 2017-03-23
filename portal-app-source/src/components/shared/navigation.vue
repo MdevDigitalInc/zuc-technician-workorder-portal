@@ -7,7 +7,7 @@
       </a>
       <!-- Navigation Links -->
       <navlinks></navlinks> 
-      <div class="hidden-desktop reorder">
+      <div class="u-hidden-desktop reorder">
         <a @click="goBack"
           v-if="showBack"
           class="mdev-back-btn flex flex-hor-between flex-vert-center">
