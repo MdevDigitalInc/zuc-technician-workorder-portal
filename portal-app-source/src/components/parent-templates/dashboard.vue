@@ -37,8 +37,11 @@
     background: $white;
   }
 
-  .unreachable {
-    background: orange;
+  .mdev-main-content {
+    @media screen and ('$phone-only-comp') {
+      width: 100%;
+    }  
+
   }
 
 	/*--------------------------------------*/

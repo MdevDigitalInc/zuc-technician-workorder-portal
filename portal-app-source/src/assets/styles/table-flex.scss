@@ -14,15 +14,24 @@
   }
 
   .mdev-table-row {
-    padding: $medium-spacing $large-spacing;
+    padding: $medium-spacing;
     justify-content: space-between;
     border-bottom: 1px solid $bkg-light-grey;
     align-items: flex-start;
     color: $active-grey;
+
+    @media #{$tablet-up} {
+      padding: $medium-spacing $large-spacing;
+    }
   }
 
   .mdev-table-cell {
     text-align: left;
+  }
+
+  .mdev-hidden-label {
+    color: $active-grey;
+    font-weight: $heading-weight;
   }
 }
 

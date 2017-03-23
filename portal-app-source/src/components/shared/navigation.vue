@@ -7,6 +7,17 @@
       </a>
       <!-- Navigation Links -->
       <navlinks></navlinks> 
+      <div class="hidden-desktop reorder">
+        <a @click="goBack"
+          v-if="showBack"
+          class="mdev-back-btn flex flex-hor-between flex-vert-center">
+            <i class="mdev-icon --size-s --back-icon"></i>
+            {{ $t('general.back')}}
+        </a>
+        <span class="u-white u-bold" v-else>
+          {{ $t('general.title') }}
+        </span>
+      </div>
     </div>
     <!--
     <button @click="change()">CHANGE</button>
@@ -30,10 +41,17 @@
         homeLink: '/',
         homeTitle: 'Home',
         homeBrand: 'zucora-white.svg',
-        homeBrandReverse: 'zucora-black.svg'
+        homeBrandReverse: 'zucora-black.svg',
+        showBack: false
       };
     },
-
+    
+    watch: {
+      '$route'(to, from) {
+        this.determineVisibility(to.path); 
+      }
+    },
+    
     components: {
       'navlinks' : NavLinks
     },
@@ -58,10 +76,12 @@
       // Give padding according to Nav Height IIFE
       (function(){
       
-        // Desired Padding Value
-        var desiredPadding = 20;
-        // Adjust Padding of the site
+       // Adjust Padding of the site
         function adjustPadding() {
+        // Desired Padding Value
+        var desiredPadding = (($(window).width() <= 500) ? 10 : 20);
+        console.log(desiredPadding);
+ 
           var navHeight = $('.mdev-main-nav')[0].getBoundingClientRect().height;
         
           $('#app').css({
@@ -81,6 +101,17 @@
     methods: {
       loadImage(path){
         return require('../../assets/images/' + path);
+      },
+      goBack() {
+        this.$router.go(-1);
+      },
+      determineVisibility(path) {
+        if (path === "/dashboard/list") {
+          this.showBack = false;
+        } 
+        else {
+          this.showBack = true;
+        }
       },
       // Change Language METHOD
       change () {
@@ -174,6 +205,21 @@
       &:hover {
         opacity: 1;
       }
+    }
+  }
+
+  .mdev-back-btn {
+    color: $white;
+    font-weight: $heading-weight;
+  }
+
+  @media screen and ('$phone-only-comp') {
+    .reorder {
+      order: 1;
+    }
+
+    .mdev-main-nav-branding {
+      order: 2;
     }
   }
 

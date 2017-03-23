@@ -24,9 +24,16 @@ export default {
 
 
   input{
-    margin: 15px 0 0 0;
-    padding: 20px;
+    margin: 5px auto;
+    width: 90%;
+    padding: 10px;
     background: $white;
+    display: block;
+    
+    @media screen and ('$tablet-up-comp') {
+      margin: 15px 0 0 0;
+      padding: 20px;
+    }
   }
 
 	/*--------------------------------------*/

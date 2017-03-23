@@ -24,8 +24,18 @@
   height: 9.3vw;
 
   @media #{$tablet-up} {
-    height: 1.6vw;
-    width: 1.6vw;
+    height: 1.8vw;
+    width: 1.8vw;
+  }
+}
+
+.--size-l {
+  width: 9.3vw;
+  height: 9.3vw;
+
+  @media #{$tablet-up} {
+    height: 2.2vw;
+    width: 2.2vw;
   }
 }
 
@@ -61,4 +71,8 @@
 
 .--info-icon {
   background: blue;
+}
+
+.--back-icon {
+  background: $zucora-green;
 }

@@ -168,7 +168,7 @@
   }
   
   // Hack to Fix Color On Input
-  @media scree and ('$phone-only-comp'){
+  @media screen and ('$phone-only-comp'){
     input{
       background-color: $white;
     }      

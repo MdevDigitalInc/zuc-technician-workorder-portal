@@ -11,10 +11,12 @@ export default {
     dateAdd: "Date Added:",
     date: "Date:",
     time: "Time:",
+    back: "Back",
     delivery: "Delivery:",
     orderNum: "Order #",
     store: "Store:",
-    search: "Customer Name, Order Number, Date(MM/DD/YYYY)"
+    search: "Customer Name, Order Number, Date(MM/DD/YYYY)",
+    title: "Manage Work Orders"
   },
   auth: {
     register: {

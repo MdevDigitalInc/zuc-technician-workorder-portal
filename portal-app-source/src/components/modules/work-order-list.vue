@@ -23,11 +23,14 @@
         
         <!-- Date Added -->
         <span class="mdev-table-cell" aria-labeledby="dateColumn">
+          <span class="hidden-desktop mdev-hidden-label" aria-hidde="true">
+            Date Added:
+          </span>
           {{ orders.orderContent.dateAdded   }}
         </span> 
 
         <!-- Customer Name -->
-        <span class="mdev-table-cell" aria-labeledby="customerColumn">
+        <span class="mdev-table-cell --name-modifier" aria-labeledby="customerColumn">
           <router-link :to="{path:'/dashboard/workorder/' + orders.orderId}" class="mdev-link u-bold">
             {{ orders.orderContent.custName }}
           </router-link>
@@ -35,34 +38,43 @@
 
         <!-- City -->
         <span class="mdev-table-cell" aria-labeledby="cityColumn">
+          <span class="hidden-desktop mdev-hidden-label --column-modifier" aria-hidde="true">
+            City:
+          </span>
           {{ orders.orderContent.city }}
         </span>
 
         <!-- Address -->
           <span class="mdev-table-cell" aria-labeledby="addresscolumn">
+          <span class="hidden-desktop mdev-hidden-label --column-modifier" aria-hidde="true">
+            Address:
+          </span>
             {{ orders.orderContent.address }}
           </span>
         <!-- Phone -->
         <span class="mdev-table-cell" aria-labeledby="phoneColumn">
+          <span class="hidden-desktop mdev-hidden-label --column-modifier" aria-hidde="true">
+            Phone:
+          </span>
         {{ orders.orderContent.phone}}
         </span>
 
         
-        <span class="mdev-table-cell" aria-labeledby="serviceColumn">
+        <span class="mdev-table-cell --side-modifier" aria-labeledby="serviceColumn">
           <div class="mdev-serviced-plugin flex flex-hor-between flex-vert-stretch">
             <i class="mdev-icon --rounded-icon --size-m --date-icon"></i>
             <input type="text" placeholder="DD/MM/YYYY" v-model="orders.serviceDate">
            </div>
         </span>
 
-        <span class="mdev-table-cell" aria-labeledby="statusColumn">
+        <span class="mdev-table-cell --side-modifier" aria-labeledby="statusColumn">
           <button 
-            :class="['mdev-base-btn',{ unreachable: orders.unreachable}]"> {{ $t("general.unreachable") }} </button>
+            :class="['mdev-base-btn mdev-status-btn',{ unreachable: orders.unreachable}]"> {{ $t("general.unreachable") }} </button>
         </span>
         
-        <span class="mdev-table-cell" aria-labeledby="statusColumn">
+        <span class="mdev-table-cell --top-modifier" aria-labeledby="statusColumn">
           <router-link :to="{ path:'/dashboard/workorder/' + orders.orderId}">
-            <i class="mdev-icon --rounded-icon --size-m --info-icon"></i>
+            <i class="mdev-icon --rounded-icon --size-l --info-icon"></i>
           </router-link>
         </span>
 
@@ -180,12 +192,18 @@
   }
 
   .mdev-serviced-plugin {
-    margin: 0 $small-spacing;
+    margin: 0 5px 0 0;
     background: $active-grey;
     position: relative;
     border-radius: 3px;
     overflow: hidden;
     padding: 2px;
+    height: 10.2vw;
+
+    @media screen and ('$tablet-up-comp') {
+      margin: 0 $small-spacing;
+      height: 2.2vw;
+    }
 
     &:hover {
       background: $zucora-green;
@@ -194,10 +212,15 @@
     input {
       width: 80%;
       margin-left: 5px;
+      font-size: 3.4vw;
       padding: 5px;
       position: relative;
       background: $white;
       border: none;
+
+      @media screen and ('$tablet-up-comp') {
+        font-size: 1vw;
+      }
 
       &:hover {
         border: none;
@@ -205,4 +228,49 @@
     }
   }
 
+  @media screen and ('$phone-only-comp') {
+    .mdev-table-cell {
+      width: 100%;
+      padding: 5px 0;
+    }
+    
+    .mdev-table-row {
+      flex-wrap: wrap;
+      position: relative;
+    }
+    
+    .mdev-table-head {
+      display: none;
+    }
+    
+    .--side-modifier {
+      width: 50%;
+      padding: 0;
+      margin-top: 10px;
+    }
+    
+    .--top-modifier {
+      position: absolute;
+      top: $medium-spacing;
+      padding: 0;
+      right: -87%;
+    }
+
+    .--name-modifier {
+      font-size: 6vw;
+      margin-bottom: 8px;
+    }
+
+    .--column-modifier {
+      width: 24%;
+      display: inline-block;
+    }
+
+    .mdev-status-btn {
+      height: 10.2vw;
+      margin: 0 0 0 5px;
+      font-size: 3.4vw;
+      width: 100%;
+    }
+  }
 </style>
