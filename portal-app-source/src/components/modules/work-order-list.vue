@@ -11,7 +11,7 @@
       <div class="mdev-table-head flex flex-start">
         <span
           v-for="header in tableHeaders"
-          class="mdev-table-cell" id="header.ariaId">
+          :class="['mdev-table-cell',{ smallColumn: header.special}]" id="header.ariaId">
             {{ header.title }}
           </span>
       </div>
@@ -23,7 +23,7 @@
         
         <!-- Date Added -->
         <span class="mdev-table-cell" aria-labeledby="dateColumn">
-          <span class="hidden-desktop mdev-hidden-label" aria-hidde="true">
+          <span class="u-hidden-desktop mdev-hidden-label" aria-hidde="true">
             Date Added:
           </span>
           {{ orders.orderContent.dateAdded   }}
@@ -38,7 +38,7 @@
 
         <!-- City -->
         <span class="mdev-table-cell" aria-labeledby="cityColumn">
-          <span class="hidden-desktop mdev-hidden-label --column-modifier" aria-hidde="true">
+          <span class="u-hidden-desktop mdev-hidden-label --column-modifier" aria-hidde="true">
             City:
           </span>
           {{ orders.orderContent.city }}
@@ -46,14 +46,14 @@
 
         <!-- Address -->
           <span class="mdev-table-cell" aria-labeledby="addresscolumn">
-          <span class="hidden-desktop mdev-hidden-label --column-modifier" aria-hidde="true">
+          <span class="u-hidden-desktop mdev-hidden-label --column-modifier" aria-hidde="true">
             Address:
           </span>
             {{ orders.orderContent.address }}
           </span>
         <!-- Phone -->
         <span class="mdev-table-cell" aria-labeledby="phoneColumn">
-          <span class="hidden-desktop mdev-hidden-label --column-modifier" aria-hidde="true">
+          <span class="u-hidden-desktop mdev-hidden-label --column-modifier" aria-hidde="true">
             Phone:
           </span>
         {{ orders.orderContent.phone}}
@@ -72,7 +72,7 @@
             :class="['mdev-base-btn mdev-status-btn',{ unreachable: orders.unreachable}]"> {{ $t("general.unreachable") }} </button>
         </span>
         
-        <span class="mdev-table-cell --top-modifier" aria-labeledby="statusColumn">
+        <span class="mdev-table-cell --top-modifier smallColumn" aria-labeledby="statusColumn">
           <router-link :to="{ path:'/dashboard/workorder/' + orders.orderId}">
             <i class="mdev-icon --rounded-icon --size-l --info-icon"></i>
           </router-link>
@@ -93,36 +93,43 @@
         tableHeaders: [
           {
             title   : "Date Added:",
-            ariaId  : "dateColumn"
+            ariaId  : "dateColumn",
+            special : false
           },
           {
             title: "Customer Name:",
-            ariaId  : "customerColumn"
+            ariaId  : "customerColumn",
+            special : false
           },
           {
             title: "City:",
-            ariaId: "cityColumn"
+            ariaId: "cityColumn",
+            special : false
           },
           {
             title: "Address:",
-            ariaId: "addressColumn"
+            ariaId: "addressColumn",
+            special : false
           },
           {
             title: "Phone:",
-            ariaId: "phoneColumn"
+            ariaId: "phoneColumn",
+            special : false
           },
           {
             title: "Serviced Date:",
-            ariaId: "serviceColumn"
-              
+            ariaId: "serviceColumn",
+            special : false
           },
           {
             title: "Status:",
-            ariaId: "statusColumn"
+            ariaId: "statusColumn",
+            special : false
           },          
           {
             title: "Info:",
-            ariaId: "infoColumn"
+            ariaId: "infoColumn",
+            special : true
           }
         ],
 
@@ -189,6 +196,14 @@
     input {
       margin-top: 0;
     }
+  }
+
+  .smallColumn {
+    width: 4%;
+  }
+
+  .mdev-serviced-plugin {
+    margin-left: 0;
   }
 
 

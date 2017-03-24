@@ -64,7 +64,7 @@ export default {
     }
   },
   orderDetails: {
-    title: "Manage Open Work Orders",
+    title: "Wokorder Number: ",
     custInfo: "Customer Information",
     apptDetails: "Appointment Details",
     orderInfo: "Order Information",

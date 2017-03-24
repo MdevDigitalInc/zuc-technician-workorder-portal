@@ -3,7 +3,7 @@
   <section class="mdev-main-content-frame" aria-labelledby="details-title">
     <!-- Header [FLEX] -->
     <div class="mdev-frame-header flex flex-hor-start flex-hor-between">
-      <span id="details-title">{{ $t("orderDetails.title") }} + {{ orderId }}</span>
+      <span id="details-title">{{ $t("orderDetails.title") }} {{ orderId }}</span>
       <router-link to="/dashboard/list" title="Back">{{ $t("general.navBack") }}</router-link>
     </div>
 
@@ -59,7 +59,7 @@
       </div>
 
       <!-- Appointment Info -->
-      <div class="mdev-half-column flex flex-hor-end" aria-labelledby="appdetails-title">
+      <div class="mdev-half-column flex flex-hor-end --bkg-modifier" aria-labelledby="appdetails-title">
         <div class="mdev-appointment-plugin">
             <h3 id="appdetails-title">{{ $t("orderDetails.apptDetails") }}</h3>
             <!-- Date -->
@@ -136,7 +136,9 @@
         </div>
 
         <!-- Print -->
-        <button class="mdev-base-btn" aria-label="Print"> {{ $t("general.print") }} </button>
+        <div class="flex flex-hor-end u-hidden-tablet u-hidden-phone">
+          <button class="mdev-base-btn mdev-print-btn" aria-label="Print"> {{ $t("general.print") }} </button>
+        </div>
       </div>
     </div>
 
@@ -192,7 +194,7 @@
               }
             ]
           },
-          notes: "Customer notes in play text come in through here please",
+          notes: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce semper vel nisl non interdum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tristique diam eu efficitur facilisis. In ac metus sit amet quam semper lobortis. Etiam nec orci ac mi dictum varius. Nulla diam mi, accumsan at risus et, iaculis laoreet ipsum. Phasellus dui mauris, dapibus id vestibulum et, venenatis in erat. Praesent eu nulla sit amet sem volutpat lobortis at id ex. Nullam et dolor aliquam, pellentesque nisl quis, porttitor enim. In sed tortor metus. Donec consequat, ex quis venenatis rutrum, mauris lacus imperdiet erat, et blandit urna leo sit amet nisi. Pellentesque tempus eros eget nisl mollis, et maximus libero tincidunt.",
           unreachable: false,
           serviceDate: ""
         }
@@ -217,11 +219,23 @@
   /*--------------------------------------*/
  
   .mdev-order-header, .mdev-order-wrapper {
-    padding: 0 $large-spacing;
+    padding: 0;
+
+    @media screen and ('$tablet-up-comp') {
+      padding: 0 $large-spacing;
+    }
+  }
+
+  .mdev-order-header {
+    flex-wrap: wrap;
+
+    @media screen and ('$tablet-up-comp') {
+      flex-wrap: nowrap;
+    }
   }
 
   .mdev-frame-header {
-    margin-bottom: 30px;
+    margin-bottom: $large-spacing;
   }
   .mdev-order-info, .mdev-order-header {
     margin-bottom: $large-spacing;
@@ -229,14 +243,32 @@
 
   .mdev-customer-name {
     color: $active-blue;
-    font-size: 1.6vw;
+    font-size: 5.6vw;
     margin: 0 0 20px 0;
     display: block;
+
+    @media screen and ('$tablet-only-comp') {
+      font-size: 2.8vw;
+    }
+
+    @media screen and ('$laptop-up-comp') {
+      font-size: 1.6vw;
+    }
   }
   
   .mdev-info-field {
-    line-height: 1.3vw;
+    line-height: 7.3vw;
     margin: 4px 0;
+    display: flex;
+
+    @media screen and ('$tablet-only-comp') {
+      line-height: 2.5vw;
+    }
+
+    @media screen and ('$laptop-up-comp') {
+      line-height: 1.3vw;
+      display: block;
+    }
   }
 
   h3 {
@@ -244,8 +276,20 @@
   }
 
   .mdev-info-label {
-    display: inline-block;
-    width: 25%;
+    display: block;
+    width: 30%;
+
+    @media screen and ('$tablet-up-comp') {
+      display: inline-block;
+    }
+  }
+
+  .mdev-info-content {
+
+    @media screen and ('$phone-only-comp') {
+      width: 65%;
+      display: block;
+    }
   }
 
   .mdev-serviced-plugin, .mdev-status-btn {
@@ -261,27 +305,61 @@
   }
 
   .mdev-appointment-plugin {
-    width: 60%;
-    padding: 20px;
+    width: 100%;
+    padding: 0;
     background: $bkg-light-grey;
     border-radius: $standard-radius;
 
-
-    .--emphasis-modifier {
-      margin: 0;
-      line-height: 2.3vw;
-      color: $active-blue;
-      font-size: 1.6vw;
-      font-weight: $heading-weight;
-
+    @media screen and ('$tablet-only-comp') {
+      width: 80%;
+      padding: $medium-spacing;
     }
+
+    @media screen and ('$laptop-up-comp') {
+      padding: 20px;
+      width: 60%;
+    }
+
   }
 
   .mdev-light-cell {
     width: 20%;
+    flex-grow: 1;
+    
+    @media screen and ('$laptop-up-comp') {
+      flex-grow: 0;
+    }
   }
 
   .--large-cell {
-    flex-grow: 4;
+    flex-grow: 2;
+
+    @media screen and ('$laptop-up-comp') {
+      flex-grow: 4;
+    }
+  }
+
+  .mdev-order-notes {
+    padding: 0 $small-spacing;
+    margin: $large-spacing 0;
+
+    @media screen and ('$tablet-up-comp') {
+      padding: 0;
+    }
+  }
+
+  @media screen and ('$phone-only-comp') {
+    .--bkg-modifier {
+      background: $bkg-light-grey;
+    }
+
+    .mdev-half-column {
+      padding: $small-spacing;
+    }
+
+    .mdev-status-btn {
+      font-size: 4vw;
+      height: auto;
+    }
   }
 </style>

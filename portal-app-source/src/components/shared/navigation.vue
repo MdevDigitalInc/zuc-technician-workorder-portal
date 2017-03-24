@@ -45,6 +45,10 @@
         showBack: false
       };
     },
+
+    created: function() {
+      this.determineVisibility(this.$route.path);
+    },
     
     watch: {
       '$route'(to, from) {

@@ -45,20 +45,33 @@
     width: 100%;
     color: $active-grey;
     font-weight: $heading-weight;
+    line-height: 10.5vw;
     border-top: 2px solid $active-grey;
     border-bottom: 2px solid $active-grey;
-    line-height: 1.8vw;
     margin-top: $large-spacing;
-    padding: 0 $large-spacing;
+    padding: 0 $small-spacing;
+    font-size: 3vw;
+
+    @media screen and ('$tablet-up-comp') {
+      padding: 0 $large-spacing;
+      line-height: 2.5vw;
+      font-size: inherit;
+    }
   }
 
   .mdev-light-table-row {
     width: 100%;
-    padding: 0 $large-spacing;
+    padding: 3.1vw $small-spacing;
     color: $active-grey;
+    font-size: 3vw;
 
-    &:nth-child(odd) {
-      background: blue;
+    @media screen and ('$tablet-up-comp') {
+      padding: 1.1vw $large-spacing;
+      font-size: inherit;
+    }
+
+    &:nth-child( even ) {
+      background: $bkg-light-grey;
     }
   }
 }

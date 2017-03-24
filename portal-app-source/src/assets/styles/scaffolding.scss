@@ -33,6 +33,7 @@
   border-radius: $standard-radius;
   overflow: hidden;
   margin-top: 15px;
+  margin-bottom: 100px;
 
   @media #{$tablet-up} {
     margin-top: 30px;
@@ -55,5 +56,9 @@
 // Columns
 
 .mdev-half-column {
-  width: 50%;
+  width: 100%;
+
+  @media screen and ('$tablet-up-comp') {
+    width: 50%;
+  }
 }

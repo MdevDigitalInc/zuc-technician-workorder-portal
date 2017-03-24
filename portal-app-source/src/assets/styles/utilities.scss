@@ -40,19 +40,28 @@
   font-weight: 700;
 }
 
+/* Disabling because of !important */
+/* stylelint-disable */
 .u-hidden-phone {
-  
   @media #{$phone-only} {
-    display: none;
+    display: none !important;
+  }
+}
+
+.u-hidden-tablet {
+  @media #{$tablet-only} {
+    display: none !important;
   }
 }
 
 .u-hidden-desktop {
   
   @media #{$tablet-up} {
-    display: none;
+    display: none !important;
   }
 }
+
+/* stylelint-enable */
 .u-bold {
   font-weight: $heading-weight;
 }

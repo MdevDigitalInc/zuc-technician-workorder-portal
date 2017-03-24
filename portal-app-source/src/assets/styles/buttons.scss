@@ -48,6 +48,20 @@
   }
 }
 
+.mdev-print-btn {
+  color: $white;
+  padding: 0 1vw;
+  background: $active-blue;
+  border: none;
+  height: 2vw;
+  margin-right: 10px;
+  
+  &:hover {
+    background: $zucora-blue;
+    border: none;
+  }
+}
+
 .unreachable {
   background: $active-orange;
 }
