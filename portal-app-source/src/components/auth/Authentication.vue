@@ -98,7 +98,7 @@
 
     @media screen and ('$tablet-up-comp'){
       background: $white;
-      border-radius: 4px;
+      border-radius: $standard-radius;
       border-top: solid $border-top-size $zucora-blue;
       padding:($top-padding-var + $border-top-size) 30px 30px 30px;
       width: 40%;

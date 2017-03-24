@@ -35,4 +35,30 @@
   }
 }
 
+/* Light Table */
 
+.mdev-light-table {
+  width: 100%;
+  position: relative;
+
+  .mdev-light-table-head {
+    width: 100%;
+    color: $active-grey;
+    font-weight: $heading-weight;
+    border-top: 2px solid $active-grey;
+    border-bottom: 2px solid $active-grey;
+    line-height: 1.8vw;
+    margin-top: $large-spacing;
+    padding: 0 $large-spacing;
+  }
+
+  .mdev-light-table-row {
+    width: 100%;
+    padding: 0 $large-spacing;
+    color: $active-grey;
+
+    &:nth-child(odd) {
+      background: blue;
+    }
+  }
+}

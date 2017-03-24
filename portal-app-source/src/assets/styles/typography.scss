@@ -184,3 +184,12 @@ a {
     color: $zucora-green;
   }
 }
+
+/* Labels & Fields */
+.mdev-info-field {
+  color: $active-grey;
+
+  .mdev-info-label {
+    font-weight: $heading-weight;
+  }
+}

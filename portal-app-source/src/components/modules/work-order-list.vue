@@ -191,42 +191,7 @@
     }
   }
 
-  .mdev-serviced-plugin {
-    margin: 0 5px 0 0;
-    background: $active-grey;
-    position: relative;
-    border-radius: 3px;
-    overflow: hidden;
-    padding: 2px;
-    height: 10.2vw;
 
-    @media screen and ('$tablet-up-comp') {
-      margin: 0 $small-spacing;
-      height: 2vw;
-    }
-
-    &:hover {
-      background: $zucora-green;
-    }
-
-    input {
-      width: 80%;
-      margin-left: 5px;
-      font-size: 3.4vw;
-      padding: 5px;
-      position: relative;
-      background: $white;
-      border: none;
-
-      @media screen and ('$tablet-up-comp') {
-        font-size: 1vw;
-      }
-
-      &:hover {
-        border: none;
-      }
-    }
-  }
 
   @media screen and ('$phone-only-comp') {
     .mdev-table-cell {

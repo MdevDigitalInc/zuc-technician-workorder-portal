@@ -59,68 +59,72 @@
       </div>
 
       <!-- Appointment Info -->
-      <div class="mdev-half-column" aria-labelledby="appdetails-title">
-        <h3 id="appdetails-title">{{ $t("orderDetails.apptDetails") }}</h3>
-        <!-- Date -->
-        <div class="mdev-info-field">
-          <span id="date">{{ $t("general.date") }}</span>
-          <span aria-labelledby="date"> {{ orderDetails.appointment.time }}</span>
-        </div>
-        <!-- Time -->
-        <div class="mdev-info-field">
-          <span id="time">{{$t("general.time") }}</span>
-          <span aria-labelledby="time"> {{ orderDetails.appointment.time }}</span>
-        </div>
-        
+      <div class="mdev-half-column flex flex-hor-end" aria-labelledby="appdetails-title">
+        <div class="mdev-appointment-plugin">
+            <h3 id="appdetails-title">{{ $t("orderDetails.apptDetails") }}</h3>
+            <!-- Date -->
+          <div class="mdev-info-field flex flex-vert-center --emphasis-modifier">
+            <span id="date" class="u-hidden" aria-hidden="true">{{ $t("general.date") }}</span>
+            <i class="mdev-icon --size-l --date-icon"></i>
+            <span aria-labelledby="date"> {{ orderDetails.appointment.time }}</span>
+          </div>
+          <!-- Time -->
+          <div class="mdev-info-field flex flex-vert-center --emphasis-modifier">
+            <span id="time" class="u-hidden" aria-hidden="true">{{$t("general.time") }}</span>
+            <i class="mdev-icon --size-l --time-icon"></i>
+            <span aria-labelledby="time"> {{ orderDetails.appointment.time }}</span>
+          </div>
         <!-- Actions -->
-        <div class="mdev-info-field" aria-label="Actions and Status">
+        <div class="mdev-info-actions flex flex-hor-between flex-vert-stretch" aria-label="Actions and Status">
+          <div class="mdev-serviced-plugin flex flex-hor-between flex-vert-stretch">
+            <i class="mdev-icon --rounded-icon --size-m --date-icon"></i>
             <input type="text" placeholder="DD/MM/YYYY" v-model="orderDetails.serviceDate">
-            <button 
-              :class="['mdev-base-btn',{ unreachable: orderDetails.unreachable}]">
+           </div>
+          <button 
+              :class="['mdev-base-btn mdev-status-btn',{ unreachable: orderDetails.unreachable}]">
                {{ $t("general.unreachable") }} </button>
-  
         </div>
-
+      </div>
       </div>
     </div>
 
     <!-- Order Information -->
     <div class="mdev-order-info" aria-labelledby="orderinfo-title">
         <div class="mdev-order-wrapper">
-          <h3 id="orderinfo-title">{{ $t("orderDetails.orderInfo") }}</h3>
-          <!-- Delivery -->
-          <div class="mdev-info-field">
-            <span id="delivery">{{ $t("general.delivery") }}</span>
-            <span aria-labelledby="delivery"> {{ orderDetails.order.deliveryDate  }}</span>
-          </div>
+          <div class="mdev-half-column">
+            <h3 id="orderinfo-title">{{ $t("orderDetails.orderInfo") }}</h3>
+            <!-- Delivery -->
+            <div class="mdev-info-field">
+              <span class="mdev-info-label" id="delivery">{{ $t("general.delivery") }}</span>
+              <span class="mdev-info-content" aria-labelledby="delivery"> {{ orderDetails.order.deliveryDate  }}</span>
+            </div>
 
-          <!-- Order Id -->
-          <div class="mdev-info-field">
-            <span id="ordernum">{{ $t("general.orderNum") }}</span>
-            <span aria-labelledby="ordernum"> {{ orderDetails.order.orderId  }}</span>
-          </div>
+            <!-- Order Id -->
+            <div class="mdev-info-field">
+              <span class="mdev-info-label" id="ordernum">{{ $t("general.orderNum") }}</span>
+              <span class="mdev-info-content" aria-labelledby="ordernum"> {{ orderDetails.order.orderId  }}</span>
+            </div>
 
-          <!-- Store -->
-          <div class="mdev-info-field">
-            <span id="store">{{ $t("general.store") }}</span>
-            <span aria-labelledby="store"> {{ orderDetails.order.store  }} </span>
+            <!-- Store -->
+            <div class="mdev-info-field">
+              <span class="mdev-info-label" id="store">{{ $t("general.store") }}</span>
+              <span class="mdev-info-content" aria-labelledby="store"> {{ orderDetails.order.store  }} </span>
+            </div>
           </div>
         <!-- SKU's -->
         <div class="mdev-light-table">
           <div class="mdev-light-table-head flex flex-hor-start flex-hor-between">
-            <span id="head-1">{{ $t("orderDetails.table.quantity") }}</span>
-            <span id="head-2">{{ $t("orderDetails.table.sku") }}</span>
-            <span id="head-3">{{ $t("orderDetails.table.description") }}</span>
-            <span id="head-4">{{ $t("orderDetails.table.value") }}</span>
+            <span class="mdev-light-cell" id="head-1">{{ $t("orderDetails.table.quantity") }}</span>
+            <span  class="mdev-light-cell" id="head-2">{{ $t("orderDetails.table.sku") }}</span>
+            <span  class="mdev-light-cell --large-cell" id="head-3">{{ $t("orderDetails.table.description") }}</span>
           </div>
 
           <div
             v-for= "sku in orderDetails.order.skus"
             class="mdev-light-table-row flex flex-hor-start flex-hor-between">
-            <span aria-labelledby="head-1"> {{ sku.quantity  }}</span>
-            <span aria-labelledby="head-2"> {{ sku.sku  }}</span>
-            <span aria-labelledby="head-3"> {{ sku.description  }}</span>
-            <span aria-labelledby="head-4"> {{ sku.value  }}</span>
+            <span  class="mdev-light-cell" aria-labelledby="head-1"> {{ sku.quantity  }}</span>
+            <span  class="mdev-light-cell" aria-labelledby="head-2"> {{ sku.sku  }}</span>
+            <span  class="mdev-light-cell --large-cell" aria-labelledby="head-3"> {{ sku.description  }}</span>
           </div>
         </div>
         <!-- Order Notes -->
@@ -197,7 +201,7 @@
   };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
   /*--------------------------------------*/
   /* Lean Import for Components           */
@@ -216,7 +220,68 @@
     padding: 0 $large-spacing;
   }
 
+  .mdev-frame-header {
+    margin-bottom: 30px;
+  }
   .mdev-order-info, .mdev-order-header {
     margin-bottom: $large-spacing;
+  }
+
+  .mdev-customer-name {
+    color: $active-blue;
+    font-size: 1.6vw;
+    margin: 0 0 20px 0;
+    display: block;
+  }
+  
+  .mdev-info-field {
+    line-height: 1.3vw;
+    margin: 4px 0;
+  }
+
+  h3 {
+    margin-bottom: 20px;
+  }
+
+  .mdev-info-label {
+    display: inline-block;
+    width: 25%;
+  }
+
+  .mdev-serviced-plugin, .mdev-status-btn {
+    margin: 0;
+    width: 48%;
+    input {
+      margin: 0;
+    }
+  }
+
+  .mdev-info-actions {
+    margin-top: $medium-spacing;
+  }
+
+  .mdev-appointment-plugin {
+    width: 60%;
+    padding: 20px;
+    background: $bkg-light-grey;
+    border-radius: $standard-radius;
+
+
+    .--emphasis-modifier {
+      margin: 0;
+      line-height: 2.3vw;
+      color: $active-blue;
+      font-size: 1.6vw;
+      font-weight: $heading-weight;
+
+    }
+  }
+
+  .mdev-light-cell {
+    width: 20%;
+  }
+
+  .--large-cell {
+    flex-grow: 4;
   }
 </style>
