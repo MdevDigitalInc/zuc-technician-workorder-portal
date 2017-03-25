@@ -5,24 +5,36 @@
       :to="link.route"
       class ="mdev-nav-link flex flex-hor-between flex-vert-center u-bold"
       active-class="--active" 
+      @click="link.method"
       :title="link.linkTitle" 
       aria-role="menuitem" 
       exact>
         <i :class="['mdev-icon --size-s', link.iconClass ]"></i>
         <span>{{ link.linkName  }}</span>
    </router-link> 
+   <a @click="showModalChild" class="mdev-nav-link flex flex-hor-between flex-vert-center u-bold">
+        <i :class="['mdev-icon --size-s', contact.iconClass ]"></i>
+        <span>{{ contact.linkName  }}</span>
+   </a>
+   <a class="mdev-nav-link flex flex-hor-between flex-vert-center u-bold">
+        <i :class="['mdev-icon --size-s', user.iconClass ]"></i>
+        <span>{{ user.linkName  }}</span>
+   </a>
   </div>
 </template>
 
 
 
 <script>
-  export default{
+  // Local registration
+
+  export default {
     // <router-link> element is a custom element derived from vue-router. use :to - to bind. 
     name: "navLinks",
 
     data: function(){
       return{
+        showModal: false,
         // Refer to routes.js file for available routes.
         links: [
           {
@@ -36,21 +48,25 @@
             iconClass: '--billing-icon',
             linkTitle: 'Billing Report',
             route: '/dashboard/billing'
-          },
-          {
+          }
+        ],
+        contact: {
             linkName: 'Contact',
             iconClass: '--contact-icon',
             linkTitle: 'Contact Information',
-            route: '#'
           },
-          {
+        user: {
             linkName: 'User',
             iconClass: '--user-icon',
             linkTitle: 'User Menu',
-            route: '#'
           }
-        ]
       };
+    },
+
+    methods: {
+      showModalChild() {
+        this.$emit('showModalParent');
+      }
     }
   };
 

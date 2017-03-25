@@ -61,15 +61,13 @@
 
         
         <span class="mdev-table-cell --side-modifier" aria-labeledby="serviceColumn">
-          <div class="mdev-serviced-plugin flex flex-hor-between flex-vert-stretch">
-            <i class="mdev-icon --rounded-icon --size-m --date-icon"></i>
-            <input type="text" placeholder="DD/MM/YYYY" v-model="orders.serviceDate">
-           </div>
+        <!-- Serviced Component -->
+          <serviced-component :servicedDate="orders.servicedDate" :orderId="orders.orderId"></serviced-component>
         </span>
 
         <span class="mdev-table-cell --side-modifier" aria-labeledby="statusColumn">
-          <button 
-            :class="['mdev-base-btn mdev-status-btn',{ unreachable: orders.unreachable}]"> {{ $t("general.unreachable") }} </button>
+        <!-- Unreachable Component -->
+        <unreachable-component :orderId="orders.orderId" :unreachable="orders.unreachable"></unreachable-component>
         </span>
         
         <span class="mdev-table-cell --top-modifier smallColumn" aria-labeledby="statusColumn">
@@ -84,6 +82,11 @@
 </template>
 
 <script>
+
+  //Local Component Registration
+  import servicedComponent from '../shared/serviced.vue';
+  import unreachableComponent from '../shared/unreachable.vue';
+
   export default {
     name: "workOrderList",
 
@@ -171,6 +174,10 @@
           },
         ]
       };
+    },
+    components: {
+      'serviced-component'  : servicedComponent,
+      'unreachable-component' : unreachableComponent
     }
   };
 </script>

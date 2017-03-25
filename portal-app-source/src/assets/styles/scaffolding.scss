@@ -30,12 +30,12 @@
 .mdev-main-content-frame {
   width: 100%;
   height: auto;
-  border-radius: $standard-radius;
   overflow: hidden;
   margin-top: 15px;
   margin-bottom: 100px;
 
   @media #{$tablet-up} {
+    border-radius: $standard-radius;
     margin-top: 30px;
   }
 }

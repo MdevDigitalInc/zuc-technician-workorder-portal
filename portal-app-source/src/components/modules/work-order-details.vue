@@ -4,7 +4,9 @@
     <!-- Header [FLEX] -->
     <div class="mdev-frame-header flex flex-hor-start flex-hor-between">
       <span id="details-title">{{ $t("orderDetails.title") }} {{ orderId }}</span>
-      <router-link to="/dashboard/list" title="Back">{{ $t("general.navBack") }}</router-link>
+      <router-link class="flex flex-vert-center" to="/dashboard/list" title="Back">
+        <i class="mdev-icon --size-s --back-icon"></i>
+        {{ $t("general.navBack") }}</router-link>
     </div>
 
     <!-- Customer / Appointment [ Top Section ] -->
@@ -76,13 +78,10 @@
           </div>
         <!-- Actions -->
         <div class="mdev-info-actions flex flex-hor-between flex-vert-stretch" aria-label="Actions and Status">
-          <div class="mdev-serviced-plugin flex flex-hor-between flex-vert-stretch">
-            <i class="mdev-icon --rounded-icon --size-m --date-icon"></i>
-            <input type="text" placeholder="DD/MM/YYYY" v-model="orderDetails.serviceDate">
-           </div>
-          <button 
-              :class="['mdev-base-btn mdev-status-btn',{ unreachable: orderDetails.unreachable}]">
-               {{ $t("general.unreachable") }} </button>
+          <!-- Serviced Component -->
+          <serviced-component :servicedDate="orderDetails.serviceDate" :orderId="orderId"></serviced-component> 
+          <!-- Unreachable Component -->
+          <unreachable-component :orderId="orderId" :unreachable="orderDetails.unreachable"></unreachable-component>
         </div>
       </div>
       </div>
@@ -147,6 +146,11 @@
 </template>
 
 <script>
+  
+  //Local Component Registration
+  import servicedComponent from '../shared/serviced.vue';
+  import unreachableComponent from '../shared/unreachable.vue';
+
   export default {
     name: "workOrderDetail",
 
@@ -199,6 +203,11 @@
           serviceDate: ""
         }
       };
+    },
+
+    components: {
+      'serviced-component'  : servicedComponent,
+      'unreachable-component' : unreachableComponent
     }
   };
 </script>

@@ -6,7 +6,7 @@
         <img class="u-hidden-desktop" :src="loadImage(homeBrandReverse)">
       </a>
       <!-- Navigation Links -->
-      <navlinks></navlinks> 
+      <navlinks @showModalParent="showModalMaster"></navlinks> 
       <div class="u-hidden-desktop reorder">
         <a @click="goBack"
           v-if="showBack"
@@ -116,6 +116,10 @@
         else {
           this.showBack = true;
         }
+      },
+      //Show Modal
+      showModalMaster() {
+        this.$emit('showModal');
       },
       // Change Language METHOD
       change () {
