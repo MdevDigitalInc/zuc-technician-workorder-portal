@@ -19,14 +19,15 @@
       <!-- Table Row [FLEX] -->
       <div 
         v-for="orders in workOrders"
-        class="mdev-table-row flex flex-start">      
+        class="mdev-table-row flex flex-start"
+        v-if="!orders.serviceDate">      
         
         <!-- Date Added -->
         <span class="mdev-table-cell" aria-labeledby="dateColumn">
           <span class="u-hidden-desktop mdev-hidden-label" aria-hidde="true">
             Date Added:
           </span>
-          {{ orders.orderContent.dateAdded   }}
+          {{ orders.orderContent.dateAdded }}
         </span> 
 
         <!-- Customer Name -->
@@ -62,7 +63,7 @@
         
         <span class="mdev-table-cell --side-modifier" aria-labeledby="serviceColumn">
         <!-- Serviced Component -->
-          <serviced-component :servicedDate="orders.servicedDate" :orderId="orders.orderId"></serviced-component>
+          <serviced-component @statusChanged="orders.serviceDate = $event" :servicedDate="orders.servicedDate" :orderId="orders.orderId"></serviced-component>
         </span>
 
         <span class="mdev-table-cell --side-modifier" aria-labeledby="statusColumn">
@@ -71,8 +72,11 @@
         </span>
         
         <span class="mdev-table-cell --top-modifier smallColumn" aria-labeledby="statusColumn">
-          <router-link :to="{ path:'/dashboard/workorder/' + orders.orderId}">
+          <router-link class="info-icon-test" :to="{ path:'/dashboard/workorder/' + orders.orderId}">
+          <i class="fa fa-fw fa-info"></i>
+            <!-- Temporary
             <i class="mdev-icon --rounded-icon --size-l --info-icon"></i>
+            -->
           </router-link>
         </span>
 
@@ -139,36 +143,36 @@
         workOrders: [
           {
             orderContent: {
-              dateAdded: "03/04/2017",
+              dateAdded: 1488622220,
               custName: "John Santos Smith",
               city: "Victoria",
               address: "202-111 Oak Bay Avenue",
               phone: "1-519-555-55555"
             },
-            serviceDate: "",
+            serviceDate: false,
             orderId: "38827199271",
             unreachable: false
           },
           {
             orderContent: {
-              dateAdded: "03/04/2017",
+              dateAdded: 1488622220,
               custName: "John Santos Smith",
               city: "Victoria",
               address: "202-111 Oak Bay Avenue",
               phone: "1-519-555-55555"
             },
-            serviceDate: "",
+            serviceDate: false,
             orderId: "3768279198",
             unreachable: true
           },          {
             orderContent: {
-              dateAdded: "03/04/2017",
+              dateAdded: 1488622220,
               custName: "John Santos Smith",
               city: "Victoria",
               address: "202-111 Oak Bay Avenue",
               phone: "1-519-555-55555"
             },
-            serviceDate: "",
+            serviceDate: false,
             orderId: "111111",
             unreachable: false
           },
@@ -213,6 +217,14 @@
     margin-left: 0;
   }
 
+  .info-icon-test {
+    display: inline-block;
+    border-radius: 3px;
+    padding: 8px;
+    background: $active-blue;
+    color: $white;
+  }
+
 
 
   @media screen and ('$phone-only-comp') {
@@ -238,7 +250,7 @@
     
     .--top-modifier {
       position: absolute;
-      top: $medium-spacing;
+      top: $large-spacing;
       padding: 0;
       right: -87%;
     }

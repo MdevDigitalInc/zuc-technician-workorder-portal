@@ -5,7 +5,9 @@
     <div class="mdev-frame-header flex flex-hor-start flex-hor-between" aria-labelledby="billingTitle">
       <span id="billing-title">{{ $t("billing.title") }}</span>
       <router-link to="/dashboard/list" title="Back" class="flex flex-vert-center">
-        <i class="mdev-icon --size-s --back-icon"></i>
+        <i class="fa fa-fw fa-chevron-left"></i>
+        <!-- Temporary
+        <i class="mdev-icon --size-s --back-icon"></i> -->
         {{ $t("general.navBack") }}
       </router-link>
     </div>

@@ -5,7 +5,9 @@
     <div class="mdev-frame-header flex flex-hor-start flex-hor-between">
       <span id="details-title">{{ $t("orderDetails.title") }} {{ orderId }}</span>
       <router-link class="flex flex-vert-center" to="/dashboard/list" title="Back">
-        <i class="mdev-icon --size-s --back-icon"></i>
+        <i class="fa fa-fw fa-chevron-left"></i>
+        <!-- Temporary
+        <i class="mdev-icon --size-s --back-icon"></i> -->
         {{ $t("general.navBack") }}</router-link>
     </div>
 
@@ -67,13 +69,17 @@
             <!-- Date -->
           <div class="mdev-info-field flex flex-vert-center --emphasis-modifier">
             <span id="date" class="u-hidden" aria-hidden="true">{{ $t("general.date") }}</span>
-            <i class="mdev-icon --size-l --date-icon"></i>
+            <!-- Temporary
+            <i class="mdev-icon --size-l --date-icon"></i> -->
+            <i class="fa fa-fw fa-clock-o"></i>
             <span aria-labelledby="date"> {{ orderDetails.appointment.time }}</span>
           </div>
           <!-- Time -->
           <div class="mdev-info-field flex flex-vert-center --emphasis-modifier">
             <span id="time" class="u-hidden" aria-hidden="true">{{$t("general.time") }}</span>
-            <i class="mdev-icon --size-l --time-icon"></i>
+            <!-- Temporary
+            <i class="mdev-icon --size-l --time-icon"></i> -->
+            <i class="fa fa-fw fa-calendar"></i>
             <span aria-labelledby="time"> {{ orderDetails.appointment.time }}</span>
           </div>
         <!-- Actions -->
@@ -267,7 +273,7 @@
   
   .mdev-info-field {
     line-height: 7.3vw;
-    margin: 4px 0;
+    margin: 8px 0;
     display: flex;
 
     @media screen and ('$tablet-only-comp') {

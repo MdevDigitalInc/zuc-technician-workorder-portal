@@ -52,7 +52,8 @@ export default {
       form: "I think you missed something, please check the form.",
       email: "Please provide a valid Email address.",
       match: "New Passwords do not match.",
-      pwdTooShort: "Passwords need a minimum of 6 characters."
+      pwdTooShort: "Passwords need a minimum of 6 characters.",
+      date: "Please ensure the date is in the correct format MM/DD/YYY."
     },
     messages: {
       success: { 

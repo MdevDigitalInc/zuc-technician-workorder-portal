@@ -39,45 +39,41 @@ export default {
       width: 100%;
       margin: 15px 0 0 0;
       padding: 20px 20px 20px 40px;
-      font-size: 1vw;
+      font-size: 1.6vw;
     }
 
     @media screen and ('$laptop-only-comp') {
       padding: 20px 20px 20px 50px
     }
+
+    @media screen and ('$desktop-up-comp') {
+      font-size: 1.2vw;
+    }
   }
 
   .--icon-layer{
+     font: normal normal normal 14px/1 FontAwesome;
      position: relative;
      &:before {
-      content: ' ';
+      content: "\f002";
       display: block;
       z-index: 2;
       position: absolute;
-      width: 6vw;
-      height: 6vw;
-      background: red;
-      left: 25px;
+      left: 28px;
       top: 50%;
       transform: translateY(-50%);
+      color: $bkg-light-grey;
+      font-size: 3vw;
 
-      @media screen and ('$tablet-up-comp') {
-        width: 3vw;
-        height: 3vw;
-        left: 12px;
-      }
-
-      @media screen and ('$laptop-only-comp') {
-        width: 2vw;
-        height: 2vw;
+      @media screen and ('$tablet-only-comp') {
         left: 15px;
-
-      }
-      @media screen and ('$desktop-up-comp') {
-        width: 1vw;
-        height: 1vw;
+        font-size: 2.1vw;
       }
 
+      @media screen and ('$laptop-up-comp') {
+        left: 18px;
+        font-size: 1.4vw;
+      }
      }
   }
 

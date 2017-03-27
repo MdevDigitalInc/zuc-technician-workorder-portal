@@ -11,7 +11,10 @@
         <a @click="goBack"
           v-if="showBack"
           class="mdev-back-btn flex flex-hor-between flex-vert-center">
+            <!-- Temporary 
             <i class="mdev-icon --size-s --back-icon"></i>
+            -->
+            <i class="fa fa-fw fa-chevron-left"></i>
             {{ $t('general.back')}}
         </a>
         <span class="u-white u-bold" v-else>
@@ -172,13 +175,28 @@
     }
     
     .mdev-nav-link {
-      margin: 0 5px;
-
-      @media screen and ('$tablet-up-comp') {
-        padding: 6px $medium-spacing;
-        margin: 0 $medium-spacing;
+      padding: 6px 5px;
+      max-width: 240px;
+      @media screen and ('$tablet-only-comp') {
+        padding: 6px 3vw;
       }
-     }
+
+      @media screen and ('$laptop-only-comp') {
+        padding: 6px $large-spacing;
+      }
+      @media screen and ('$desktop-up-comp') {
+        padding: 6px $large-spacing;
+      }
+
+      &:last-child {
+        padding-right: 0!important;
+      }
+      /* Temporary */
+      i {
+        font-size: 1.5vw;
+        padding-right: .5vw;
+      }
+    }
     
     .mdev-main-nav-branding {
       max-width: 125px;

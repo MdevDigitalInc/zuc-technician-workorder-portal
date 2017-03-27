@@ -9,15 +9,24 @@
       :title="link.linkTitle" 
       aria-role="menuitem" 
       exact>
+        <!-- Temporary Off
         <i :class="['mdev-icon --size-s', link.iconClass ]"></i>
+        -->
+        <i :class="['fa fa-fw', link.iconFa]"></i>
         <span>{{ link.linkName  }}</span>
    </router-link> 
    <a @click="showModalChild" class="mdev-nav-link flex flex-hor-between flex-vert-center u-bold">
+        <!-- Temporary Off
         <i :class="['mdev-icon --size-s', contact.iconClass ]"></i>
+        -->
+        <i :class="['fa fa-fw', contact.iconFa]"></i>
         <span>{{ contact.linkName  }}</span>
    </a>
    <a class="mdev-nav-link flex flex-hor-between flex-vert-center u-bold">
+        <!-- Temporary Off
         <i :class="['mdev-icon --size-s', user.iconClass ]"></i>
+        -->
+        <i :class="['fa fa-fw', user.iconFa]"></i>
         <span>{{ user.linkName  }}</span>
    </a>
   </div>
@@ -41,11 +50,13 @@
             linkName: 'Work Orders',
             linkTitle: 'Available Work Orders',
             iconClass: '--workorder-icon',
+            iconFa: 'fa-file-text',
             route: '/dashboard/list'
           },
           {
             linkName: 'Billing',
             iconClass: '--billing-icon',
+            iconFa: 'fa-bar-chart',
             linkTitle: 'Billing Report',
             route: '/dashboard/billing'
           }
@@ -53,11 +64,13 @@
         contact: {
             linkName: 'Contact',
             iconClass: '--contact-icon',
+            iconFa: 'fa-envelope',
             linkTitle: 'Contact Information',
           },
         user: {
             linkName: 'User',
             iconClass: '--user-icon',
+            iconFa: 'fa-user',
             linkTitle: 'User Menu',
           }
       };
@@ -98,6 +111,7 @@
     transition: all, .3s;
     flex-wrap: wrap;
     text-align: center;
+    color: $bkg-light-grey;
 
     @media screen and ('$tablet-up-comp') {
       flex-wrap: nowrap;
@@ -119,6 +133,7 @@
         width: auto;
       }
     }
+    
   }
 
   .--active {

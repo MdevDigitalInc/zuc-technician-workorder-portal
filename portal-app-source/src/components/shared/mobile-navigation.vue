@@ -55,6 +55,13 @@
 
     .mdev-nav-link {
       width: 25%;
+      
+      /* Temporary as frig */
+      i {
+        display: block;
+        margin: 0 auto 3vw auto;
+        font-size: 7vw;
+      }
     }
   }
 
