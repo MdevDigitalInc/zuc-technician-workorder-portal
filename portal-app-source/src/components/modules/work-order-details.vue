@@ -82,7 +82,7 @@
             <i class="mdev-icon --size-l --time-icon"></i> -->
             <i class="fa fa-fw fa-calendar"></i>
             <span aria-labelledby="time"> 
-              {{ (orderDetails.appointment.time * 1000) | moment("HH:MM") }}</span>
+              {{ (orderDetails.appointment.time * 1000) | moment("HH:MM A") }}</span>
           </div>
         <!-- Actions -->
         <div class="mdev-info-actions flex flex-hor-between flex-vert-stretch" aria-label="Actions and Status">
@@ -103,7 +103,8 @@
             <!-- Delivery -->
             <div class="mdev-info-field">
               <span class="mdev-info-label" id="delivery">{{ $t("general.delivery") }}</span>
-              <span class="mdev-info-content" aria-labelledby="delivery"> {{ orderDetails.order.deliveryDate  }}</span>
+              <span class="mdev-info-content" aria-labelledby="delivery"> 
+                {{ (orderDetails.order.deliveryDate * 1000) | moment("MM/DD/YYY")  }}</span>
             </div>
 
             <!-- Order Id -->
@@ -181,7 +182,7 @@
             time: 1490201100 
           },
           order: {
-            deliveryDate: "1489164300",
+            deliveryDate: 1489164300,
             orderId: "87372918623",
             store: "Leons - Victoria",
 
