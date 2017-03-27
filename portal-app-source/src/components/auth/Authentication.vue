@@ -41,12 +41,12 @@
       }
     },
     
-    mounted: function(){
+    mounted: function() {
       this.determineVisibility(this.$route.path); 
     },
 
     methods: {
-      loadImage(path){
+      loadImage(path) {
         return require('../../assets/images/' + path);
       },
       determineVisibility(path) {
@@ -96,11 +96,11 @@
     z-index: 10;
     transform: translate3D(-50%, -50%, 0);
 
-    @media screen and ('$tablet-up-comp'){
+    @media screen and ('$tablet-up-comp') {
       background: $white;
       border-radius: $standard-radius;
       border-top: solid $border-top-size $zucora-blue;
-      padding:($top-padding-var + $border-top-size) 30px 30px 30px;
+      padding: ($top-padding-var + $border-top-size) 30px 30px 30px;
       width: 40%;
     }
     
@@ -123,7 +123,7 @@
       margin-top: 10px;
     }
 
-    .mdev-base-btn{
+    .mdev-base-btn {
       width: 100%;
     }
   }
@@ -146,7 +146,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    background: url("../../assets/images/login-bkg.jpg");
+    background: url('../../assets/images/login-bkg.jpg');
     background-size: cover;
     background-position: center;
     width: 100vw;
@@ -155,7 +155,7 @@
     filter: blur(2px);
 
     &:before {
-      content: "";
+      content: '';
       display: block;
       position: absolute;
       top: 0;
@@ -168,8 +168,8 @@
   }
   
   // Hack to Fix Color On Input
-  @media screen and ('$phone-only-comp'){
-    input{
+  @media screen and ('$phone-only-comp') {
+    input {
       background-color: $white;
     }      
   }

@@ -25,7 +25,10 @@
           </div>
           <div class="mdev-billing-period">
             <span class="mdev-label">{{ $t("billing.period") }}</span>
-            <span class="mdev-information --emphasis-modifier">{{ billingOrder.periodStart }} - {{ billingOrder.periodEnd  }}</span>
+            <span class="mdev-information --emphasis-modifier">
+              {{ (billingOrder.periodStart * 1000) | moment("MM/DD/YYYY") }} 
+              - 
+              {{ (billingOrder.periodEnd * 1000) | moment("MM/DD/YYYY") }}</span>
           </div>
       </div>
       <div class="mdev-light-table" aria-labelledby="billing-table">
@@ -71,8 +74,8 @@ export default {
       mainBrand: 'zucora-white.svg',
       billingOrder: {
         serviceProvider: "Edmonton MagiSeal Service - Leather",
-        periodStart: "3672618712631",
-        periodEnd: "7782987129387213",
+        periodStart: 1488233506,
+        periodEnd: 1488406306,
         servicedOrders: [
           {
             orderId: "CA631827361283",

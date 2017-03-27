@@ -53,7 +53,6 @@
         }
       },
       showModalOn( state ) {
-        console.log(state);
         
         if (state) {
           this.showModal = true;

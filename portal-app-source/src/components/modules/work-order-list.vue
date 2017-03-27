@@ -27,7 +27,7 @@
           <span class="u-hidden-desktop mdev-hidden-label" aria-hidde="true">
             Date Added:
           </span>
-          {{ orders.orderContent.dateAdded }}
+          {{ (orders.orderContent.dateAdded * 1000) | moment("DD/MM/YYYY")}}
         </span> 
 
         <!-- Customer Name -->
@@ -143,7 +143,7 @@
         workOrders: [
           {
             orderContent: {
-              dateAdded: 1488622220,
+              dateAdded: 1490651987,
               custName: "John Santos Smith",
               city: "Victoria",
               address: "202-111 Oak Bay Avenue",
@@ -155,7 +155,7 @@
           },
           {
             orderContent: {
-              dateAdded: 1488622220,
+              dateAdded: 1318781876,
               custName: "John Santos Smith",
               city: "Victoria",
               address: "202-111 Oak Bay Avenue",
@@ -166,7 +166,7 @@
             unreachable: true
           },          {
             orderContent: {
-              dateAdded: 1488622220,
+              dateAdded: 1318781876,
               custName: "John Santos Smith",
               city: "Victoria",
               address: "202-111 Oak Bay Avenue",

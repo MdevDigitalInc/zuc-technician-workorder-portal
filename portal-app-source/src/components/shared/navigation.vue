@@ -87,7 +87,6 @@
         function adjustPadding() {
         // Desired Padding Value
         var desiredPadding = (($(window).width() <= 500) ? 10 : 20);
-        console.log(desiredPadding);
  
           var navHeight = $('.mdev-main-nav')[0].getBoundingClientRect().height;
         
@@ -187,10 +186,13 @@
       @media screen and ('$desktop-up-comp') {
         padding: 6px $large-spacing;
       }
-
+      
+      /* Important is necessary for override */
+      /* stylelint-disable */
       &:last-child {
-        padding-right: 0!important;
+        padding-right: 0 !important;
       }
+      /* stylelint-enable */
       /* Temporary */
       i {
         font-size: 1.5vw;

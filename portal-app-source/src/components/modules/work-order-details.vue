@@ -72,7 +72,8 @@
             <!-- Temporary
             <i class="mdev-icon --size-l --date-icon"></i> -->
             <i class="fa fa-fw fa-clock-o"></i>
-            <span aria-labelledby="date"> {{ orderDetails.appointment.time }}</span>
+            <span aria-labelledby="date"> 
+              {{ (orderDetails.appointment.time * 1000) | moment("MM/DD/YYYY") }}</span>
           </div>
           <!-- Time -->
           <div class="mdev-info-field flex flex-vert-center --emphasis-modifier">
@@ -80,7 +81,8 @@
             <!-- Temporary
             <i class="mdev-icon --size-l --time-icon"></i> -->
             <i class="fa fa-fw fa-calendar"></i>
-            <span aria-labelledby="time"> {{ orderDetails.appointment.time }}</span>
+            <span aria-labelledby="time"> 
+              {{ (orderDetails.appointment.time * 1000) | moment("HH:MM") }}</span>
           </div>
         <!-- Actions -->
         <div class="mdev-info-actions flex flex-hor-between flex-vert-stretch" aria-label="Actions and Status">
@@ -176,7 +178,7 @@
             dateAdded: "1489164300"
           },
           appointment: {
-            time: "1490201100" 
+            time: 1490201100 
           },
           order: {
             deliveryDate: "1489164300",
@@ -233,7 +235,8 @@
   /* Main Component Styles                */
   /*--------------------------------------*/
  
-  .mdev-order-header, .mdev-order-wrapper {
+  .mdev-order-header,
+  .mdev-order-wrapper {
     padding: 0;
 
     @media screen and ('$tablet-up-comp') {
@@ -252,7 +255,8 @@
   .mdev-frame-header {
     margin-bottom: $large-spacing;
   }
-  .mdev-order-info, .mdev-order-header {
+  .mdev-order-info,
+  .mdev-order-header {
     margin-bottom: $large-spacing;
   }
 
@@ -307,7 +311,8 @@
     }
   }
 
-  .mdev-serviced-plugin, .mdev-status-btn {
+  .mdev-serviced-plugin,
+  .mdev-status-btn {
     margin: 0;
     width: 48%;
     input {
@@ -334,7 +339,6 @@
       padding: 20px;
       width: 60%;
     }
-
   }
 
   .mdev-light-cell {

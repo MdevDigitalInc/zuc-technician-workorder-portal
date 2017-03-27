@@ -32,7 +32,7 @@ Vue.use(VueResource);
 Vue.use(VueRouter);
 Vue.use(Auth);
 Vue.use(Validate);
-
+Vue.use(require('vue-moment'));
 // Set Language Default [ ENGLISH ]
 Vue.config.lang = 'en';
 

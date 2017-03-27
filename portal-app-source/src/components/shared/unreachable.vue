@@ -21,13 +21,6 @@
 
 
       }
-    },
-
-    created: function(){
-      this.status = this.unreachable;
-      console.log('----Unreachable Component---');
-      console.log('orderId: ' + this.orderId);
-      console.log('unreachableStatus' + this.unreachable);
     }
   };
 </script>

@@ -46,21 +46,12 @@
 
         //call Emit
         setTimeout(this.successEmit, 1000);
-        console.log(this.date);
-
       },
       successEmit() {
         // emit to parent so it can eliminate row
         this.$emit('statusChanged', this.date); 
       }
 
-    },
-
-    created: function(){
-      console.log('----Serviced Component----');
-      console.log('Date: ' + this.date);
-      console.log('ServicedDate: ' + this.servicedDate);
-      console.log('orderId: ' + this.orderId);
     }
   };  
 </script>
@@ -147,9 +138,12 @@
     }
   }
 
+  /* Important is necessary for override */
+  /* stylelint-disable */  
   .activeInput {
     background: $zucora-green !important;
   }
+  /* stylelint-enable */
 </style>
 
 
