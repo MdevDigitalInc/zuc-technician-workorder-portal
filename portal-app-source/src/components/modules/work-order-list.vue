@@ -3,7 +3,7 @@
   <section class="mdev-main-content-frame" aria-labeledby="dashboard-title">
     <!-- Header [FLEX] -->
     <div class="mdev-frame-header flex flex-start flex-hor-between">
-      <span id="dashboard-title">{{ $t("orderDetails.title") }}</span>
+      <span id="dashboard-title">{{ $t("orderList.title") }}</span>
     </div>
     <!-- Table Container --> 
     <div class="mdev-table-container">
@@ -72,7 +72,7 @@
         </span>
         
         <span class="mdev-table-cell --top-modifier smallColumn" aria-labeledby="statusColumn">
-          <router-link class="info-icon-test" :to="{ path:'/dashboard/workorder/' + orders.orderId}">
+          <router-link class="info-icon" :to="{ path:'/dashboard/workorder/' + orders.orderId}">
           <i class="fa fa-fw fa-info"></i>
             <!-- Temporary
             <i class="mdev-icon --rounded-icon --size-l --info-icon"></i>
@@ -217,12 +217,16 @@
     margin-left: 0;
   }
 
-  .info-icon-test {
+  .info-icon {
     display: inline-block;
     border-radius: 3px;
     padding: 8px;
     background: $active-blue;
     color: $white;
+
+    @media screen and ('$tablet-only-comp') {
+      padding: 3px;
+    }
   }
 
 

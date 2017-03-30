@@ -13,11 +13,28 @@
   padding: 8px 15px;
   transition: all, .3s;
   text-transform: uppercase;
-  font-size: 1vw;
+  font-size: 4vw;
   cursor: pointer;
   border-radius: $standard-radius;
   font-weight: $heading-weight;
   letter-spacing: 0;
+
+  @media #{$tablet-only} {
+    font-size: 1vw;
+  }
+  
+  @media #{$laptop-only} {
+    font-size: .9vw;
+  }
+  
+  @media #{$desktop-only} {
+    font-size: 1vw;
+  }
+  
+  @media #{$xl-up} {
+    font-size: 16px;
+  }
+
 }
 
 /* Button Colors */

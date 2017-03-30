@@ -77,7 +77,7 @@
     position: relative;
     border-radius: 3px;
     overflow: hidden;
-    padding: 2px;
+    padding: 3px;
     height: 10.2vw;
 
     @media screen and ('$tablet-up-comp') {
@@ -95,6 +95,11 @@
       font-size: 178%;
       position: relative;
 
+      @media screen and ('$tablet-only-comp') {
+        font-size: 11px;
+        margin: 0 2px;
+      }
+
       /*&:before {
         display: block;
         position: relative;
@@ -111,13 +116,30 @@
       margin-top: 0;
       width: 80%;
       font-size: 3.4vw;
-      padding: 5px;
+      padding: 8px;
       position: relative;
       background: $white;
       border: none;
 
-      @media screen and ('$tablet-up-comp') {
+      @media screen and ('$tablet-only-comp') {
+        font-size: .8vw;
+        padding: 3px;
+        width: 88%;
+      }
+
+      @media screen and ('$laptop-only-comp') {
         font-size: 1vw;
+        padding: 3px;
+      }
+
+      @media screen and ('$desktop-only-comp') {
+        font-size: 1vw;
+        padding: 3px;
+      }
+
+      @media screen and ('$xl-up-comp') {
+        font-size: 16px;
+        padding: 10px;
       }
 
       &:hover {

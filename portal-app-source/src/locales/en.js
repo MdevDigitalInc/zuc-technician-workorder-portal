@@ -64,6 +64,9 @@ export default {
       }
     }
   },
+  orderList: {
+    title: "Available Work Orders:"
+  },
   orderDetails: {
     title: "Wokorder Number: ",
     custInfo: "Customer Information",

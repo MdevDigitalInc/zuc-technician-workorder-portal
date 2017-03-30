@@ -38,16 +38,22 @@ Global Main
   @media screen and ('$tablet-up-comp') {
     width: 100%;
     margin: 15px 0 0 0;
-    padding: 20px 20px 20px 40px;
+    padding: 15px 15px 15px 40px;
     font-size: 1.6vw;
   }
 
   @media screen and ('$laptop-only-comp') {
-    padding: 20px 20px 20px 50px;
+    padding-left: 50px;
   }
 
-  @media screen and ('$desktop-up-comp') {
-    font-size: 1.2vw;
+  @media screen and ('$desktop-only-comp') {
+    font-size: 1vw;
+    padding-left: 50px;
+  }
+
+  @media screen and ('$xl-up-comp') {
+    font-size: 16px;
+    padding-left: 60px;
   }
 }
 
