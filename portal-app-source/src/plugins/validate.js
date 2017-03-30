@@ -73,6 +73,19 @@ var ValidatePlugin = {
     
   },
 
+  validateDate: function(payload, error){
+    var regDate = /^\d{2}\/\d{2}\/\d{4}$/;
+    // Validate Password Length
+    if (regDate.test(payload)){
+      return true;
+    }
+    else {
+      alertify.error(error);
+      return false;
+    }
+    
+  },
+  
   validateMatch: function (set, match, error){
     // Match Variables
     if( set === match) {

@@ -1,6 +1,6 @@
 <template>
   <div class="mdev-form-group">
-    <h1>Password Reset</h1>
+    <h1 class="u-text-center">{{ $t("auth.reset.title") }}</h1>
     
     <input
       data-required
@@ -14,14 +14,14 @@
       <button
         @click="reset"
         aria-label="Reset Password"
-        class="mdev-base-btn mdev-action-btn"> reset </button>
+        class="mdev-base-btn mdev-action-btn"> {{ $t("auth.reset.action") }} </button>
     </div>
   </div> 
 </template>
 
 <script>
   export default {
-   name: "RegisterComponent",
+   name: "ResetComponent",
 
    data: function() {
     return{

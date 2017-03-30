@@ -1,20 +1,25 @@
 <template>
   <nav class="mdev-main-nav" aria-role="navigation" role="navigation">
-    <div class="mdev-main-wrapper flex flex-nowrap flex-hor-between flex-vert-end">
+    <div class="mdev-main-wrapper flex flex-nowrap flex-hor-between flex-vert-center">
       <a :href="homeLink" :title="homeTitle" class="mdev-main-nav-branding">
-        <img :src="loadImage(homeBrand)">
+        <img class="u-hidden-phone" :src="loadImage(homeBrand)">
+        <img class="u-hidden-desktop" :src="loadImage(homeBrandReverse)">
       </a>
-      <div class="mdev-main-nav-links u-capitalize">
-        <router-link 
-          v-for="link in links" 
-          :to="link.route"
-          class ="mdev-nav-link"
-          active-class="--active" 
-          :title="link.linkTitle" 
-          aria-role="menuitem" 
-          exact>
-            {{ link.linkName  }}
-       </router-link> 
+      <!-- Navigation Links -->
+      <navlinks @showModalParent="showModalMaster"></navlinks> 
+      <div class="u-hidden-desktop reorder">
+        <a @click="goBack"
+          v-if="showBack"
+          class="mdev-back-btn flex flex-hor-between flex-vert-center">
+            <!-- Temporary 
+            <i class="mdev-icon --size-s --back-icon"></i>
+            -->
+            <i class="fa fa-fw fa-chevron-left"></i>
+            {{ $t('general.back')}}
+        </a>
+        <span class="u-white u-bold" v-else>
+          {{ $t('general.title') }}
+        </span>
       </div>
     </div>
     <!--
@@ -26,38 +31,36 @@
 
 
 <script>
+  //Import Nav Links
+  import NavLinks from './navlinks.vue';
+
   export default{
     // <router-link> element is a custom element derived from vue-router. use :to - to bind. 
+    name: "navigation",
+
     data: function(){
       return{
         // Refer to routes.js file for available routes.
-        links: [
-          {
-            linkName: 'Work Orders',
-            linkTitle: 'Available Work Orders',
-            route: '/dashboard/list'
-          },
-          {
-            linkName: 'Billing',
-            linkTitle: 'Billing Report',
-            route: '#'
-          },
-          {
-            linkName: 'Contact',
-            linkTitle: 'Contact Information',
-            route: '#'
-          },
-          {
-            linkName: 'User',
-            linkTitle: 'User Menu',
-            route: '#'
-          }
-        ],
-
         homeLink: '/',
         homeTitle: 'Home',
-        homeBrand: 'zucora-white.svg'
+        homeBrand: 'zucora-white.svg',
+        homeBrandReverse: 'zucora-black.svg',
+        showBack: false
       };
+    },
+
+    created: function() {
+      this.determineVisibility(this.$route.path);
+    },
+    
+    watch: {
+      '$route'(to, from) {
+        this.determineVisibility(to.path); 
+      }
+    },
+    
+    components: {
+      'navlinks' : NavLinks
     },
 
     mounted: function(){
@@ -80,10 +83,11 @@
       // Give padding according to Nav Height IIFE
       (function(){
       
-        // Desired Padding Value
-        var desiredPadding = 20;
-        // Adjust Padding of the site
+       // Adjust Padding of the site
         function adjustPadding() {
+        // Desired Padding Value
+        var desiredPadding = (($(window).width() <= 500) ? 10 : 20);
+ 
           var navHeight = $('.mdev-main-nav')[0].getBoundingClientRect().height;
         
           $('#app').css({
@@ -104,6 +108,21 @@
       loadImage(path){
         return require('../../assets/images/' + path);
       },
+      goBack() {
+        this.$router.go(-1);
+      },
+      determineVisibility(path) {
+        if (path === "/dashboard/list") {
+          this.showBack = false;
+        } 
+        else {
+          this.showBack = true;
+        }
+      },
+      //Show Modal
+      showModalMaster() {
+        this.$emit('showModal');
+      },
       // Change Language METHOD
       change () {
         let current = this.$locale.current();
@@ -120,7 +139,7 @@
 
 
 
-<style lang="scss" scoped>
+<style lang="scss">
 
   /*--------------------------------------*/
   /* Lean Import for Components           */
@@ -139,16 +158,48 @@
     position: fixed;
     top: 0;
     left: 0;
-    padding: 35px 0;
+    padding: 15px 0;
     z-index: 10;
     transition: all, .3s;
     opacity: 1;
-    background: $white;
+    background: $zucora-blue;
 
-    img{
-      width: 100%;
+    @media screen and ('$tablet-up-comp') {
+      background: $white;
+      padding: 25px 0;
     }
 
+    img {
+      width: 100%;
+    }
+    
+    .mdev-nav-link {
+      padding: 6px 5px;
+      max-width: 240px;
+      @media screen and ('$tablet-only-comp') {
+        padding: 6px 3vw;
+      }
+
+      @media screen and ('$laptop-only-comp') {
+        padding: 6px $large-spacing;
+      }
+      @media screen and ('$desktop-up-comp') {
+        padding: 6px $large-spacing;
+      }
+      
+      /* Important is necessary for override */
+      /* stylelint-disable */
+      &:last-child {
+        padding-right: 0 !important;
+      }
+      /* stylelint-enable */
+      /* Temporary */
+      i {
+        font-size: 1.5vw;
+        padding-right: .5vw;
+      }
+    }
+    
     .mdev-main-nav-branding {
       max-width: 125px;
       min-width: 73px;
@@ -162,41 +213,41 @@
         opacity: .8;
       }
     }
+    
+    .mdev-icon {
+      margin-right: $small-spacing;
+    }
 
     .mdev-main-nav-links {
+      display: none;
       color: $charcoal-grey;
       font-weight: $body-weight;
-    }
-
-    .mdev-nav-link {
-      margin: 0 5px;
-      transition: all, .3s;
-      padding: 6px 15px;
-      background: rgba(230,231,233, 0);
-      border-radius: 3px;
 
       @media screen and ('$tablet-up-comp') {
-        margin: 0 15px;
-      }
-
-      &:hover {
-        background: rgba(230,231,233, 1);
-      }
-
-      &:last-child {
-        margin-right: 0;
+        display: flex;
       }
     }
 
-    .--active {
-      background: rgba(230,231,233, 1);
+    .mdev-main-nav-visibility {
+      opacity: .6;
+      &:hover {
+        opacity: 1;
+      }
     }
   }
 
-  .mdev-main-nav-visibility {
-    opacity: .6;
-    &:hover {
-      opacity: 1;
+  .mdev-back-btn {
+    color: $white;
+    font-weight: $heading-weight;
+  }
+
+  @media screen and ('$phone-only-comp') {
+    .reorder {
+      order: 1;
+    }
+
+    .mdev-main-nav-branding {
+      order: 2;
     }
   }
 

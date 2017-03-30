@@ -1,6 +1,20 @@
 <template>
   <footer class="mdev-footer">
-    Footer Content goes Here
+    <span class="u-bold u-green">
+      {{ $t("footer.title") }}
+    </span>
+    <span class="u-bold">
+      {{ $t("footer.action") }}
+    </span>
+    <span>
+      {{ $t("footer.message") }}
+    </span>
+    <span class="u-bold">
+      {{ $t("footer.brand") }}
+    </span>
+    <span>
+      {{ year }}
+    </span>
   </footer>
 </template>
 
@@ -8,7 +22,15 @@
 
 <script>
   export default{
-   
+    name: "mainFooter",
+    data: function (){
+      return {
+        year: ""
+      };
+    },
+    created: function (){
+      this.year = new Date().getFullYear();
+    }
   };
 
 </script>
@@ -36,7 +58,13 @@
     text-align: center;
     background: $zucora-blue;
     padding: 1vw 0;
-    color: $white;
+    color: $white; 
+    z-index: 10;
+    display: none;
+
+    @media screen and ('$tablet-up-comp') {
+      display: block;
+    }
   }
   /*--------------------------------------*/
 

@@ -1,37 +1,87 @@
 <template>
-  <input class="mdev-search-form" type="text" :placeholder="placeholder" aria-label="Search">
+ <div class="--icon-layer">
+  <input class="mdev-search-form" type="text" :placeholder="$t('general.search')" aria-label="Search">
+  </div>
 </template>
 
 <script>
 
 export default {
-  data: function() {
-    return {
-      placeholder : "Customer Name, Order Number, Date(MM/DD/YYYY)"
-    };
-  }
+  name: "search"
 };
 
 </script>
 
 <style lang="scss" scoped>
 
-	/*-----/
-	Global Main
-	/-----*/
-	@import '../../assets/styles/component-lean-main.scss';
+/*-----/
+Global Main
+/-----*/
+@import '../../assets/styles/component-lean-main.scss';
 
-	/*--------------------------------------*/
-	/* Main Component Styles                */
-	/*--------------------------------------*/
+/*--------------------------------------*/
+/* Main Component Styles                */
+/*--------------------------------------*/
 
 
 
-  input{
+.mdev-search-form {
+  margin: 5px auto;
+  width: 90%;
+  position: relative;
+  padding: 10px 10px 10px 30px;
+  background: $white;
+  display: block;
+  font-size: 2.6vw;
+  z-index: 1;
+  
+  @media screen and ('$tablet-up-comp') {
+    width: 100%;
     margin: 15px 0 0 0;
-    padding: 20px;
-    background: $white;
+    padding: 15px 15px 15px 40px;
+    font-size: 1.6vw;
   }
+
+  @media screen and ('$laptop-only-comp') {
+    padding-left: 50px;
+  }
+
+  @media screen and ('$desktop-only-comp') {
+    font-size: 1vw;
+    padding-left: 50px;
+  }
+
+  @media screen and ('$xl-up-comp') {
+    font-size: 16px;
+    padding-left: 60px;
+  }
+}
+
+.--icon-layer {
+  font: normal normal normal 14px/1 FontAwesome;
+  position: relative;
+  &:before {
+    content: "\f002";
+    display: block;
+    z-index: 2;
+    position: absolute;
+    left: 28px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $bkg-light-grey;
+    font-size: 3vw;
+
+    @media screen and ('$tablet-only-comp') {
+      left: 15px;
+      font-size: 2.1vw;
+    }
+
+    @media screen and ('$laptop-up-comp') {
+      left: 18px;
+      font-size: 1.4vw;
+    }
+  }
+}
 
 	/*--------------------------------------*/
 </style>
