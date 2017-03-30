@@ -29,9 +29,9 @@ h6,.h6, {
 
 // Responsive Font Size Maps
 $p-font-sizes: (
-  null  : 14px,
-  $tablet-up : 16px,
-  $desktop-up: 19px
+  null  : 3vw,
+  $tablet-up : 1.3vw,
+  $desktop-up: 1vw
 );
 
 $h1-font-sizes: (
@@ -47,14 +47,15 @@ $h2-font-sizes: (
 );
 
 $h3-font-sizes: (
-  null  : 20px,
-  $tablet-up : 22px,
+  null  : 5.1vw,
+  $tablet-up : 2.1vw,
+  $laptop-up : 1.4vw,
   $desktop-up: 1.1vw
 );
 
 $h4-font-sizes: (
-  null  : 60%,
-  $tablet-up : 90%,
+  null  : 3.2%,
+  $tablet-up : 1.6%,
   $desktop-up: .8vw
 );
 
@@ -68,12 +69,26 @@ $h6-font-sizes: (
 
 // Links
 $link-font-sizes: (
-  null  : 4vw,
-  $tablet-up : 2vw,
-  $laptop-up : 1.2vw,
-  $desktop-up: 1vw
+  null  : 3vw,
+  $tablet-up : 1.5vw,
+  $laptop-up : 1vw,
+  $desktop-up: .8vw
 );
 
+$footer-font-sizes: (
+  null  : 2vw,
+  $tablet-up : 1vw,
+  $laptop-up : .8vw,
+  $desktop-up: .7vw
+);
+
+// Table Header
+$table-header-font-sizes: (
+  null  : 4vw,
+  $tablet-up : 1.2vw,
+  $laptop-up : .8vw,
+  $desktop-up: .7vw
+);
 // Responsive Font-Size Mixing (Function Only)
 @mixin font-size($fs-map) {
   @each $fs-breakpoint, $fs-font-size in $fs-map {
@@ -93,7 +108,16 @@ $link-font-sizes: (
 /* Generate Responsive Sizing */
 
 p {
-  line-height: 24px;
+  line-height: 5vw;
+  color: $active-grey;
+
+  @media #{$tablet-only} {
+    line-height: 2.2vw;
+  }
+  
+  @media #{$laptop-up} {
+    line-height: 1.6vw;
+  }
   @include font-size($p-font-sizes);
 }
 
@@ -127,8 +151,19 @@ h6,
   @include font-size($h6-font-sizes);
 }
 
+/* Font Control */
+
 .mdev-main-nav-links {
   @include font-size($link-font-sizes);
+}
+
+.mdev-footer {
+  @include font-size($footer-font-sizes);
+}
+
+.mdev-table-head,
+.mdev-table-row {
+  @include font-size($table-header-font-sizes);
 }
 
 /* Link Reset / Base Inherit */
@@ -145,3 +180,26 @@ a {
   }
 }
 
+/* Generic Link */
+
+.mdev-link {
+  color: $active-blue;
+  font-weight: inherit;
+  font-size: inherit;
+  transition: all, .3s;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: $zucora-green;
+  }
+}
+
+/* Labels & Fields */
+.mdev-info-field {
+  color: $active-grey;
+
+  .mdev-info-label {
+    font-weight: $heading-weight;
+  }
+}

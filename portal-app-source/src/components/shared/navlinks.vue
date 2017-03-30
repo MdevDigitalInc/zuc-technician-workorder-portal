@@ -1,0 +1,144 @@
+<template>
+  <div class="mdev-main-nav-links flex flex-nowrap flex-hor-end flex-vert-center u-capitalize">
+    <router-link 
+      v-for="link in links" 
+      :to="link.route"
+      class ="mdev-nav-link flex flex-hor-between flex-vert-center u-bold"
+      active-class="--active" 
+      @click="link.method"
+      :title="link.linkTitle" 
+      aria-role="menuitem" 
+      exact>
+        <!-- Temporary Off
+        <i :class="['mdev-icon --size-s', link.iconClass ]"></i>
+        -->
+        <i :class="['fa fa-fw', link.iconFa]"></i>
+        <span>{{ link.linkName  }}</span>
+   </router-link> 
+   <a @click="showModalChild" class="mdev-nav-link flex flex-hor-between flex-vert-center u-bold">
+        <!-- Temporary Off
+        <i :class="['mdev-icon --size-s', contact.iconClass ]"></i>
+        -->
+        <i :class="['fa fa-fw', contact.iconFa]"></i>
+        <span>{{ contact.linkName  }}</span>
+   </a>
+   <a class="mdev-nav-link flex flex-hor-between flex-vert-center u-bold">
+        <!-- Temporary Off
+        <i :class="['mdev-icon --size-s', user.iconClass ]"></i>
+        -->
+        <i :class="['fa fa-fw', user.iconFa]"></i>
+        <span>{{ user.linkName  }}</span>
+   </a>
+  </div>
+</template>
+
+
+
+<script>
+  // Local registration
+
+  export default {
+    // <router-link> element is a custom element derived from vue-router. use :to - to bind. 
+    name: "navLinks",
+
+    data: function(){
+      return{
+        showModal: false,
+        // Refer to routes.js file for available routes.
+        links: [
+          {
+            linkName: 'Work Orders',
+            linkTitle: 'Available Work Orders',
+            iconClass: '--workorder-icon',
+            iconFa: 'fa-file-text',
+            route: '/dashboard/list'
+          },
+          {
+            linkName: 'Billing',
+            iconClass: '--billing-icon',
+            iconFa: 'fa-bar-chart',
+            linkTitle: 'Billing Report',
+            route: '/dashboard/billing'
+          }
+        ],
+        contact: {
+            linkName: 'Contact',
+            iconClass: '--contact-icon',
+            iconFa: 'fa-envelope',
+            linkTitle: 'Contact Information',
+          },
+        user: {
+            linkName: 'User',
+            iconClass: '--user-icon',
+            iconFa: 'fa-user',
+            linkTitle: 'User Menu',
+          }
+      };
+    },
+
+    methods: {
+      showModalChild() {
+        this.$emit('showModalParent');
+      }
+    }
+  };
+
+</script>
+
+
+
+<style lang="scss">
+
+  /*--------------------------------------*/
+  /* Lean Import for Components           */
+  /*--------------------------------------*/
+
+  /* Disable because they are already linted */
+  /* stylelint-disable */
+  @import '../../assets/styles/component-lean-main.scss';
+  /* stylelint-enable */
+
+  .mdev-main-nav-links {
+    color: $white;
+    font-weight: $body-weight;
+    
+    @media screen and ('$tablet-up-comp') {
+      color: $charcoal-grey;
+    }
+  }
+
+  .mdev-nav-link {
+    transition: all, .3s;
+    flex-wrap: wrap;
+    text-align: center;
+    color: $bkg-light-grey;
+
+    @media screen and ('$tablet-up-comp') {
+      flex-wrap: nowrap;
+      text-align: left;
+    }
+
+    &:hover {
+      color: $zucora-green;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    span {
+      width: 100%;
+
+      @media screen and ('$tablet-up-comp') {
+        width: auto;
+      }
+    }
+    
+  }
+
+  .--active {
+    color: $zucora-green;
+  }
+  /*--------------------------------------*/
+
+</style>

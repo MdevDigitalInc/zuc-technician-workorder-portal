@@ -1,0 +1,12 @@
+/* Modifiers */
+.--emphasis-modifier {
+  margin: 0;
+  line-height: 2.3vw;
+  color: $active-blue;
+  font-size: 5.6vw;
+  font-weight: $heading-weight;
+
+  @media screen and ('$tablet-up-comp') {
+    font-size: 1.6vw;
+  }
+}

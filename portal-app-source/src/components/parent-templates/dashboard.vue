@@ -14,7 +14,7 @@
   import SearchComponent  from '../shared/search-bar.vue';
   
   export default{
-
+    name: "dashboard",
     components: {
       'search-component'  : SearchComponent
     }
@@ -25,22 +25,24 @@
 
 <style lang="scss">
 
-	/*-----/
-	Global Main
-	/-----*/
-	@import '../../assets/styles/component-lean-main.scss';
+/*-----/
+Global Main
+/-----*/
+@import '../../assets/styles/component-lean-main.scss';
 
-	/*--------------------------------------*/
-	/* Main Component Styles                */
-	/*--------------------------------------*/
-  .mdev-main-content-frame {
-    background: $white;
-  }
+/*--------------------------------------*/
+/* Main Component Styles                */
+/*--------------------------------------*/
+.mdev-main-content-frame {
+  background: $white;
+}
 
-  .unreachable {
-    background: orange;
-  }
+.mdev-main-content {
+  @media screen and ('$phone-only-comp') {
+    width: 100%;
+  }  
+}
 
-	/*--------------------------------------*/
+/*--------------------------------------*/
 
 </style>

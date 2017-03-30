@@ -8,7 +8,7 @@ import * as mutations from './mutations.js';
 import * as actions from './actions.js';
 
 // [ Module Imports ]
-import counter from './modules/counter.js';
+//import counter from './modules/counter.js';
 
 // Tell Vue to use VueX
 Vue.use(Vuex);
@@ -20,7 +20,6 @@ const state = {
 
 // [ Modules ]
 const modules = {
-  counter
 };
 
 // Export package

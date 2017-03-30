@@ -5,19 +5,73 @@
   .mdev-table-head {
     width: 100%;
     position: relative;
-    padding: 10px 30px;
     justify-content: space-between;
     align-items: middle;
+    background: #f9f9f9;
+    padding: $medium-spacing $large-spacing;
+    color: $active-grey;
+    font-weight: $heading-weight;
   }
 
   .mdev-table-row {
-    padding: 10px 30px;
+    padding: $medium-spacing;
     justify-content: space-between;
-    border-top: 2px solid $bkg-light-grey;
+    border-bottom: 1px solid $bkg-light-grey;
     align-items: flex-start;
+    color: $active-grey;
+
+    @media #{$tablet-up} {
+      padding: $medium-spacing $large-spacing;
+    }
   }
 
   .mdev-table-cell {
     text-align: left;
+  }
+
+  .mdev-hidden-label {
+    color: $active-grey;
+    font-weight: $heading-weight;
+  }
+}
+
+/* Light Table */
+
+.mdev-light-table {
+  width: 100%;
+  position: relative;
+
+  .mdev-light-table-head {
+    width: 100%;
+    color: $active-grey;
+    font-weight: $heading-weight;
+    line-height: 10.5vw;
+    border-top: 2px solid $active-grey;
+    border-bottom: 2px solid $active-grey;
+    margin-top: $large-spacing;
+    padding: 0 $small-spacing;
+    font-size: 3vw;
+
+    @media screen and ('$tablet-up-comp') {
+      padding: 0 $large-spacing;
+      line-height: 2.5vw;
+      font-size: inherit;
+    }
+  }
+
+  .mdev-light-table-row {
+    width: 100%;
+    padding: 3.1vw $small-spacing;
+    color: $active-grey;
+    font-size: 3vw;
+
+    @media screen and ('$tablet-up-comp') {
+      padding: 1.1vw $large-spacing;
+      font-size: inherit;
+    }
+
+    &:nth-child( even ) {
+      background: $bkg-light-grey;
+    }
   }
 }

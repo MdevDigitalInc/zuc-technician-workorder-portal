@@ -5,17 +5,18 @@
 // Wrapper Classes
 
 .mdev-main-wrapper {
-  width: 95%;
+  width: 90%;
   margin: 0 auto;
   position: relative;
   padding: 0;
-  min-width: 320px;
+  min-width: 300px;
 
   @media #{$tablet-only} {
     max-width: 800px;
   }
 
   @media #{$laptop-up} {
+    width: 95%;
     max-width: 1400px;
   }
 
@@ -29,9 +30,14 @@
 .mdev-main-content-frame {
   width: 100%;
   height: auto;
-  border-radius: 3px;
   overflow: hidden;
-  margin-top: 30px;
+  margin-top: 15px;
+  margin-bottom: 100px;
+
+  @media #{$tablet-up} {
+    border-radius: $standard-radius;
+    margin-top: 30px;
+  }
 }
 
 .mdev-frame-header {
@@ -41,10 +47,18 @@
   padding: 15px;
   font-weight: $heading-weight; 
   @include font-size($h3-font-sizes);
+
+  @media #{$phone-only} {
+    display: none;
+  }
 }
 
 // Columns
 
 .mdev-half-column {
-  width: 50%;
+  width: 100%;
+
+  @media screen and ('$tablet-up-comp') {
+    width: 50%;
+  }
 }
