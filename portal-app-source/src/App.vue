@@ -7,7 +7,7 @@
     <main-footer></main-footer>
     <mobile-navigation v-if="showNav"></mobile-navigation>
     <modal-panel v-if="showModal" @close="showModalOn(false)">
-      <h1>TEst Test test</h1>
+      <h1>Placeholder Text</h1>
     </modal-panel>
   </main>
 </template>
