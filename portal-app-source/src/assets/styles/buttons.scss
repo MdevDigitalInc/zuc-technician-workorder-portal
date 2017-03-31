@@ -49,6 +49,13 @@
     background: transparent;
     border: 1px solid rgba(122,193,66,1);
   }
+
+  &:active,
+  &:focus {
+    color: $white;
+    background: $zucora-green;
+    border: 1px solid rgba(122,193,66,0);
+  }
 }
 
 .mdev-status-btn {
@@ -59,7 +66,9 @@
   height: 2vw;
   margin-right: 10px;
   
-  &:hover {
+  &:hover
+  &:focus,
+  &:active {
     background: $active-orange;
     border: none;
   }
@@ -73,7 +82,9 @@
   height: 2vw;
   margin-right: 10px;
   
-  &:hover {
+  &:hover,
+  &:focus,
+  &:active{
     background: $zucora-blue;
     border: none;
   }

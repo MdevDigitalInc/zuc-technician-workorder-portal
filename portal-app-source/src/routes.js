@@ -23,19 +23,23 @@ export const routes = [
     children: [
       {
         path: "login",
-        component: Login
+        component: Login,
+        meta: { requiresGuest: true }
       },
       {
         path: "register",
-        component: Register
+        component: Register,
+        meta: { requiresGuest: true }
       },
       {
         path: "reset",
-        component: Reset
+        component: Reset,
+        meta: { requiresGuest: true }
       },
       {
         path: "changepwd",
-        component: ChangePwd
+        component: ChangePwd,
+        meta: { requiresAuth: true }
       }
     ]
   },
@@ -46,25 +50,20 @@ export const routes = [
     children: [
       {
         path: 'list',
-        component: WorkOrderList
+        component: WorkOrderList,
+        meta: { requiresAuth: true }
       },
       {
         name: "details",
         path: 'workorder/:orderId',
-        component: WorkOrderDetail
+        component: WorkOrderDetail,
+        meta: { requiresAuth: true }
       },
       {
         path: 'billing',
-        component: billingView
+        component: billingView,
+        meta: { requiresAuth: true }
       }
     ]
-  },
-  {
-    path: '/home1',
-    component: Dashboard
-  },
-  {
-    path: '/home2',
-    component: Dashboard
   }
 ];

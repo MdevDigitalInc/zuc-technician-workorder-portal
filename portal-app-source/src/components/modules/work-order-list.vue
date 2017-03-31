@@ -27,13 +27,13 @@
           <span class="u-hidden-desktop mdev-hidden-label" aria-hidde="true">
             Date Added:
           </span>
-          {{ (orders.orderContent.dateAdded * 1000) | moment("DD/MM/YYYY")}}
+          {{ (orders.workOrderContent.dateAdded) | moment("DD/MM/YYYY")}}
         </span> 
 
         <!-- Customer Name -->
         <span class="mdev-table-cell --name-modifier" aria-labeledby="customerColumn">
-          <router-link :to="{path:'/dashboard/workorder/' + orders.orderId}" class="mdev-link u-bold">
-            {{ orders.orderContent.custName }}
+          <router-link :to="{path:'/dashboard/workorder/' + orders.workOrderId}" class="mdev-link u-bold">
+            {{ orders.workOrderContent.custName }}
           </router-link>
         </span>
 
@@ -42,7 +42,7 @@
           <span class="u-hidden-desktop mdev-hidden-label --column-modifier" aria-hidde="true">
             City:
           </span>
-          {{ orders.orderContent.city }}
+          {{ orders.workOrderContent.city }}
         </span>
 
         <!-- Address -->
@@ -50,29 +50,29 @@
           <span class="u-hidden-desktop mdev-hidden-label --column-modifier" aria-hidde="true">
             Address:
           </span>
-            {{ orders.orderContent.address }}
+            {{ orders.workOrderContent.address }}
           </span>
         <!-- Phone -->
         <span class="mdev-table-cell" aria-labeledby="phoneColumn">
           <span class="u-hidden-desktop mdev-hidden-label --column-modifier" aria-hidde="true">
             Phone:
           </span>
-        {{ orders.orderContent.phone}}
+        {{ orders.workOrderContent.custHomePhone}}
         </span>
 
         
         <span class="mdev-table-cell --side-modifier" aria-labeledby="serviceColumn">
         <!-- Serviced Component -->
-          <serviced-component @statusChanged="orders.serviceDate = $event" :servicedDate="orders.servicedDate" :orderId="orders.orderId"></serviced-component>
+          <serviced-component @statusChanged="orders.serviceDate = $event" :servicedDate="orders.servicedDate" :orderId="orders.WorkOrderId"></serviced-component>
         </span>
 
         <span class="mdev-table-cell --side-modifier" aria-labeledby="statusColumn">
         <!-- Unreachable Component -->
-        <unreachable-component :orderId="orders.orderId" :unreachable="orders.unreachable"></unreachable-component>
+        <unreachable-component :orderId="orders.WorkOrderId" :unreachable="orders.unreachable"></unreachable-component>
         </span>
         
         <span class="mdev-table-cell --top-modifier smallColumn" aria-labeledby="statusColumn">
-          <router-link class="info-icon" :to="{ path:'/dashboard/workorder/' + orders.orderId}">
+          <router-link class="info-icon" :to="{path:'/dashboard/workorder/' + orders.workOrderId}">
           <i class="fa fa-fw fa-info"></i>
             <!-- Temporary
             <i class="mdev-icon --rounded-icon --size-l --info-icon"></i>
@@ -140,45 +140,29 @@
           }
         ],
 
-        workOrders: [
-          {
-            orderContent: {
-              dateAdded: 1490651987,
-              custName: "John Santos Smith",
-              city: "Victoria",
-              address: "202-111 Oak Bay Avenue",
-              phone: "1-519-555-55555"
-            },
-            serviceDate: false,
-            orderId: "38827199271",
-            unreachable: false
-          },
-          {
-            orderContent: {
-              dateAdded: 1318781876,
-              custName: "John Santos Smith",
-              city: "Victoria",
-              address: "202-111 Oak Bay Avenue",
-              phone: "1-519-555-55555"
-            },
-            serviceDate: false,
-            orderId: "3768279198",
-            unreachable: true
-          },          {
-            orderContent: {
-              dateAdded: 1318781876,
-              custName: "John Santos Smith",
-              city: "Victoria",
-              address: "202-111 Oak Bay Avenue",
-              phone: "1-519-555-55555"
-            },
-            serviceDate: false,
-            orderId: "111111",
-            unreachable: false
-          },
-        ]
+        workOrders: null
       };
     },
+    
+    // Call DataFetch on Load
+    created: function(){
+       this.fetchData();
+    },
+    // Watch for Route Changes and fetch data 
+    watch: {
+      '$route': 'fetchData'
+    },
+
+    methods: {
+      // Call API for Data
+      fetchData() {
+        this.$http.get("/workorders/list")
+          .then(function(res){
+            this.workOrders = res.body.orders;
+          });
+      }
+    },
+    
     components: {
       'serviced-component'  : servicedComponent,
       'unreachable-component' : unreachableComponent

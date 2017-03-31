@@ -18,6 +18,9 @@ export default {
     search: "Customer Name, Order Number, Date(MM/DD/YYYY)",
     title: "Manage Work Orders"
   },
+  redirect: {
+    toLogin: "You Will Be Redirected to Login Shortly..."
+  },
   auth: {
     register: {
       title: "Work Order Portal Registration",

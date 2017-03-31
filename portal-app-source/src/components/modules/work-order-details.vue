@@ -213,7 +213,27 @@
         }
       };
     },
+    
+    // Call DataFetch on Load
+    created: function(){
+       this.fetchData();
+    },
+    // Watch for Route Changes and fetch data 
+    watch: {
+      '$route': 'fetchData'
+    },
 
+    methods: {
+      // Call API for Data
+      fetchData() {
+        this.$http.get("/workorders/" + this.orderId)
+          .then(function(res){
+          console.log('fetch');
+          console.log(res.body);
+          });
+      }
+    },
+ 
     components: {
       'serviced-component'  : servicedComponent,
       'unreachable-component' : unreachableComponent
