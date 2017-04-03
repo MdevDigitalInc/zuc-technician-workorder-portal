@@ -7,7 +7,7 @@
       tab-index="1"
       aria-required="true"
       aria-label="Old Password"
-      v-model="user.oldPassword"
+      v-model="user.oldPwd"
       type="email"
       :placeholder="$t('auth.change.oldPwd')">
     
@@ -16,7 +16,7 @@
       tab-index="2"
       aria-required="true"
       aria-label="New password"
-      v-model="user.newPassword"
+      v-model="user.newPwd"
       type="password"
       :placeholder="$t('auth.change.newPwd')">
     
@@ -46,8 +46,8 @@
    data: function() {
     return{
       user:{
-        oldPassword         : "",
-        newPassword         : "",
+        oldPwd         : "",
+        newPwd         : "",
       },
       newPasswordConfirm    : ""
     };
@@ -64,14 +64,16 @@
       // Validate Fields
       if (
         this.$validate.validateFields(formFields, this.$t("validation.errors.form")) &&
-        this.$validate.validatePassword(this.user.newPassword, this.$t("validation.errors.pwdTooShort")) &&
-        this.$validate.validateMatch(this.user.newPassword, this.newPasswordConfirm, this.$t("validation.errors.match"))
+        this.$validate.validatePassword(this.user.newPwd, this.$t("validation.errors.pwdTooShort")) &&
+        this.$validate.validateMatch(this.user.newPwd, this.newPasswordConfirm, this.$t("validation.errors.match"))
       ){
 
         this.$http.post("/auth/changepwd", this.user)
           .then(function(res){
             // Notify User
             alertify.success(this.$t("validation.messages.success.change"));
+            // Store new Token
+            this.$auth.setToken(res.body.token, Date.now() + 14400000);
             // Redirect
             this.$router.push('/');
           });
