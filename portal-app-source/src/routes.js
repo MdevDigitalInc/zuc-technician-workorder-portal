@@ -7,7 +7,8 @@ import Reset from './components/auth/Reset.vue';
 import ChangePwd from './components/auth/ChangePWD.vue';
 import WorkOrderList from './components/modules/work-order-list.vue';
 import WorkOrderDetail from './components/modules/work-order-details.vue';
-import billingView from './components/modules/billing.vue';
+import BillingView from './components/modules/billing.vue';
+import ErrorComponent from './components/parent-templates/errorpage.vue';
 
 // Export routes as named constant array.
 // Routes consist of desired path + bound parent component
@@ -61,9 +62,14 @@ export const routes = [
       },
       {
         path: 'billing',
-        component: billingView,
+        component: BillingView,
         meta: { requiresAuth: true }
       }
     ]
+  },
+  {
+    path: '*',
+    component: ErrorComponent
   }
+
 ];

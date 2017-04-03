@@ -70,7 +70,7 @@ Vue.http.interceptors.push( (request, next) => {
   }
   next( function(response){
     console.log(response);
-    if (response.status == 422){
+    if (response.status >= 400){
       alertify.error(response.body.error);
     }
   }); 

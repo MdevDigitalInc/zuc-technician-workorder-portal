@@ -16,7 +16,8 @@ export default {
     orderNum: "Order #",
     store: "Store:",
     search: "Customer Name, Order Number, Date(MM/DD/YYYY)",
-    title: "Manage Work Orders"
+    title: "Manage Work Orders",
+    title404: "We're sorry but that URL doesn't exist."
   },
   redirect: {
     toLogin: "You Will Be Redirected to Login Shortly..."

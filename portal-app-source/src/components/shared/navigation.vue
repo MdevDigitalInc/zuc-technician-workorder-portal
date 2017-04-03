@@ -120,8 +120,8 @@
         }
       },
       //Show Modal
-      showModalMaster() {
-        this.$emit('showModal');
+      showModalMaster(pwdOrContact) {
+        this.$emit('showModalContactMain', pwdOrContact);
       },
       // Change Language METHOD
       change () {

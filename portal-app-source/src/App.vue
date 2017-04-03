@@ -1,13 +1,12 @@
 <template>
   <main id="app">
-    <main-navigation v-if="showNav" @showModal="showModalOn(true)"></main-navigation>
+    <main-navigation v-if="showNav" @showModalContactMain="showModalOn($event,true)"></main-navigation>
     <transition name="fade">
       <router-view></router-view>
     </transition>
     <main-footer></main-footer>
-    <mobile-navigation v-if="showNav"></mobile-navigation>
-    <modal-panel v-if="showModal" @close="showModalOn(false)">
-      <h1>Placeholder Text</h1>
+    <mobile-navigation v-if="showNav" @showModalContactMain="showModalOn($event,true)"></mobile-navigation>
+    <modal-panel :pwdOrContact="pwdOrContact" v-if="showModal" @close="showModalOn($event,false)">
     </modal-panel>
   </main>
 </template>
@@ -24,12 +23,13 @@
   import ModalPanel from './components/shared/modal.vue';
   
   export default{
-    name: 'MainNavigation',
+    name: 'AppMain',
 
     data: function() {
       return{
         showNav: true,
-        showModal: false
+        showModal: false,
+        pwdOrContact: true
       };
     },
     
@@ -52,7 +52,9 @@
           this.showNav = true;
         }
       },
-      showModalOn( state ) {
+      showModalOn( pwdOrContact, state ) {
+      // Pass new prop to child
+      this.pwdOrContact = pwdOrContact;
         
         if (state) {
           this.showModal = true;

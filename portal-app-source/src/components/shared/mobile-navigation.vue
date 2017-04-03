@@ -2,7 +2,7 @@
   <div class="mdev-mobile-nav u-hidden-desktop" aria-role="navigation" aria-hidden="true" role="navigation">
     <div class="mdev-main-wrapper flex flex-nowrap flex-hor-between flex-vert-center">
       <!-- -->
-      <navlinks></navlinks>  
+      <navlinks @showModalParent="showModalMaster"></navlinks>  
     </div>
   </div>
 </template>
@@ -16,6 +16,14 @@
 
     components: {
       'navlinks' : NavLinks
+    },
+
+    methods: {
+      //Show Modal
+      showModalMaster(pwdOrContact) {
+        console.log(pwdOrContact);
+        this.$emit('showModalContactMain', pwdOrContact);
+      }
     }
   };
 </script>
