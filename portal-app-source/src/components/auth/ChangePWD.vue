@@ -76,6 +76,8 @@
             this.$auth.setToken(res.body.token, Date.now() + 14400000);
             // Redirect
             this.$router.push('/');
+            // Close Any Open Modals
+            this.$emit("closeModal");
           });
       }
     }

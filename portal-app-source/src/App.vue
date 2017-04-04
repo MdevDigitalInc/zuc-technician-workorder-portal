@@ -1,13 +1,13 @@
 <template>
   <main id="app">
-    <main-navigation v-if="showNav" @showModalContactMain="showModalOn($event,true)"></main-navigation>
+    <main-navigation v-if="showNav" @showModalContactMain="showModalOn($event,true)" @showShybarMain="showShybar=$event"></main-navigation>
     <transition name="fade">
       <router-view></router-view>
     </transition>
     <main-footer></main-footer>
-    <mobile-navigation v-if="showNav" @showModalContactMain="showModalOn($event,true)"></mobile-navigation>
-    <modal-panel :pwdOrContact="pwdOrContact" v-if="showModal" @close="showModalOn($event,false)">
-    </modal-panel>
+    <mobile-navigation v-if="showNav" @showModalContactMain="showModalOn($event,true)" @showShybarMain="showShybar=$event"></mobile-navigation>
+    <modal-panel :pwdOrContact="pwdOrContact" v-if="showModal" @close="showModalOn($event,false)"></modal-panel>
+    <shybar v-if="showShybar" @showModalContactMain="showModalOn($event,true)"></shybar>
   </main>
 </template>
 
@@ -21,6 +21,7 @@
   import MobileNavigation from './components/shared/mobile-navigation.vue';
   import MainFooter from './components/shared/footer.vue';
   import ModalPanel from './components/shared/modal.vue';
+  import ShyBar from './components/shared/shybar.vue';
   
   export default{
     name: 'AppMain',
@@ -29,6 +30,7 @@
       return{
         showNav: true,
         showModal: false,
+        showShybar: false,
         pwdOrContact: true
       };
     },
@@ -71,7 +73,8 @@
       'main-navigation'   : MainNavigation,
       'mobile-navigation' : MobileNavigation,
       'main-footer'       : MainFooter,
-      'modal-panel'       : ModalPanel
+      'modal-panel'       : ModalPanel,
+      'shybar'            : ShyBar
     }
   };
 </script>

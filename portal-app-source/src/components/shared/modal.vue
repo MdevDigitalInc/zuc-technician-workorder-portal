@@ -4,7 +4,7 @@
       <a @click="closeMe" class="mdev-close-modal" aria-label="Close Modal">
         <i class="fa fa-fw fa-times-circle"></i> 
       </a>
-      <change-pwd v-if="pwdOrContactShow"></change-pwd>
+      <change-pwd v-if="pwdOrContactShow" @closeModal="closeMe"></change-pwd>
       <div class="mdev-contact-info" v-if="!pwdOrContactShow">
         <h1> Contact Information </h1>
       </div>

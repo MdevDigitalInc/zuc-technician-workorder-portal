@@ -2,7 +2,7 @@
   <div class="mdev-mobile-nav u-hidden-desktop" aria-role="navigation" aria-hidden="true" role="navigation">
     <div class="mdev-main-wrapper flex flex-nowrap flex-hor-between flex-vert-center">
       <!-- -->
-      <navlinks @showModalParent="showModalMaster"></navlinks>  
+      <navlinks @showModalParent="showModalMaster" @showShybarChild="showShybar($event)"></navlinks>  
     </div>
   </div>
 </template>
@@ -23,6 +23,9 @@
       showModalMaster(pwdOrContact) {
         console.log(pwdOrContact);
         this.$emit('showModalContactMain', pwdOrContact);
+      },
+      showShybar(showShybar) {
+        this.$emit('showShybarMain', showShybar);
       }
     }
   };
@@ -49,6 +52,7 @@
     bottom: 0;
     background: $zucora-blue;
     padding: $small-spacing 0;
+    z-index: 2;
     left: 0;
 
     .mdev-main-nav-links {

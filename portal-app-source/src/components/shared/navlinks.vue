@@ -23,7 +23,7 @@
         <i :class="['fa fa-fw', contact.iconFa]"></i>
         <span>{{ contact.linkName  }}</span>
    </a>
-   <a @click="showModalChild(true)" class="mdev-nav-link flex flex-hor-between flex-vert-center u-bold">
+   <a @click="showShybar(!showShybarBool)" class="mdev-nav-link flex flex-hor-between flex-vert-center u-bold">
         <!-- Temporary Off
         <i :class="['mdev-icon --size-s', user.iconClass ]"></i>
         -->
@@ -45,6 +45,7 @@
     data: function(){
       return{
         showModal: false,
+        showShybarBool: false,
         // Refer to routes.js file for available routes.
         links: [
           {
@@ -82,6 +83,10 @@
       // Link. True will show the PWD Change screen in the modal, False will show the Contact.
       showModalChild(pwdOrContact) {
         this.$emit('showModalParent', pwdOrContact);
+      },
+      showShybar(showShybar) {
+        this.$emit('showShybarChild', showShybar);
+        this.showShybarBool = showShybar
       }
     }
   };
