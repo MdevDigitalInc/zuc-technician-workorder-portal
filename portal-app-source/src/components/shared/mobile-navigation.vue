@@ -52,7 +52,7 @@
     bottom: 0;
     background: $zucora-blue;
     padding: $small-spacing 0;
-    z-index: 2;
+    z-index: 10;
     left: 0;
 
     .mdev-main-nav-links {

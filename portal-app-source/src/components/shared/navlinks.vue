@@ -120,6 +120,7 @@
     flex-wrap: wrap;
     text-align: center;
     color: $bkg-light-grey;
+    cursor: pointer;
 
     @media screen and ('$tablet-up-comp') {
       flex-wrap: nowrap;

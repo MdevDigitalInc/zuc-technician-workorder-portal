@@ -29,15 +29,12 @@
     props: ['pwdOrContact'],
 
     created: function () {
-      console.log('Modal')
-      console.log(this.pwdOrContact);
       this.pwdOrContactShow = this.pwdOrContact;
     },
 
     watch: {
       pwdOrContact: function() {
         this.pwdOrContactShow = this.pwdOrContact;
-        console.log('Ignooore me');
       }
     },
 
@@ -66,7 +63,7 @@ Global Main
 
 .mdev-modal-frame {
   position: absolute;
-  z-index: 5;
+  z-index: 100;
   width: 100vw;
   height: 100vh;
   top: 0;

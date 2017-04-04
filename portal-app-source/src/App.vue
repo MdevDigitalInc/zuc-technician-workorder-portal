@@ -7,7 +7,7 @@
     <main-footer></main-footer>
     <mobile-navigation v-if="showNav" @showModalContactMain="showModalOn($event,true)" @showShybarMain="showShybar=$event"></mobile-navigation>
     <modal-panel :pwdOrContact="pwdOrContact" v-if="showModal" @close="showModalOn($event,false)"></modal-panel>
-    <shybar v-if="showShybar" @showModalContactMain="showModalOn($event,true)"></shybar>
+    <shybar v-if="showShybar" @closeMe="showShybar=false" @showModalContactMain="showModalOn($event,true)"></shybar>
   </main>
 </template>
 
