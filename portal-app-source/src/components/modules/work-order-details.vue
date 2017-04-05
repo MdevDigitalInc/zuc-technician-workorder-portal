@@ -166,51 +166,61 @@
     data: function() {
       return{
         orderId: this.$route.params.orderId,
-        orderDetails: {
-          customer: {
-            custName: "John Santos Smith",
-            address: "201-111 something something street",
-            city: "Victoria",
-            province: "BC",
-            postalCode: "N5B1B1",
-            phone: "1-519-555-5555",
-            bizPhone: "1-888-555-5555",
-            customerId: "1377981269882371",
-            dateAdded: "1489164300"
-          },
-          appointment: {
-            time: 1490201100 
-          },
-          order: {
-            deliveryDate: 1489164300,
-            orderId: "87372918623",
-            store: "Leons - Victoria",
+        
+        work_order_details: {
+          id: 100244201,
+          created_at: "2017-03-06T00:00:00.000Z",
+          status: "NEW",
+          service_provider_id: 2079,
+          order_id: 3845959,
+          invoice_number: "12186WWXPWS",
+          date_of_deliver: "2017-03-04T00:00:00.00Z",
+          retailer: "Leon's - Web Store",
+          retailer_id: 23353,
+          ancestry: 22914,
+          sort_code: "MO",
+          order_type: "SAL",
+          description: null,
+          special_instructions: null,
+          pushed: null
+        },
 
-            skus: [
-              {
-                sku: "41239879798211",
-                quantity: "4",
-                value: "89.99",
-                description: "This is a sku description"
-              },
-              {
-                sku: "41239879798211",
-                quantity: "4",
-                value: "89.99",
-                description: "This is a sku description"
-              },
-              {
-                sku: "41239879798211",
-                quantity: "4",
-                value: "89.99",
-                description: "This is a sku description"
-              }
-            ]
-          },
-          notes: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce semper vel nisl non interdum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tristique diam eu efficitur facilisis. In ac metus sit amet quam semper lobortis. Etiam nec orci ac mi dictum varius. Nulla diam mi, accumsan at risus et, iaculis laoreet ipsum. Phasellus dui mauris, dapibus id vestibulum et, venenatis in erat. Praesent eu nulla sit amet sem volutpat lobortis at id ex. Nullam et dolor aliquam, pellentesque nisl quis, porttitor enim. In sed tortor metus. Donec consequat, ex quis venenatis rutrum, mauris lacus imperdiet erat, et blandit urna leo sit amet nisi. Pellentesque tempus eros eget nisl mollis, et maximus libero tincidunt.",
-          unreachable: false,
-          serviceDate: ""
-        }
+        customer: {
+          id: 3492409,
+          first_name: "RHONA",
+          last_name: "SHUERBEKE",
+          phone_number: "2505891622",
+          street: "361 Irving RD",
+          city: "VICTORYA",
+          province: "BC",
+          postal: "V85A3"
+        },
+
+        plans: [
+          {
+            id: 4427340,
+            wod_id: 3722187,
+            wod_status: null,
+            quantity: 1,
+            sku: "00130014",
+            name: "Fabric - MAGISEAL SOFA / SOFA BED / KLIK LKAK / FUTON between $500 - $799",
+            description: null,
+            date_of_delivery: null,
+            price: 0
+          }
+        ],
+
+        items: [
+          {
+            id: 13779349,
+            wod_id: 3724199,
+            quantity: 1,
+            sku: 23739880,
+            name: "D=SOFA=ANTHENA CHARCOAL ATCC",
+            date_of_delivery: "2017-03-04T00:00:00.000Z",
+            price: 519.2
+          } 
+        ]
       };
     },
     
