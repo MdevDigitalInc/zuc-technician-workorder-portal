@@ -76,8 +76,10 @@ export default {
   orderDetails: {
     title: "Wokorder Number: ",
     custInfo: "Customer Information",
-    apptDetails: "Appointment Details",
+    apptStatus: "Appointment Status",
     orderInfo: "Order Information",
+    plans: "Plans",
+    items: "Items",
     notes: "Notes",
     table: {
       quantity: "QTY",

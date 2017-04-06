@@ -17,7 +17,7 @@
       <div class="mdev-half-column" aria-labelledby="customer-details">
         <h3 id="customer-details">{{ $t("orderDetails.custInfo") }}</h3>
         <span class="mdev-customer-name">
-          {{ orderDetails.customer.custName }}
+          {{ orderDetails.customer.first_name + " " +orderDetails.customer.last_name }}
         </span>
         
         
@@ -25,7 +25,7 @@
         <div class="mdev-info-field">
           <span class="mdev-info-label" id="address">{{ $t("general.address") }}</span>
           <span class="mdev-info-content" aria-labelledby="address">
-            {{ orderDetails.customer.address  }}
+            {{ orderDetails.customer.street }}
           </span>
         </div>
         
@@ -33,15 +33,7 @@
         <div class="mdev-info-field">
           <span class="mdev-info-label" id="phone">{{ $t("general.phone") }}</span>
           <span class="mdev-info-content" aria-labelledby="phone">
-            {{ orderDetails.customer.phone  }}
-          </span>
-        </div>
-        
-        <!-- Business Phone -->
-        <div class="mdev-info-field">
-          <span class="mdev-info-label" id="business">{{ $t("general.business") }}</span>
-          <span class="mdev-info-content" aria-labelledby="business">
-            {{ orderDetails.customer.bizPhone  }}
+            {{ formatPhone(orderDetails.customer.phone_number) }}
           </span>
         </div>
         
@@ -49,7 +41,7 @@
         <div class="mdev-info-field">
           <span class="mdev-info-label" id="custid">{{ $t("general.custId") }}</span>
           <span class="mdev-info-content" aria-labelledby="custid">
-            {{ orderDetails.customer.customerId  }}
+            {{ orderDetails.customer.id }}
           </span>
         </div>
         
@@ -57,39 +49,21 @@
         <div class="mdev-info-field">
           <span class="mdev-info-label" id="dateadd">{{ $t("general.dateAdd") }}</span>
           <span class="mdev-info-content" aria-labelledby="dateadd">
-            {{ orderDetails.customer.dateAdded  }}
+            {{ orderDetails.work_order_details.created_at | moment("MM/DD/YYY") }} 
           </span>
         </div>
       </div>
-
+    
       <!-- Appointment Info -->
       <div class="mdev-half-column flex flex-hor-end --bkg-modifier" aria-labelledby="appdetails-title">
         <div class="mdev-appointment-plugin">
-            <h3 id="appdetails-title">{{ $t("orderDetails.apptDetails") }}</h3>
-            <!-- Date -->
-          <div class="mdev-info-field flex flex-vert-center --emphasis-modifier">
-            <span id="date" class="u-hidden" aria-hidden="true">{{ $t("general.date") }}</span>
-            <!-- Temporary
-            <i class="mdev-icon --size-l --date-icon"></i> -->
-            <i class="fa fa-fw fa-clock-o"></i>
-            <span aria-labelledby="date"> 
-              {{ (orderDetails.appointment.time * 1000) | moment("MM/DD/YYYY") }}</span>
-          </div>
-          <!-- Time -->
-          <div class="mdev-info-field flex flex-vert-center --emphasis-modifier">
-            <span id="time" class="u-hidden" aria-hidden="true">{{$t("general.time") }}</span>
-            <!-- Temporary
-            <i class="mdev-icon --size-l --time-icon"></i> -->
-            <i class="fa fa-fw fa-calendar"></i>
-            <span aria-labelledby="time"> 
-              {{ (orderDetails.appointment.time * 1000) | moment("HH:MM A") }}</span>
-          </div>
-        <!-- Actions -->
+            <h3 id="appdetails-title">{{ $t("orderDetails.apptStatus") }}</h3>
+                  <!-- Actions -->
         <div class="mdev-info-actions flex flex-hor-between flex-vert-stretch" aria-label="Actions and Status">
           <!-- Serviced Component -->
-          <serviced-component :servicedDate="orderDetails.serviceDate" :orderId="orderId"></serviced-component> 
+          <serviced-component :servicedDate="orderDetails.plans[0].date_of_delivery" :orderId="orderId"></serviced-component> 
           <!-- Unreachable Component -->
-          <unreachable-component :orderId="orderId" :unreachable="orderDetails.unreachable"></unreachable-component>
+          <unreachable-component :orderId="orderId" :unreachable="orderDetails.plans[0].wod_statusy"></unreachable-component>
         </div>
       </div>
       </div>
@@ -104,22 +78,28 @@
             <div class="mdev-info-field">
               <span class="mdev-info-label" id="delivery">{{ $t("general.delivery") }}</span>
               <span class="mdev-info-content" aria-labelledby="delivery"> 
-                {{ (orderDetails.order.deliveryDate * 1000) | moment("MM/DD/YYY")  }}</span>
+                {{ (orderDetails.work_order_details.date_of_delivery) | moment("MM/DD/YYY")  }} 
+              </span>
             </div>
 
             <!-- Order Id -->
             <div class="mdev-info-field">
               <span class="mdev-info-label" id="ordernum">{{ $t("general.orderNum") }}</span>
-              <span class="mdev-info-content" aria-labelledby="ordernum"> {{ orderDetails.order.orderId  }}</span>
+              <span class="mdev-info-content" aria-labelledby="ordernum"> 
+                {{ orderDetails.work_order_details.id  }}
+              </span>
             </div>
 
             <!-- Store -->
             <div class="mdev-info-field">
               <span class="mdev-info-label" id="store">{{ $t("general.store") }}</span>
-              <span class="mdev-info-content" aria-labelledby="store"> {{ orderDetails.order.store  }} </span>
+              <span class="mdev-info-content" aria-labelledby="store"> 
+                {{ orderDetails.work_order_details.retailer  }}
+              </span>
             </div>
           </div>
-        <!-- SKU's -->
+        <!-- Plans -->
+        <h3> {{ $t("orderDetails.plans") }} </h3>
         <div class="mdev-light-table">
           <div class="mdev-light-table-head flex flex-hor-start flex-hor-between">
             <span class="mdev-light-cell" id="head-1">{{ $t("orderDetails.table.quantity") }}</span>
@@ -128,18 +108,24 @@
           </div>
 
           <div
-            v-for= "sku in orderDetails.order.skus"
+            v-for= "plan in orderDetails.plans"
             class="mdev-light-table-row flex flex-hor-start flex-hor-between">
-            <span  class="mdev-light-cell" aria-labelledby="head-1"> {{ sku.quantity  }}</span>
-            <span  class="mdev-light-cell" aria-labelledby="head-2"> {{ sku.sku  }}</span>
-            <span  class="mdev-light-cell --large-cell" aria-labelledby="head-3"> {{ sku.description  }}</span>
-          </div>
+            <span  class="mdev-light-cell" aria-labelledby="head-1"> 
+              {{ plan.quantity  }}
+            </span>
+            <span  class="mdev-light-cell" aria-labelledby="head-2"> 
+              {{ plan.sku  }} 
+            </span>
+            <span  class="mdev-light-cell --large-cell" aria-labelledby="head-3"> 
+              {{ plan.name  }}
+            </span>
+          </div> 
         </div>
         <!-- Order Notes -->
         <div class="mdev-order-notes" aria-labelledby="notes">
           <h3 id="notes">{{ $t("orderDetails.notes") }}</h3>
           <p>
-            {{ orderDetails.notes  }}
+            <!-- {{ orderDetails.notes  }} -->
           </p>
         </div>
 
@@ -166,61 +152,64 @@
     data: function() {
       return{
         orderId: this.$route.params.orderId,
+
+        orderDetails: {
         
-        work_order_details: {
-          id: 100244201,
-          created_at: "2017-03-06T00:00:00.000Z",
-          status: "NEW",
-          service_provider_id: 2079,
-          order_id: 3845959,
-          invoice_number: "12186WWXPWS",
-          date_of_deliver: "2017-03-04T00:00:00.00Z",
-          retailer: "Leon's - Web Store",
-          retailer_id: 23353,
-          ancestry: 22914,
-          sort_code: "MO",
-          order_type: "SAL",
-          description: null,
-          special_instructions: null,
-          pushed: null
-        },
-
-        customer: {
-          id: 3492409,
-          first_name: "RHONA",
-          last_name: "SHUERBEKE",
-          phone_number: "2505891622",
-          street: "361 Irving RD",
-          city: "VICTORYA",
-          province: "BC",
-          postal: "V85A3"
-        },
-
-        plans: [
-          {
-            id: 4427340,
-            wod_id: 3722187,
-            wod_status: null,
-            quantity: 1,
-            sku: "00130014",
-            name: "Fabric - MAGISEAL SOFA / SOFA BED / KLIK LKAK / FUTON between $500 - $799",
+          work_order_details: {
+            id: 100244201,
+            created_at: "2017-03-06T00:00:00.000Z",
+            status: "NEW",
+            service_provider_id: 2079,
+            order_id: 3845959,
+            invoice_number: "12186WWXPWS",
+            date_of_deliver: "2017-03-04T00:00:00.00Z",
+            retailer: "Leon's - Web Store",
+            retailer_id: 23353,
+            ancestry: 22914,
+            sort_code: "MO",
+            order_type: "SAL",
             description: null,
-            date_of_delivery: null,
-            price: 0
-          }
-        ],
+            special_instructions: null,
+            pushed: null
+          },
 
-        items: [
-          {
-            id: 13779349,
-            wod_id: 3724199,
-            quantity: 1,
-            sku: 23739880,
-            name: "D=SOFA=ANTHENA CHARCOAL ATCC",
-            date_of_delivery: "2017-03-04T00:00:00.000Z",
-            price: 519.2
-          } 
-        ]
+          customer: {
+            id: 3492409,
+            first_name: "RHONA",
+            last_name: "SHUERBEKE",
+            phone_number: "2505891622",
+            street: "361 Irving RD",
+            city: "VICTORYA",
+            province: "BC",
+            postal: "V85A3"
+          },
+
+          plans: [
+            {
+              id: 4427340,
+              wod_id: 3722187,
+              wod_status: null,
+              quantity: 1,
+              sku: "00130014",
+              name: "Fabric - MAGISEAL SOFA / SOFA BED / KLIK LKAK / FUTON between $500 - $799",
+              description: null,
+              date_of_delivery: null,
+              price: 0
+            }
+          ],
+
+          items: [
+            {
+              id: 13779349,
+              wod_id: 3724199,
+              quantity: 1,
+              sku: 23739880,
+              name: "D=SOFA=ANTHENA CHARCOAL ATCC",
+              date_of_delivery: "2017-03-04T00:00:00.000Z",
+              price: 519.2
+            } 
+          ]
+        }
       };
     },
     
@@ -241,6 +230,10 @@
           console.log('fetch');
           console.log(res.body);
           });
+      },
+      formatPhone(phone) {
+        console.log(phone);
+        return phone.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
       }
     },
  
@@ -358,7 +351,7 @@
   .mdev-appointment-plugin {
     width: 100%;
     padding: 0;
-    background: $bkg-light-grey;
+    border: 2px solid $zucora-blue;
     border-radius: $standard-radius;
 
     @media screen and ('$tablet-only-comp') {
