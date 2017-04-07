@@ -1,0 +1,55 @@
+/* Print Styles */
+
+@media print {
+  .mdev-main-nav {
+    
+    .mdev-main-nav-links {
+      display: none!important;
+    }
+
+    .mdev-main-nav-branding .u-hidden-desktop {
+      display: none!important;
+      opacity: 0;
+    }
+  }
+
+  .mdev-back-btn,
+  .mdev-base-btn,
+  .mdev-frame-header,
+  .mdev-search,
+  .mdev-mobile-nav, 
+  .mdev-appointment-plugin,
+  footer {
+    display: none!important;
+  }
+
+  .mdev-main-content-frame {
+    
+    h3 {
+      font-size: 18px !important;
+      margin-bottom: 10px !important;
+    }
+
+    .mdev-customer-name {
+      font-size: 16px !important;
+    }
+
+
+  }
+
+  .mdev-info-field {
+    margin: 2px 0;
+    font-size: 14px;
+    line-height: 16px!important;
+  }
+
+  .mdev-light-cell {
+    font-size: 12px !important;
+    line-height: 14px !important;
+  }
+
+  .mdev-light-table-row,
+  .mdev-light-table-head {
+    padding: 10px 15px;
+  }
+}

@@ -99,7 +99,7 @@
             </div>
           </div>
         <!-- Plans -->
-        <h3> {{ $t("orderDetails.plans") }} </h3>
+        <h3 class="--spacer"> {{ $t("orderDetails.plans") }} </h3>
         <div class="mdev-light-table">
           <div class="mdev-light-table-head flex flex-hor-start flex-hor-between">
             <span class="mdev-light-cell" id="head-1">{{ $t("orderDetails.table.quantity") }}</span>
@@ -116,22 +116,46 @@
             <span  class="mdev-light-cell" aria-labelledby="head-2"> 
               {{ plan.sku  }} 
             </span>
-            <span  class="mdev-light-cell --large-cell" aria-labelledby="head-3"> 
+            <span  class="mdev-light-cell --large-cell --limit-text" aria-labelledby="head-3"> 
               {{ plan.name  }}
             </span>
           </div> 
         </div>
+        <!-- Items -->
+        <h3 class="--spacer"> {{ $t("orderDetails.items") }} </h3>
+        <div class="mdev-light-table">
+          <div class="mdev-light-table-head flex flex-hor-start flex-hor-between">
+            <span class="mdev-light-cell" id="head-1">{{ $t("orderDetails.table.quantity") }}</span>
+            <span  class="mdev-light-cell" id="head-2">{{ $t("orderDetails.table.sku") }}</span>
+            <span  class="mdev-light-cell --large-cell" id="head-3">{{ $t("orderDetails.table.description") }}</span>
+          </div>
+
+          <div
+            v-for= "item in orderDetails.items"
+            class="mdev-light-table-row flex flex-hor-start flex-hor-between">
+            <span  class="mdev-light-cell" aria-labelledby="head-1"> 
+              {{ item.quantity  }}
+            </span>
+            <span  class="mdev-light-cell" aria-labelledby="head-2"> 
+              {{ item.sku  }} 
+            </span>
+            <span  class="mdev-light-cell --large-cell --limit-text" aria-labelledby="head-3"> 
+              {{ item.name  }}
+            </span>
+          </div> 
+        </div>
+
         <!-- Order Notes -->
-        <div class="mdev-order-notes" aria-labelledby="notes">
+        <div v-if="orderDetails.work_order_details.description" class="mdev-order-notes" aria-labelledby="notes">
           <h3 id="notes">{{ $t("orderDetails.notes") }}</h3>
           <p>
-            <!-- {{ orderDetails.notes  }} -->
+            {{ orderDetails.work_order_details.description  }}
           </p>
         </div>
 
         <!-- Print -->
-        <div class="flex flex-hor-end u-hidden-tablet u-hidden-phone">
-          <button class="mdev-base-btn mdev-print-btn" aria-label="Print"> {{ $t("general.print") }} </button>
+        <div class="flex flex-hor-end u-hidden-tablet u-hidden-phone --spacer">
+          <button class="mdev-base-btn mdev-print-btn" aria-label="Print" @click="printPage"> {{ $t("general.print") }} </button>
         </div>
       </div>
     </div>
@@ -234,6 +258,10 @@
       formatPhone(phone) {
         console.log(phone);
         return phone.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+      },
+      printPage() {
+        console.log('TESTING');
+        window.print();
       }
     },
  
@@ -389,6 +417,10 @@
     @media screen and ('$tablet-up-comp') {
       padding: 0;
     }
+  }
+
+  .--spacer {
+    margin-top: $large-spacing;
   }
 
   @media screen and ('$phone-only-comp') {

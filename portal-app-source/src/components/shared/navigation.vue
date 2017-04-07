@@ -166,6 +166,7 @@
     transition: all, .3s;
     opacity: 1;
     background: $zucora-blue;
+    border-bottom: 1px solid $bkg-light-grey;
 
     @media screen and ('$tablet-up-comp') {
       background: $white;

@@ -68,7 +68,7 @@
         }
       }
     },
-
+    
     components: {
       'main-navigation'   : MainNavigation,
       'mobile-navigation' : MobileNavigation,

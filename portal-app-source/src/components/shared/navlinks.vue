@@ -86,7 +86,7 @@
       },
       showShybar(showShybar) {
         this.$emit('showShybarChild', showShybar);
-        this.showShybarBool = showShybar
+        this.showShybarBool = showShybar;
       }
     }
   };
