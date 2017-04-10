@@ -81,6 +81,7 @@ export default {
     plans: "Plans",
     items: "Items",
     notes: "Notes",
+    noPlans: "No Plans Available.",
     table: {
       quantity: "QTY",
       sku: "SKU",
@@ -94,12 +95,14 @@ export default {
     provider: "Service Provider",
     period: "Billing Period",
     orders: "Serviced Orders",
+    total: "Total:",
     table: {
       orderId: "Order ID",
       custName: "Customer Name",
-      orderVal: "Order Val.",
+      workOrderVal: "Order Val.",
       dateServ: "Date Serviced",
-      appVal: "Application Val."
+      authMileage: "Mileage",
+      authService: "Service"
     }
   },
   footer: {

@@ -1,6 +1,7 @@
 /* Print Styles */
 
 @media print {
+  /*stylelint-disable*/
   .mdev-main-nav {
     
     .mdev-main-nav-links {
@@ -52,4 +53,9 @@
   .mdev-light-table-head {
     padding: 10px 15px;
   }
+
+  i {
+    display: none;
+  }
+  /*stylelint-enable*/
 }

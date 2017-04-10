@@ -61,9 +61,9 @@
                   <!-- Actions -->
         <div class="mdev-info-actions flex flex-hor-between flex-vert-stretch" aria-label="Actions and Status">
           <!-- Serviced Component -->
-          <serviced-component :servicedDate="orderDetails.plans[0].date_of_delivery" :orderId="orderId"></serviced-component> 
+          <serviced-component :servicedDate="orderDetails.items[0].date_of_delivery" :orderId="orderId"></serviced-component> 
           <!-- Unreachable Component -->
-          <unreachable-component :orderId="orderId" :unreachable="orderDetails.plans[0].wod_statusy"></unreachable-component>
+          <unreachable-component :orderId="orderId" :unreachable="orderDetails.items[0].wod_status"></unreachable-component>
         </div>
       </div>
       </div>
@@ -105,6 +105,11 @@
             <span class="mdev-light-cell" id="head-1">{{ $t("orderDetails.table.quantity") }}</span>
             <span  class="mdev-light-cell" id="head-2">{{ $t("orderDetails.table.sku") }}</span>
             <span  class="mdev-light-cell --large-cell" id="head-3">{{ $t("orderDetails.table.description") }}</span>
+          </div>
+          <div class="mdev-light-table-row flex flex-hor-start" v-if="orderDetails.plans.length === 0"> 
+            <div class="mdev-light-cell">
+             {{ $t("orderDetails.noPlans") }} 
+            </div>
           </div>
 
           <div
@@ -176,64 +181,7 @@
     data: function() {
       return{
         orderId: this.$route.params.orderId,
-
-        orderDetails: {
-        
-          work_order_details: {
-            id: 100244201,
-            created_at: "2017-03-06T00:00:00.000Z",
-            status: "NEW",
-            service_provider_id: 2079,
-            order_id: 3845959,
-            invoice_number: "12186WWXPWS",
-            date_of_deliver: "2017-03-04T00:00:00.00Z",
-            retailer: "Leon's - Web Store",
-            retailer_id: 23353,
-            ancestry: 22914,
-            sort_code: "MO",
-            order_type: "SAL",
-            description: null,
-            special_instructions: null,
-            pushed: null
-          },
-
-          customer: {
-            id: 3492409,
-            first_name: "RHONA",
-            last_name: "SHUERBEKE",
-            phone_number: "2505891622",
-            street: "361 Irving RD",
-            city: "VICTORYA",
-            province: "BC",
-            postal: "V85A3"
-          },
-
-          plans: [
-            {
-              id: 4427340,
-              wod_id: 3722187,
-              wod_status: null,
-              quantity: 1,
-              sku: "00130014",
-              name: "Fabric - MAGISEAL SOFA / SOFA BED / KLIK LKAK / FUTON between $500 - $799",
-              description: null,
-              date_of_delivery: null,
-              price: 0
-            }
-          ],
-
-          items: [
-            {
-              id: 13779349,
-              wod_id: 3724199,
-              quantity: 1,
-              sku: 23739880,
-              name: "D=SOFA=ANTHENA CHARCOAL ATCC",
-              date_of_delivery: "2017-03-04T00:00:00.000Z",
-              price: 519.2
-            } 
-          ]
-        }
+        orderDetails: null
       };
     },
     
@@ -251,16 +199,13 @@
       fetchData() {
         this.$http.get("/workorders/" + this.orderId)
           .then(function(res){
-          console.log('fetch');
-          console.log(res.body);
+          this.orderDetails = res.body;
           });
       },
       formatPhone(phone) {
-        console.log(phone);
         return phone.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
       },
       printPage() {
-        console.log('TESTING');
         window.print();
       }
     },

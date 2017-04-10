@@ -34,7 +34,6 @@
   @media #{$xl-up} {
     font-size: 16px;
   }
-
 }
 
 /* Button Colors */
@@ -84,7 +83,7 @@
   
   &:hover,
   &:focus,
-  &:active{
+  &:active {
     background: $zucora-blue;
     border: none;
   }
