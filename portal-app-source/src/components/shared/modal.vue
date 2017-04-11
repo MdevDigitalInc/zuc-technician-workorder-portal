@@ -1,20 +1,51 @@
 <template>
-  <div class="mdev-modal-frame mdev-modal-bkg">
-    <div class="mdev-modal-content">
-      <a @click="closeMe" >CLOSE ME HERE</a>
+  <div class="mdev-modal-frame mdev-modal-bkg" @click.stop="closeMe">
+    <div class="mdev-modal-content" @click.stop="">
+      <a @click="closeMe" class="mdev-close-modal" aria-label="Close Modal">
+        <i class="fa fa-fw fa-times-circle"></i> 
+      </a>
+      <change-pwd v-if="pwdOrContactShow" @closeModal="closeMe"></change-pwd>
+      <div class="mdev-contact-info" v-if="!pwdOrContactShow">
+        <h1> Contact Information </h1>
+      </div>
       <slot></slot>    
     </div>
   </div>
 </template>
 
 <script>
+
+  import ChangePwd from '../../components/auth/ChangePWD.vue';
+  
   export default {
     name: 'ModalComponent',
+
+    data: function() {
+      return{
+        pwdOrContactShow: null
+      };
+    },
+
+    props: ['pwdOrContact'],
+
+    created: function () {
+      this.pwdOrContactShow = this.pwdOrContact;
+    },
+
+    watch: {
+      pwdOrContact: function() {
+        this.pwdOrContactShow = this.pwdOrContact;
+      }
+    },
 
     methods: {
       closeMe() {
         this.$emit('close');
       }
+    },
+
+    components: {
+      'change-pwd'  : ChangePwd
     }
   };
 </script>
@@ -32,7 +63,7 @@ Global Main
 
 .mdev-modal-frame {
   position: absolute;
-  z-index: 5;
+  z-index: 100;
   width: 100vw;
   height: 100vh;
   top: 0;
@@ -44,16 +75,52 @@ Global Main
 }
 
 .mdev-modal-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate3d(-50%, -50%, 0);
-  width: 30vw;
-  border-radius: 4px;
-  height: 20vw;
-  padding: 2vw;
-  background: $active-grey;
-  color: $zucora-blue;
+    $top-padding-var: 35px;
+    $border-top-size: 8px;
+    position: absolute;
+    min-width: 300px;
+    max-width: 380px;
+    margin: 0 auto;
+    width: 80%;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+    transform: translate3D(-50%, -50%, 0);
+    background: $white;
+    border-radius: $standard-radius;
+    border-top: solid $border-top-size $zucora-blue;
+    padding: ($top-padding-var + $border-top-size) 30px 30px 30px;
+    
+    @media screen and ('$tablet-up-comp') {  
+      width: 40%;
+    }
+    
+
+
+    h1 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    a {
+      font-size: 12px;
+      line-height: 14px;
+    }
+
+    .mdev-base-btn {
+      width: 100%;
+    }
+
+    .mdev-close-modal {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      color: $active-grey;
+      font-size: 20px;
+
+    }
+
 }
 
 </style>

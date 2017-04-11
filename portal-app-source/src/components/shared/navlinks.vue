@@ -15,14 +15,15 @@
         <i :class="['fa fa-fw', link.iconFa]"></i>
         <span>{{ link.linkName  }}</span>
    </router-link> 
-   <a @click="showModalChild" class="mdev-nav-link flex flex-hor-between flex-vert-center u-bold">
+   <!-- Set Modal -->
+   <a @click="showModalChild(false)" class="mdev-nav-link flex flex-hor-between flex-vert-center u-bold">
         <!-- Temporary Off
         <i :class="['mdev-icon --size-s', contact.iconClass ]"></i>
         -->
         <i :class="['fa fa-fw', contact.iconFa]"></i>
         <span>{{ contact.linkName  }}</span>
    </a>
-   <a class="mdev-nav-link flex flex-hor-between flex-vert-center u-bold">
+   <a @click="showShybar(!showShybarBool)" class="mdev-nav-link flex flex-hor-between flex-vert-center u-bold">
         <!-- Temporary Off
         <i :class="['mdev-icon --size-s', user.iconClass ]"></i>
         -->
@@ -44,6 +45,7 @@
     data: function(){
       return{
         showModal: false,
+        showShybarBool: false,
         // Refer to routes.js file for available routes.
         links: [
           {
@@ -77,8 +79,14 @@
     },
 
     methods: {
-      showModalChild() {
-        this.$emit('showModalParent');
+      // This is a Boolean, True or false fed by the
+      // Link. True will show the PWD Change screen in the modal, False will show the Contact.
+      showModalChild(pwdOrContact) {
+        this.$emit('showModalParent', pwdOrContact);
+      },
+      showShybar(showShybar) {
+        this.$emit('showShybarChild', showShybar);
+        this.showShybarBool = showShybar;
       }
     }
   };
@@ -112,6 +120,7 @@
     flex-wrap: wrap;
     text-align: center;
     color: $bkg-light-grey;
+    cursor: pointer;
 
     @media screen and ('$tablet-up-comp') {
       flex-wrap: nowrap;

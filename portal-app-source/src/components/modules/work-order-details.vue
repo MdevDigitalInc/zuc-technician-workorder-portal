@@ -17,7 +17,7 @@
       <div class="mdev-half-column" aria-labelledby="customer-details">
         <h3 id="customer-details">{{ $t("orderDetails.custInfo") }}</h3>
         <span class="mdev-customer-name">
-          {{ orderDetails.customer.custName }}
+          {{ orderDetails.customer.first_name + " " +orderDetails.customer.last_name }}
         </span>
         
         
@@ -25,7 +25,7 @@
         <div class="mdev-info-field">
           <span class="mdev-info-label" id="address">{{ $t("general.address") }}</span>
           <span class="mdev-info-content" aria-labelledby="address">
-            {{ orderDetails.customer.address  }}
+            {{ orderDetails.customer.street }}
           </span>
         </div>
         
@@ -33,15 +33,7 @@
         <div class="mdev-info-field">
           <span class="mdev-info-label" id="phone">{{ $t("general.phone") }}</span>
           <span class="mdev-info-content" aria-labelledby="phone">
-            {{ orderDetails.customer.phone  }}
-          </span>
-        </div>
-        
-        <!-- Business Phone -->
-        <div class="mdev-info-field">
-          <span class="mdev-info-label" id="business">{{ $t("general.business") }}</span>
-          <span class="mdev-info-content" aria-labelledby="business">
-            {{ orderDetails.customer.bizPhone  }}
+            {{ formatPhone(orderDetails.customer.phone_number) }}
           </span>
         </div>
         
@@ -49,7 +41,7 @@
         <div class="mdev-info-field">
           <span class="mdev-info-label" id="custid">{{ $t("general.custId") }}</span>
           <span class="mdev-info-content" aria-labelledby="custid">
-            {{ orderDetails.customer.customerId  }}
+            {{ orderDetails.customer.id }}
           </span>
         </div>
         
@@ -57,39 +49,21 @@
         <div class="mdev-info-field">
           <span class="mdev-info-label" id="dateadd">{{ $t("general.dateAdd") }}</span>
           <span class="mdev-info-content" aria-labelledby="dateadd">
-            {{ orderDetails.customer.dateAdded  }}
+            {{ orderDetails.work_order_details.created_at | moment("MM/DD/YYYY") }} 
           </span>
         </div>
       </div>
-
+    
       <!-- Appointment Info -->
       <div class="mdev-half-column flex flex-hor-end --bkg-modifier" aria-labelledby="appdetails-title">
         <div class="mdev-appointment-plugin">
-            <h3 id="appdetails-title">{{ $t("orderDetails.apptDetails") }}</h3>
-            <!-- Date -->
-          <div class="mdev-info-field flex flex-vert-center --emphasis-modifier">
-            <span id="date" class="u-hidden" aria-hidden="true">{{ $t("general.date") }}</span>
-            <!-- Temporary
-            <i class="mdev-icon --size-l --date-icon"></i> -->
-            <i class="fa fa-fw fa-clock-o"></i>
-            <span aria-labelledby="date"> 
-              {{ (orderDetails.appointment.time * 1000) | moment("MM/DD/YYYY") }}</span>
-          </div>
-          <!-- Time -->
-          <div class="mdev-info-field flex flex-vert-center --emphasis-modifier">
-            <span id="time" class="u-hidden" aria-hidden="true">{{$t("general.time") }}</span>
-            <!-- Temporary
-            <i class="mdev-icon --size-l --time-icon"></i> -->
-            <i class="fa fa-fw fa-calendar"></i>
-            <span aria-labelledby="time"> 
-              {{ (orderDetails.appointment.time * 1000) | moment("HH:MM A") }}</span>
-          </div>
-        <!-- Actions -->
+            <h3 id="appdetails-title">{{ $t("orderDetails.apptStatus") }}</h3>
+                  <!-- Actions -->
         <div class="mdev-info-actions flex flex-hor-between flex-vert-stretch" aria-label="Actions and Status">
           <!-- Serviced Component -->
-          <serviced-component :servicedDate="orderDetails.serviceDate" :orderId="orderId"></serviced-component> 
+          <serviced-component :servicedDate="orderDetails.items[0].date_of_delivery" :orderId="orderId"></serviced-component> 
           <!-- Unreachable Component -->
-          <unreachable-component :orderId="orderId" :unreachable="orderDetails.unreachable"></unreachable-component>
+          <unreachable-component :orderId="orderId" :unreachable="orderDetails.items[0].wod_status"></unreachable-component>
         </div>
       </div>
       </div>
@@ -104,22 +78,56 @@
             <div class="mdev-info-field">
               <span class="mdev-info-label" id="delivery">{{ $t("general.delivery") }}</span>
               <span class="mdev-info-content" aria-labelledby="delivery"> 
-                {{ (orderDetails.order.deliveryDate * 1000) | moment("MM/DD/YYY")  }}</span>
+                {{ (orderDetails.work_order_details.date_of_delivery) | moment("MM/DD/YYYY")  }} 
+              </span>
             </div>
 
             <!-- Order Id -->
             <div class="mdev-info-field">
               <span class="mdev-info-label" id="ordernum">{{ $t("general.orderNum") }}</span>
-              <span class="mdev-info-content" aria-labelledby="ordernum"> {{ orderDetails.order.orderId  }}</span>
+              <span class="mdev-info-content" aria-labelledby="ordernum"> 
+                {{ orderDetails.work_order_details.id  }}
+              </span>
             </div>
 
             <!-- Store -->
             <div class="mdev-info-field">
               <span class="mdev-info-label" id="store">{{ $t("general.store") }}</span>
-              <span class="mdev-info-content" aria-labelledby="store"> {{ orderDetails.order.store  }} </span>
+              <span class="mdev-info-content" aria-labelledby="store"> 
+                {{ orderDetails.work_order_details.retailer  }}
+              </span>
             </div>
           </div>
-        <!-- SKU's -->
+        <!-- Plans -->
+        <h3 class="--spacer"> {{ $t("orderDetails.plans") }} </h3>
+        <div class="mdev-light-table">
+          <div class="mdev-light-table-head flex flex-hor-start flex-hor-between">
+            <span class="mdev-light-cell" id="head-1">{{ $t("orderDetails.table.quantity") }}</span>
+            <span  class="mdev-light-cell" id="head-2">{{ $t("orderDetails.table.sku") }}</span>
+            <span  class="mdev-light-cell --large-cell" id="head-3">{{ $t("orderDetails.table.description") }}</span>
+          </div>
+          <div class="mdev-light-table-row flex flex-hor-start" v-if="orderDetails.plans.length === 0"> 
+            <div class="mdev-light-cell">
+             {{ $t("orderDetails.noPlans") }} 
+            </div>
+          </div>
+
+          <div
+            v-for= "plan in orderDetails.plans"
+            class="mdev-light-table-row flex flex-hor-start flex-hor-between">
+            <span  class="mdev-light-cell" aria-labelledby="head-1"> 
+              {{ plan.quantity  }}
+            </span>
+            <span  class="mdev-light-cell" aria-labelledby="head-2"> 
+              {{ plan.sku  }} 
+            </span>
+            <span  class="mdev-light-cell --large-cell --limit-text" aria-labelledby="head-3"> 
+              {{ plan.name  }}
+            </span>
+          </div> 
+        </div>
+        <!-- Items -->
+        <h3 class="--spacer"> {{ $t("orderDetails.items") }} </h3>
         <div class="mdev-light-table">
           <div class="mdev-light-table-head flex flex-hor-start flex-hor-between">
             <span class="mdev-light-cell" id="head-1">{{ $t("orderDetails.table.quantity") }}</span>
@@ -128,24 +136,31 @@
           </div>
 
           <div
-            v-for= "sku in orderDetails.order.skus"
+            v-for= "item in orderDetails.items"
             class="mdev-light-table-row flex flex-hor-start flex-hor-between">
-            <span  class="mdev-light-cell" aria-labelledby="head-1"> {{ sku.quantity  }}</span>
-            <span  class="mdev-light-cell" aria-labelledby="head-2"> {{ sku.sku  }}</span>
-            <span  class="mdev-light-cell --large-cell" aria-labelledby="head-3"> {{ sku.description  }}</span>
-          </div>
+            <span  class="mdev-light-cell" aria-labelledby="head-1"> 
+              {{ item.quantity  }}
+            </span>
+            <span  class="mdev-light-cell" aria-labelledby="head-2"> 
+              {{ item.sku  }} 
+            </span>
+            <span  class="mdev-light-cell --large-cell --limit-text" aria-labelledby="head-3"> 
+              {{ item.name  }}
+            </span>
+          </div> 
         </div>
+
         <!-- Order Notes -->
-        <div class="mdev-order-notes" aria-labelledby="notes">
+        <div v-if="orderDetails.work_order_details.description" class="mdev-order-notes" aria-labelledby="notes">
           <h3 id="notes">{{ $t("orderDetails.notes") }}</h3>
           <p>
-            {{ orderDetails.notes  }}
+            {{ orderDetails.work_order_details.description  }}
           </p>
         </div>
 
         <!-- Print -->
-        <div class="flex flex-hor-end u-hidden-tablet u-hidden-phone">
-          <button class="mdev-base-btn mdev-print-btn" aria-label="Print"> {{ $t("general.print") }} </button>
+        <div class="flex flex-hor-end u-hidden-tablet u-hidden-phone --spacer">
+          <button class="mdev-base-btn mdev-print-btn" aria-label="Print" @click="printPage"> {{ $t("general.print") }} </button>
         </div>
       </div>
     </div>
@@ -166,54 +181,35 @@
     data: function() {
       return{
         orderId: this.$route.params.orderId,
-        orderDetails: {
-          customer: {
-            custName: "John Santos Smith",
-            address: "201-111 something something street",
-            city: "Victoria",
-            province: "BC",
-            postalCode: "N5B1B1",
-            phone: "1-519-555-5555",
-            bizPhone: "1-888-555-5555",
-            customerId: "1377981269882371",
-            dateAdded: "1489164300"
-          },
-          appointment: {
-            time: 1490201100 
-          },
-          order: {
-            deliveryDate: 1489164300,
-            orderId: "87372918623",
-            store: "Leons - Victoria",
-
-            skus: [
-              {
-                sku: "41239879798211",
-                quantity: "4",
-                value: "89.99",
-                description: "This is a sku description"
-              },
-              {
-                sku: "41239879798211",
-                quantity: "4",
-                value: "89.99",
-                description: "This is a sku description"
-              },
-              {
-                sku: "41239879798211",
-                quantity: "4",
-                value: "89.99",
-                description: "This is a sku description"
-              }
-            ]
-          },
-          notes: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce semper vel nisl non interdum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tristique diam eu efficitur facilisis. In ac metus sit amet quam semper lobortis. Etiam nec orci ac mi dictum varius. Nulla diam mi, accumsan at risus et, iaculis laoreet ipsum. Phasellus dui mauris, dapibus id vestibulum et, venenatis in erat. Praesent eu nulla sit amet sem volutpat lobortis at id ex. Nullam et dolor aliquam, pellentesque nisl quis, porttitor enim. In sed tortor metus. Donec consequat, ex quis venenatis rutrum, mauris lacus imperdiet erat, et blandit urna leo sit amet nisi. Pellentesque tempus eros eget nisl mollis, et maximus libero tincidunt.",
-          unreachable: false,
-          serviceDate: ""
-        }
+        orderDetails: null
       };
     },
+    
+    // Call DataFetch on Load
+    created: function(){
+       this.fetchData();
+    },
+    // Watch for Route Changes and fetch data 
+    watch: {
+      '$route': 'fetchData'
+    },
 
+    methods: {
+      // Call API for Data
+      fetchData() {
+        this.$http.get("/workorders/" + this.orderId)
+          .then(function(res){
+          this.orderDetails = res.body;
+          });
+      },
+      formatPhone(phone) {
+        return phone.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+      },
+      printPage() {
+        window.print();
+      }
+    },
+ 
     components: {
       'serviced-component'  : servicedComponent,
       'unreachable-component' : unreachableComponent
@@ -328,7 +324,7 @@
   .mdev-appointment-plugin {
     width: 100%;
     padding: 0;
-    background: $bkg-light-grey;
+    border: 2px solid $zucora-blue;
     border-radius: $standard-radius;
 
     @media screen and ('$tablet-only-comp') {
@@ -366,6 +362,10 @@
     @media screen and ('$tablet-up-comp') {
       padding: 0;
     }
+  }
+
+  .--spacer {
+    margin-top: $large-spacing;
   }
 
   @media screen and ('$phone-only-comp') {

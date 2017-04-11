@@ -18,8 +18,6 @@
     methods: {
       unreachableToggle() {
         this.status = !this.status; 
-
-
       }
     }
   };

@@ -9,6 +9,28 @@
   border-radius: $standard-radius;
 }
 
+.alertify-notifier .ajs-message.ajs-warning {
+  background: rgba(241,181,61,.95);
+}
+
 .alertify-notifier.ajs-bottom {
   bottom: 60px;
+}
+
+@media #{$phone-only} {
+  .alertify-notifier.ajs-bottom { 
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+  }
+  .alertify-notifier.ajs-right .ajs-message.ajs-visible {
+    right: 0;
+  }
+  .alertify-notifier .ajs-message {
+    width: 100%;
+  }
+  .alertify-notifier .ajs-message.ajs-visible {
+    padding: 35px 15px;
+  }
 }

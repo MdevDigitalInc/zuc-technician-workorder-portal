@@ -33,6 +33,7 @@ Vue.use(VueRouter);
 Vue.use(Auth);
 Vue.use(Validate);
 Vue.use(require('vue-moment'));
+
 // Set Language Default [ ENGLISH ]
 Vue.config.lang = 'en';
 
@@ -53,24 +54,28 @@ Object.keys(locales).forEach(function (lang) {
 //-----------------------------------------------[ i18n ]
 
 // [ Vue Resource ] ------------------------------------
-// Set Global Root path
-Vue.http.options.root = 'https://vuejs-http-resource.firebaseio.com/';
 
 // Set Global Intercept 
 Vue.http.interceptors.push( (request, next) => {
-  // console.log(request);
+  console.log(request);
   // To use when defining a single API that is not firebase
-  //if (request.url[0] === '/'){
-  //  request.url = "https:apiurl:3030" + request.url;
-  //}
+  if (request.url[0] === '/'){
+    // Point Requests to API server
+    request.url = "http://getpaid.zucora.com:5003" + request.url;
+    // Attach header
+    var token = Vue.auth.getToken();
+    if (token) {
+      request.headers.set('Authorization', token);
+    }
+  }
   next( function(response){
-    if (response.status == 404){
-      alertify.error('Sorry, Our systems are not responding right now.');
+    console.log(response);
+    if (response.status >= 400){
+      alertify.error(response.body.error);
     }
   }); 
 });
 //--------------------------------------[ vue-resource ]
-
 
 // [ Vue-Router ] ------------------------------------
 // --------------------------------
@@ -93,7 +98,29 @@ const router = new VueRouter ({
     }
   }
 });
+
+// Navigation Guards
+router.beforeEach(function( to, from, next){
+  // If user is Logged In and tries to reach Login Page - redirect to Dashboard
+  if (to.matched.some( function(record) { return record.meta.requiresGuest; } ) && Vue.auth.loggedIn()) {
+    next({
+      path: '/dashboard'
+    });
+  }
+  else if (to.matched.some( function(record) { return record.meta.requiresAuth; } ) && !Vue.auth.loggedIn()) {
+    next({
+      path: '/'
+    });
+  }
+  else {
+    next();
+  }
+
+});
+
 //--------------------------------------[ vue-router ]
+
+
 
 // [ Main Vue Instance ] ----------------------------
 new Vue({

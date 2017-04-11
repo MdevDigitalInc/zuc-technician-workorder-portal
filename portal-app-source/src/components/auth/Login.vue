@@ -1,9 +1,10 @@
 <template>
-  <div class="mdev-form-group">
+  <div class="mdev-form-group" @keyup.enter="login">
     <h1 class="mdev-form-title u-text-center">{{ $t("auth.login.title") }}</h1>
     
     <input 
       data-required
+      tab-index="1"
       aria-required="true"
       aria-label="Email"
       v-model="user.email"
@@ -12,16 +13,22 @@
     
     <input
       data-required
+      tan-index="2"
       aria-required="true"
       aria-label="Password"
       v-model="user.password"
       type="password"
       placeholder="Password">
     
-    <router-link to="/auth/reset" class="--reset_link u-bold" title="Reset your password.">{{ $t("auth.login.reset") }}</router-link>
+    <router-link 
+      to="/auth/reset"
+      tab-index="4"
+      class="--reset_link u-bold"
+      title="Reset your password.">{{ $t("auth.login.reset") }}</router-link>
     
     <div class="mdev-action-group u-text-center">
       <button 
+        tab-index="3"
         aria-label="Login To Zucora Technician Work Order Portal"
         @click="login" 
         class="mdev-base-btn mdev-action-btn"> {{ $t("auth.login.action") }} </button>
@@ -56,14 +63,13 @@
         this.$validate.validateFields(formFields, this.$t("validation.errors.form")) &&
         this.$validate.validateEmail(emailField, this.$t("validation.errors.email"))
       ){
-        this.$http.post("user.json", this.user)
+        this.$http.post("/auth/login", this.user)
           .then(function(res){
-            // Notify User
-            alertify.success(this.$t("validation.messages.success.login"));
             // Store Token
-            this.$auth.setToken('abcd', Date.now() + 14400000);
+            this.$auth.setToken(res.body.token, Date.now() + 14400000);
+            //this.$auth.setToken(res.body.token, Date.now() + 60000);
             // Redirect
-            //this.$router.push('/auth/reset');
+            this.$router.push('/dashboard');
           });
       }
     }

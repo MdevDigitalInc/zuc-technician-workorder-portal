@@ -18,7 +18,7 @@
             <div class="flex flex-hor-between flex-vert-start">
               <div class="--provider-modifier">
                 <span class="mdev-label">{{ $t("billing.provider") }}</span>
-                <span class="mdev-information --emphasis-modifier">{{ billingOrder.serviceProvider }}</span>
+                <span class="mdev-information --emphasis-modifier">{{ billing.billingWorkOrder.serviceProvider }}</span>
               </div>
               <img class="u-hidden-phone" :src="loadImage(mainBrand)" alt="Zucora Inc. Logo">
             </div>
@@ -26,9 +26,14 @@
           <div class="mdev-billing-period">
             <span class="mdev-label">{{ $t("billing.period") }}</span>
             <span class="mdev-information --emphasis-modifier">
-              {{ (billingOrder.periodStart * 1000) | moment("MM/DD/YYYY") }} 
+            <!-- Previous Billing -->
+            <i v-if="billingIndex > 0" @click="billingPeriod(-1)"class="fa fa-fw fa-chevron-left"></i>
+              {{ (billing.billingWorkOrder.periodStart ) | moment("MM/DD/YYYY") }} 
               - 
-              {{ (billingOrder.periodEnd * 1000) | moment("MM/DD/YYYY") }}</span>
+              {{ (billing.billingWorkOrder.periodEnd ) | moment("MM/DD/YYYY") }}
+            <!-- Next Billing -->
+            <i @click="billingPeriod(1)" class="fa fa-fw fa-chevron-right"></i>
+            </span>
           </div>
       </div>
       <div class="mdev-light-table" aria-labelledby="billing-table">
@@ -37,23 +42,34 @@
             <span class="mdev-light-cell" id="head-1">{{ $t("billing.table.orderId") }}</span>
             <span class="u-hidden-phone mdev-light-cell" id="head-2">{{ $t("billing.table.custName") }}</span>
             <span class="mdev-light-cell" id="head-3">{{ $t("billing.table.dateServ") }}</span>
-            <span class="mdev-light-cell" id="head-4">{{ $t("billing.table.orderVal") }}</span>
-            <span class="mdev-light-cell" id="head-5">{{ $t("billing.table.appVal") }}</span>
+            <span class="mdev-light-cell u-hidden-phone" id="head-4">{{ $t("billing.table.authMileage") }}</span>
+            <span class="mdev-light-cell u-hidden-phone" id="head-5">{{ $t("billing.table.authService") }}</span>
+            <span class="mdev-light-cell" id="head-6">{{ $t("billing.table.workOrderVal") }}</span>
           </div>
 
           <div
-            v-for= "order in billingOrder.servicedOrders"
+            v-for="order in billing.billingWorkOrder.workOrders"
             class="mdev-light-table-row flex flex-hor-start flex-hor-between">
-            <span class="mdev-light-cell" aria-labelled-by="head-1"> {{ order.orderId  }}</span>
+            <span class="mdev-light-cell" aria-labelled-by="head-1"> {{ order.workOrderId  }}</span>
             <span class="u-hidden-phone mdev-light-cell" aria-labelled-by="head-2"> {{ order.customerName  }}</span>
             <span class="mdev-light-cell" aria-labelled-by="head-3"> {{ order.dateServiced  }}</span>
-            <span class="mdev-light-cell" aria-labelled-by="head-4"> {{ order.orderValue  }}</span>
-            <span class="mdev-light-cell" aria-labelled-by="head-5"> {{ order.applicationValue }}</span>
+            <span class="mdev-light-cell u-hidden-phone" aria-labelled-by="head-4"> {{ order.authorizedMileage  }}</span>
+            <span class="mdev-light-cell u-hidden-phone" aria-labelled-by="head-5"> {{ order.authorizedService }}</span>
+            <span class="mdev-light-cell" aria-labelled-by="head-6"> {{ order.workOrderTotal }}</span>
+          </div>
+
+          <!-- TOTAL -->
+          <div class="flex flex-hor-end">
+            <div class="mdev-total-value flex flex-hor-center flex-vert-center">
+              <span class="h3"> {{ $t("billing.total") }} </span> 
+              <span> {{ billing.billingWorkOrder.total }} </span>
+            </div>
           </div>
       </div>
       <!-- Print -->
       <div class="flex flex-hor-end u-hidden-tablet u-hidden-phone">
         <button 
+          @click="printPage"
           class="mdev-base-btn mdev-print-btn"
           aria-label="Print" 
           title="Print"> 
@@ -66,49 +82,73 @@
 </template>
 
 <script>
-export default {
-  name: "billing",
+  export default {
+    name: "billing",
 
-  data: function() {
-    return{
-      mainBrand: 'zucora-white.svg',
-      billingOrder: {
-        serviceProvider: "Edmonton MagiSeal Service - Leather",
-        periodStart: 1488233506,
-        periodEnd: 1488406306,
-        servicedOrders: [
-          {
-            orderId: "CA631827361283",
-            customerName: "John Santos Smith",
-            dateServiced: "12312398712391",
-            orderValue: "$10,199.99",
-            applicationValue: "399.99"
-          },          
-          {
-            orderId: "CA631827361283",
-            customerName: "John Santos Smith",
-            dateServiced: "12312398712391",
-            orderValue: "$10,199.99",
-            applicationValue: "399.99"
-          },
-          {
-            orderId: "CA631827361283",
-            customerName: "John Santos Smith",
-            dateServiced: "12312398712391",
-            orderValue: "$10,199.99",
-            applicationValue: "399.99"
-          },
-        ]
-      }
-    };
-  },
-
-  methods: {
-    loadImage(path){
-      return require('../../assets/images/' + path);
+    data: function() {
+      return{
+        mainBrand: 'zucora-white.svg',
+        billingIndex: 0,
+        billing: null 
+      };
     },
-  }
-};
+    // Call DataFetch on Load
+    created: function() {
+       this.fetchData();
+    },
+    // Watch for Route Changes and fetch data 
+    watch: {
+      '$route': 'fetchData'
+    },
+    methods: {
+      loadImage(path) {
+        return require('../../assets/images/' + path);
+      },
+
+      fetchData() {
+        this.$http.get("/billing")
+          .then(function(res){
+          console.log(res);
+          this.billing = res.body;
+          console.log(this.billing.billingPeriods);
+          });
+      },
+
+      billingPeriod(step) {
+        var index = 0
+        
+        if (step + this.billingIndex < 0) {
+          console.log('cond 1');
+          this.billingIndex = 0
+          index = 0
+        }
+        else if (step + this.billingIndex > this.billing.billingPeriods.length) {
+          console.log('cond 2');
+          this.billingIndex = this.billing.billingPeriods.length
+          index = this.billingIndex
+        }
+
+        else {
+          console.log('cond 3');
+          index += step;
+          this.billingIndex += step;
+          console.log(this.billingIndex);
+        }
+        
+        this.$http.post("/billing", this.billing.billingPeriods[index])
+          .then(function(res){
+          console.log('special fetch');
+          console.log(res);
+          this.billing = res.body
+        });
+
+      },
+
+      printPage() {
+        window.print();
+      }
+    }
+  };
 
 </script>
 
@@ -151,6 +191,10 @@ export default {
     display: block;
     color: $active-grey;
     font-weight: $heading-weight;
+
+    @media screen and ("$phone-only-comp") {
+      margin-bottom: 10px;
+    }
   }
 
   .mdev-provider {
@@ -161,6 +205,37 @@ export default {
 
   .mdev-light-cell {
     width: 20%;
+  }
+
+  .mdev-total-value {
+    width: 100%;
+    margin-top: $medium-spacing;
+    padding: $large-spacing;
+    border: 2px solid $zucora-blue;
+    border-radius: 3px;
+
+    @media screen and ("$tablet-up-comp") {
+      width: 20%;
+    }
+
+    --nomargin {
+      margin-bottom: 0;
+    }
+
+    span {
+      margin-left: $medium-spacing;
+      font-size: 7vw;
+
+      @media screen and ("$tablet-up-comp") {
+        font-size: 1vw;
+      }
+    }
+
+    .h3 {
+      @media screen and("$phone-only-comp") {
+        font-size: 7vw;
+      }
+    }
   }
 
   @media screen and ('$tablet-only-comp') {

@@ -1,5 +1,5 @@
 <template>
- <div class="--icon-layer">
+ <div class="mdev-search --icon-layer">
   <input class="mdev-search-form" type="text" :placeholder="$t('general.search')" aria-label="Search">
   </div>
 </template>

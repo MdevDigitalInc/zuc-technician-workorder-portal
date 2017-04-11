@@ -6,7 +6,7 @@
         <img class="u-hidden-desktop" :src="loadImage(homeBrandReverse)">
       </a>
       <!-- Navigation Links -->
-      <navlinks @showModalParent="showModalMaster"></navlinks> 
+      <navlinks @showModalParent="showModalMaster" @showShybarChild="showShybar($event)"></navlinks> 
       <div class="u-hidden-desktop reorder">
         <a @click="goBack"
           v-if="showBack"
@@ -120,8 +120,11 @@
         }
       },
       //Show Modal
-      showModalMaster() {
-        this.$emit('showModal');
+      showModalMaster(pwdOrContact) {
+        this.$emit('showModalContactMain', pwdOrContact);
+      },
+      showShybar(showShybar) {
+        this.$emit('showShybarMain', showShybar);
       },
       // Change Language METHOD
       change () {
@@ -163,6 +166,7 @@
     transition: all, .3s;
     opacity: 1;
     background: $zucora-blue;
+    border-bottom: 1px solid $bkg-light-grey;
 
     @media screen and ('$tablet-up-comp') {
       background: $white;

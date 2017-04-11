@@ -26,7 +26,7 @@ var ValidatePlugin = {
     
     // Return Errors
     if (errorPresent === true) {
-      alertify.error(error);
+      alertify.warning(error);
       return false;
     }
     else {
@@ -53,7 +53,7 @@ var ValidatePlugin = {
     
     // Return Errors
     if (errorPresent === true) {
-      alertify.error(error);
+      alertify.warning(error);
       return false;
     }
     else {
@@ -64,7 +64,7 @@ var ValidatePlugin = {
   validatePassword: function(payload, error){
     // Validate Password Length
     if (payload.length < 6){
-      alertify.error(error);
+      alertify.warning(error);
       return false;
     }
     else {
@@ -80,7 +80,7 @@ var ValidatePlugin = {
       return true;
     }
     else {
-      alertify.error(error);
+      alertify.warning(error);
       return false;
     }
     
@@ -88,11 +88,11 @@ var ValidatePlugin = {
   
   validateMatch: function (set, match, error){
     // Match Variables
-    if( set === match) {
-      alertify.error(error);
+    if( set === match ) {
       return true;
     }
     else {
+      alertify.warning(error);
       return false;
     }
     

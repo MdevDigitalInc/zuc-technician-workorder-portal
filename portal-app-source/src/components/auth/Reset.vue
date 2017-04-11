@@ -1,9 +1,10 @@
 <template>
-  <div class="mdev-form-group">
+  <div class="mdev-form-group" @keyup.enter="reset">
     <h1 class="u-text-center">{{ $t("auth.reset.title") }}</h1>
     
     <input
       data-required
+      tab-index="1"
       aria-required="true"
       aria-label="Email"
       v-model="user.email"
@@ -12,6 +13,7 @@
     
     <div class="mdev-action-group u-text-center">
       <button
+        tab-index="2"
         @click="reset"
         aria-label="Reset Password"
         class="mdev-base-btn mdev-action-btn"> {{ $t("auth.reset.action") }} </button>
@@ -44,14 +46,13 @@
         this.$validate.validateFields(formFields, this.$t("validation.errors.form")) &&
         this.$validate.validateEmail(emailField, this.$t("validation.errors.email"))
       ){
-        this.$http.post("user.json", this.user)
+        this.$http.post("/auth/sendResetEmail", this.user)
           .then(function(res){
             // Notify User
-            alertify.success(this.$t("validation.messages.success.reset"));
+            alertify.success(res.body.message);
             // Store Token
-            this.$auth.setToken('abcd', Date.now() + 14400000);
             // Redirect
-            //this.$router.push('/auth/reset');
+            this.$router.push('/auth/login');
           });
        }
     }
