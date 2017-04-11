@@ -49,7 +49,7 @@
         <div class="mdev-info-field">
           <span class="mdev-info-label" id="dateadd">{{ $t("general.dateAdd") }}</span>
           <span class="mdev-info-content" aria-labelledby="dateadd">
-            {{ orderDetails.work_order_details.created_at | moment("MM/DD/YYY") }} 
+            {{ orderDetails.work_order_details.created_at | moment("MM/DD/YYYY") }} 
           </span>
         </div>
       </div>
@@ -78,7 +78,7 @@
             <div class="mdev-info-field">
               <span class="mdev-info-label" id="delivery">{{ $t("general.delivery") }}</span>
               <span class="mdev-info-content" aria-labelledby="delivery"> 
-                {{ (orderDetails.work_order_details.date_of_delivery) | moment("MM/DD/YYY")  }} 
+                {{ (orderDetails.work_order_details.date_of_delivery) | moment("MM/DD/YYYY")  }} 
               </span>
             </div>
 
