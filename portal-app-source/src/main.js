@@ -55,7 +55,6 @@ Object.keys(locales).forEach(function (lang) {
 
 // Set Global Intercept 
 Vue.http.interceptors.push( (request, next) => {
-  console.log(request);
   // To use when defining a single API that is not firebase
   if (request.url[0] === '/'){
     // Point Requests to API server
@@ -67,7 +66,6 @@ Vue.http.interceptors.push( (request, next) => {
     }
   }
   next( function(response){
-    console.log(response);
     if (response.status >= 400){
       alertify.error(response.body.error);
     }

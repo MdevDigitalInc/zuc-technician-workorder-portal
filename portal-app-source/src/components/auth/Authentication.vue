@@ -106,7 +106,7 @@
       background: $white;
       border-radius: $standard-radius;
       border-top: solid $border-top-size $zucora-blue;
-      padding: ($top-padding-var + $border-top-size) 30px 30px 30px;
+      padding: ($top-padding-var + $border-top-size) 30px 30px;
       width: 40%;
     }
     
@@ -141,7 +141,7 @@
   .mdev-auth-brand {
     display: block;
     width: 60%;
-    margin: 0 auto 70px auto;
+    margin: 0 auto 70px;
   }
 
   .mdev-action-group {

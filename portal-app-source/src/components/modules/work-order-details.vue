@@ -269,7 +269,7 @@
   .mdev-customer-name {
     color: $active-blue;
     font-size: 5.6vw;
-    margin: 0 0 20px 0;
+    margin: 0 20px 0;
     display: block;
 
     @media screen and ('$tablet-only-comp') {

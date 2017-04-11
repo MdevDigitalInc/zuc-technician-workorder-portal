@@ -55,29 +55,29 @@
 
 <style lang="scss">
 
-/*-----/
-Global Main
-/-----*/
-@import '../../assets/styles/component-lean-main.scss';
+  /*-----/
+  Global Main
+  /-----*/
+  @import '../../assets/styles/component-lean-main.scss';
 
-/*--------------------------------------*/
-/* Main Component Styles                */
-/*--------------------------------------*/
+  /*--------------------------------------*/
+  /* Main Component Styles                */
+  /*--------------------------------------*/
 
-.mdev-modal-frame {
-  position: absolute;
-  z-index: 100;
-  width: 100vw;
-  height: 100vh;
-  top: 0;
-  left: 0;
-}
+  .mdev-modal-frame {
+    position: absolute;
+    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+  }
 
-.mdev-modal-bkg {
-  background: rgba(0,0,0,.9);
-}
+  .mdev-modal-bkg {
+    background: rgba(0,0,0,.9);
+  }
 
-.mdev-modal-content {
+  .mdev-modal-content {
     $top-padding-var: 35px;
     $border-top-size: 8px;
     position: absolute;
@@ -124,6 +124,6 @@ Global Main
 
     }
 
-}
+  }
 
 </style>

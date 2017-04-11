@@ -21,11 +21,11 @@ export default {
     logMeOut() {
       this.$auth.destroyToken();
       this.$router.push('/');
-      this.$emit("closeMe");
+      this.$emit('closeMe');
     },
     showModalMaster(pwdOrContact) {
       this.$emit('showModalContactMain', pwdOrContact);
-      this.$emit("closeMe");
+      this.$emit('closeMe');
     }
 
   },
@@ -102,7 +102,7 @@ export default {
     opacity: 0;
     z-index: 5;
 
-    @media screen and ("$tablet-up-comp") {
+    @media screen and ('$tablet-up-comp') {
       padding: $medium-spacing;
     }
 
@@ -112,7 +112,7 @@ export default {
       font-weight: $heading-weight;
       transition: all, .3s;
 
-      @media screen and ("$tablet-up-comp") {
+      @media screen and ('$tablet-up-comp') {
         padding: 0 $medium-spacing;
       }
 

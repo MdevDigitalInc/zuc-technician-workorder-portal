@@ -156,7 +156,7 @@
         // Reset billingIndex to "0" since fetchData is only called on refreshes
         this.billingIndex = 0;
         // Call API with GET request
-        this.$http.get("/billing")
+        this.$http.get('/billing')
           .then(function(res){
           this.billing = res.body;
           // Save out an array of available billing periods
@@ -180,7 +180,7 @@
           this.billingIndex += step;
         }
         // Retrieve specific Billing Period
-        this.$http.post("/billing", this.periods[this.billingIndex])
+        this.$http.post('/billing', this.periods[this.billingIndex])
           .then(function(res){
           this.billing = res.body;
         });
@@ -236,7 +236,7 @@
     color: $active-grey;
     font-weight: $heading-weight;
 
-    @media screen and ("$phone-only-comp") {
+    @media screen and ('$phone-only-comp') {
       margin-bottom: 10px;
     }
   }
@@ -258,25 +258,21 @@
     border: 2px solid $zucora-blue;
     border-radius: 3px;
 
-    @media screen and ("$tablet-up-comp") {
+    @media screen and ('$tablet-up-comp') {
       width: 20%;
-    }
-
-    --nomargin {
-      margin-bottom: 0;
     }
 
     span {
       margin-left: $medium-spacing;
       font-size: 7vw;
 
-      @media screen and ("$tablet-up-comp") {
+      @media screen and ('$tablet-up-comp') {
         font-size: 1vw;
       }
     }
 
     .h3 {
-      @media screen and("$phone-only-comp") {
+      @media screen and('$phone-only-comp') {
         font-size: 7vw;
       }
     }

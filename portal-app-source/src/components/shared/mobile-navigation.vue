@@ -24,7 +24,6 @@
     methods: {
       // Show Modal Event Relay
       showModalMaster(pwdOrContact) {
-        console.log(pwdOrContact);
         this.$emit('showModalContactMain', pwdOrContact);
       },
       // Show Shybvar Event Relay
