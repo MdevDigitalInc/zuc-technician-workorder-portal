@@ -27,12 +27,12 @@
             <span class="mdev-label">{{ $t("billing.period") }}</span>
             <span class="mdev-information --emphasis-modifier">
             <!-- Previous Billing -->
-            <i v-if="billingIndex > 0" @click="billingPeriod(-1)"class="fa fa-fw fa-chevron-left"></i>
+            <i v-if="billingIndex > 0" @click="billingPeriod(-1)" class="fa fa-fw fa-chevron-left"></i>
               {{ (billing.billingWorkOrder.periodStart ) | moment("MM/DD/YYYY") }} 
               - 
               {{ (billing.billingWorkOrder.periodEnd ) | moment("MM/DD/YYYY") }}
             <!-- Next Billing -->
-            <i @click="billingPeriod(1)" class="fa fa-fw fa-chevron-right"></i>
+            <i v-if="billingIndex <= periods.length" @click="billingPeriod(1)" class="fa fa-fw fa-chevron-right"></i>
             </span>
           </div>
       </div>
@@ -89,7 +89,8 @@
       return{
         mainBrand: 'zucora-white.svg',
         billingIndex: 0,
-        billing: null 
+        billing: null,
+        periods: null
       };
     },
     // Call DataFetch on Load
@@ -106,40 +107,32 @@
       },
 
       fetchData() {
+        this.billingIndex = 0;
         this.$http.get("/billing")
           .then(function(res){
-          console.log(res);
           this.billing = res.body;
-          console.log(this.billing.billingPeriods);
+          this.periods = this.billing.billingPeriods;
           });
       },
 
       billingPeriod(step) {
-        var index = 0
         
         if (step + this.billingIndex < 0) {
-          console.log('cond 1');
-          this.billingIndex = 0
-          index = 0
+          this.billingIndex = this.periods.length;
         }
-        else if (step + this.billingIndex > this.billing.billingPeriods.length) {
-          console.log('cond 2');
-          this.billingIndex = this.billing.billingPeriods.length
-          index = this.billingIndex
+        
+        else if (step + this.billingIndex > this.periods.length) {
+          this.fetchData();
+          return;
         }
 
         else {
-          console.log('cond 3');
-          index += step;
           this.billingIndex += step;
-          console.log(this.billingIndex);
         }
         
-        this.$http.post("/billing", this.billing.billingPeriods[index])
+        this.$http.post("/billing", this.periods[this.billingIndex])
           .then(function(res){
-          console.log('special fetch');
-          console.log(res);
-          this.billing = res.body
+          this.billing = res.body;
         });
 
       },
