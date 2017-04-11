@@ -9,24 +9,18 @@
       :title="link.linkTitle" 
       aria-role="menuitem" 
       exact>
-        <!-- Temporary Off
-        <i :class="['mdev-icon --size-s', link.iconClass ]"></i>
-        -->
+        
         <i :class="['fa fa-fw', link.iconFa]"></i>
         <span>{{ link.linkName  }}</span>
-   </router-link> 
-   <!-- Set Modal -->
-   <a @click="showModalChild(false)" class="mdev-nav-link flex flex-hor-between flex-vert-center u-bold">
-        <!-- Temporary Off
-        <i :class="['mdev-icon --size-s', contact.iconClass ]"></i>
-        -->
+     </router-link> 
+     <!-- Set Modal -->
+     <a @click="showModalChild(false)" class="mdev-nav-link flex flex-hor-between flex-vert-center u-bold">
+        
         <i :class="['fa fa-fw', contact.iconFa]"></i>
         <span>{{ contact.linkName  }}</span>
    </a>
    <a @click="showShybar(!showShybarBool)" class="mdev-nav-link flex flex-hor-between flex-vert-center u-bold">
-        <!-- Temporary Off
-        <i :class="['mdev-icon --size-s', user.iconClass ]"></i>
-        -->
+        
         <i :class="['fa fa-fw', user.iconFa]"></i>
         <span>{{ user.linkName  }}</span>
    </a>

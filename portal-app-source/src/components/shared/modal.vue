@@ -27,17 +27,20 @@
     },
 
     props: ['pwdOrContact'],
-
+    
+    // Decide between which Modal to show
     created: function () {
       this.pwdOrContactShow = this.pwdOrContact;
     },
-
+    
+    // Watch for changes on desired Modal
     watch: {
       pwdOrContact: function() {
         this.pwdOrContactShow = this.pwdOrContact;
       }
     },
-
+    
+    // Close Modal emitter
     methods: {
       closeMe() {
         this.$emit('close');

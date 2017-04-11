@@ -6,8 +6,6 @@
       <span id="details-title">{{ $t("orderDetails.title") }} {{ orderId }}</span>
       <router-link class="flex flex-vert-center" to="/dashboard/list" title="Back">
         <i class="fa fa-fw fa-chevron-left"></i>
-        <!-- Temporary
-        <i class="mdev-icon --size-s --back-icon"></i> -->
         {{ $t("general.navBack") }}</router-link>
     </div>
 
@@ -160,7 +158,11 @@
 
         <!-- Print -->
         <div class="flex flex-hor-end u-hidden-tablet u-hidden-phone --spacer">
-          <button class="mdev-base-btn mdev-print-btn" aria-label="Print" @click="printPage"> {{ $t("general.print") }} </button>
+          <button class="mdev-base-btn mdev-print-btn"
+            aria-label="Print"
+            @click="printPage"> 
+              {{ $t("general.print") }}
+            </button>
         </div>
       </div>
     </div>
@@ -177,7 +179,8 @@
 
   export default {
     name: "workOrderDetail",
-
+    
+    // Instance Data Storage
     data: function() {
       return{
         orderId: this.$route.params.orderId,
@@ -185,26 +188,32 @@
       };
     },
     
-    // Call DataFetch on Load
+    // Call fetchData() and retrieve Data from API
     created: function(){
        this.fetchData();
     },
-    // Watch for Route Changes and fetch data 
+
+    // Watch for Route Changes and fetchData() 
     watch: {
       '$route': 'fetchData'
     },
 
     methods: {
-      // Call API for Data
+
+      // Fetch API Data
       fetchData() {
         this.$http.get("/workorders/" + this.orderId)
           .then(function(res){
           this.orderDetails = res.body;
           });
       },
+
+      // Format Phone Numbers
       formatPhone(phone) {
         return phone.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
       },
+
+      // Print Page Command
       printPage() {
         window.print();
       }

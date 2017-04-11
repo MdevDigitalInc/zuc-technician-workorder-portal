@@ -20,10 +20,8 @@ import Validate from './plugins/validate.js';
 
 // Configure I18n Internationalization Locales
 import en from './locales/en.js';
-import pt from './locales/pt.js';
 const locales = {
-  en,
-  pt
+  en
 };
 
 // Initialize vue-resource | vue-router | vue-i18n

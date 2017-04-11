@@ -28,27 +28,33 @@
   export default {
     name: "AuthComponent",
     
+    // Instance Data Storage
     data: function() {
       return {
         mainBrand     : 'zucora-white.svg',
         showRegister  : true
       };
     },
-    
+
+    //  Watch for Route change and determine visibility of "Register" link
     watch: {
       '$route'(to, from) {
         this.determineVisibility(to.path); 
       }
     },
-    
+
+    // Check route parameters before showing "Register" link
     mounted: function() {
       this.determineVisibility(this.$route.path); 
     },
 
     methods: {
+      // Image Loader
       loadImage(path) {
         return require('../../assets/images/' + path);
       },
+
+      // Change Visibility of "Register" link
       determineVisibility(path) {
         if (path === "/auth/register" || path === "/auth/changepwd") {
           this.showRegister = false;

@@ -22,7 +22,8 @@
   
   export default{
     name: "404Page",
-
+    
+    // Instance Data Storage
     data: function () {
       return {
         mainBrand: 'zucora-white.svg'
@@ -30,6 +31,7 @@
     },
 
     methods: {
+      // Retrieve Images
       loadImage(path) {
         return require('../../assets/images/' + path);
       }

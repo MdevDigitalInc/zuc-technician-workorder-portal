@@ -1,6 +1,8 @@
 <template>
   <section class="mdev-main-content mdev-main-wrapper">
+    <!-- Search Component -->
     <search-component></search-component>
+    <!-- Rendering Slot -->
     <router-view></router-view>
   </section>
 </template>
