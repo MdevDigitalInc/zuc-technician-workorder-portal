@@ -1,14 +1,13 @@
 <template>
   <main id="app">
-    <main-navigation v-if="showNav" @showModal="showModalOn(true)"></main-navigation>
+    <main-navigation v-if="showNav" @showModalContactMain="showModalOn($event,true)" @showShybarMain="showShybar=$event"></main-navigation>
     <transition name="fade">
       <router-view></router-view>
     </transition>
     <main-footer></main-footer>
-    <mobile-navigation v-if="showNav"></mobile-navigation>
-    <modal-panel v-if="showModal" @close="showModalOn(false)">
-      <h1>Placeholder Text</h1>
-    </modal-panel>
+    <mobile-navigation v-if="showNav" @showModalContactMain="showModalOn($event,true)" @showShybarMain="showShybar=$event"></mobile-navigation>
+    <modal-panel :pwdOrContact="pwdOrContact" v-if="showModal" @close="showModalOn($event,false)"></modal-panel>
+    <shybar v-if="showShybar" @closeMe="showShybar=false" @showModalContactMain="showModalOn($event,true)"></shybar>
   </main>
 </template>
 
@@ -22,14 +21,17 @@
   import MobileNavigation from './components/shared/mobile-navigation.vue';
   import MainFooter from './components/shared/footer.vue';
   import ModalPanel from './components/shared/modal.vue';
+  import ShyBar from './components/shared/shybar.vue';
   
   export default{
-    name: 'MainNavigation',
+    name: 'AppMain',
 
     data: function() {
       return{
         showNav: true,
-        showModal: false
+        showModal: false,
+        showShybar: false,
+        pwdOrContact: true
       };
     },
     
@@ -52,7 +54,9 @@
           this.showNav = true;
         }
       },
-      showModalOn( state ) {
+      showModalOn( pwdOrContact, state ) {
+      // Pass new prop to child
+      this.pwdOrContact = pwdOrContact;
         
         if (state) {
           this.showModal = true;
@@ -64,12 +68,13 @@
         }
       }
     },
-
+    
     components: {
       'main-navigation'   : MainNavigation,
       'mobile-navigation' : MobileNavigation,
       'main-footer'       : MainFooter,
-      'modal-panel'       : ModalPanel
+      'modal-panel'       : ModalPanel,
+      'shybar'            : ShyBar
     }
   };
 </script>

@@ -1,8 +1,11 @@
 <template>
-  <div class="mdev-mobile-nav u-hidden-desktop" aria-role="navigation" aria-hidden="true" role="navigation">
+  <div class="mdev-mobile-nav u-hidden-desktop"
+    aria-role="navigation"
+    aria-hidden="true" role="navigation">
+    
     <div class="mdev-main-wrapper flex flex-nowrap flex-hor-between flex-vert-center">
-      <!-- -->
-      <navlinks></navlinks>  
+      <!-- Nav Link Component -->
+      <navlinks @showModalParent="showModalMaster" @showShybarChild="showShybar($event)"></navlinks>  
     </div>
   </div>
 </template>
@@ -16,6 +19,17 @@
 
     components: {
       'navlinks' : NavLinks
+    },
+
+    methods: {
+      // Show Modal Event Relay
+      showModalMaster(pwdOrContact) {
+        this.$emit('showModalContactMain', pwdOrContact);
+      },
+      // Show Shybvar Event Relay
+      showShybar(showShybar) {
+        this.$emit('showShybarMain', showShybar);
+      }
     }
   };
 </script>
@@ -41,6 +55,7 @@
     bottom: 0;
     background: $zucora-blue;
     padding: $small-spacing 0;
+    z-index: 10;
     left: 0;
 
     .mdev-main-nav-links {

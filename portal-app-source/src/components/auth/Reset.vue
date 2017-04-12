@@ -1,17 +1,19 @@
 <template>
-  <div class="mdev-form-group">
+  <div class="mdev-form-group" @keyup.enter="reset">
     <h1 class="u-text-center">{{ $t("auth.reset.title") }}</h1>
-    
+    <!-- Email -->    
     <input
       data-required
+      tab-index="1"
       aria-required="true"
       aria-label="Email"
       v-model="user.email"
       type="email"
       placeholder="Email">
-    
+    <!-- Action -->
     <div class="mdev-action-group u-text-center">
       <button
+        tab-index="2"
         @click="reset"
         aria-label="Reset Password"
         class="mdev-base-btn mdev-action-btn"> {{ $t("auth.reset.action") }} </button>
@@ -21,41 +23,41 @@
 
 <script>
   export default {
-   name: "ResetComponent",
+    name: "ResetComponent",
 
-   data: function() {
-    return{
-      user:{
-        email : ""
-      }
-    };
-   },
+     data: function() {
+       return{
+         user:{
+           email : ""
+         }
+       };
+     },
 
-   methods: {
-    reset: function() {
+     methods: {
+       // Reset Password Function
+       reset: function() {
       
-      this.$validate.clearErrors();
-      // Collect Fields
-      var formFields = $('[data-required]');
-      var emailField = $('input[type="email"]');
+         this.$validate.clearErrors();
+         // Collect Fields
+         var formFields = $('[data-required]');
+         var emailField = $('input[type="email"]');
       
-      // Validate Fields
-      if (
-        this.$validate.validateFields(formFields, this.$t("validation.errors.form")) &&
-        this.$validate.validateEmail(emailField, this.$t("validation.errors.email"))
-      ){
-        this.$http.post("user.json", this.user)
-          .then(function(res){
-            // Notify User
-            alertify.success(this.$t("validation.messages.success.reset"));
-            // Store Token
-            this.$auth.setToken('abcd', Date.now() + 14400000);
-            // Redirect
-            //this.$router.push('/auth/reset');
-          });
+         // Validate Fields
+         if (
+           this.$validate.validateFields(formFields, this.$t("validation.errors.form")) &&
+           this.$validate.validateEmail(emailField, this.$t("validation.errors.email"))
+         ){
+           this.$http.post("/auth/sendResetEmail", this.user)
+             .then(function(res){
+               // Notify User
+               alertify.success(res.body.message);
+               // Store Token
+               // Redirect
+               this.$router.push('/auth/login');
+             });
+          }
        }
-    }
-   }
+     }
   };
 </script>
 

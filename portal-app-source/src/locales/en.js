@@ -16,7 +16,13 @@ export default {
     orderNum: "Order #",
     store: "Store:",
     search: "Customer Name, Order Number, Date(MM/DD/YYYY)",
-    title: "Manage Work Orders"
+    title: "Manage Work Orders",
+    title404: "We're sorry but that URL doesn't exist.",
+    changePwd: "Change Password",
+    logout: "Logout"
+  },
+  redirect: {
+    toLogin: "You Will Be Redirected to Login Shortly..."
   },
   auth: {
     register: {
@@ -70,9 +76,12 @@ export default {
   orderDetails: {
     title: "Wokorder Number: ",
     custInfo: "Customer Information",
-    apptDetails: "Appointment Details",
+    apptStatus: "Appointment Status",
     orderInfo: "Order Information",
+    plans: "Plans",
+    items: "Items",
     notes: "Notes",
+    noPlans: "No Plans Available.",
     table: {
       quantity: "QTY",
       sku: "SKU",
@@ -86,12 +95,14 @@ export default {
     provider: "Service Provider",
     period: "Billing Period",
     orders: "Serviced Orders",
+    total: "Total:",
     table: {
       orderId: "Order ID",
       custName: "Customer Name",
-      orderVal: "Order Val.",
+      workOrderVal: "Order Val.",
       dateServ: "Date Serviced",
-      appVal: "Application Val."
+      authMileage: "Mileage",
+      authService: "Service"
     }
   },
   footer: {

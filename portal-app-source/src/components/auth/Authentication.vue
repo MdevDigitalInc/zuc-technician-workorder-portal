@@ -28,27 +28,33 @@
   export default {
     name: "AuthComponent",
     
+    // Instance Data Storage
     data: function() {
       return {
         mainBrand     : 'zucora-white.svg',
         showRegister  : true
       };
     },
-    
+
+    //  Watch for Route change and determine visibility of "Register" link
     watch: {
       '$route'(to, from) {
         this.determineVisibility(to.path); 
       }
     },
-    
+
+    // Check route parameters before showing "Register" link
     mounted: function() {
       this.determineVisibility(this.$route.path); 
     },
 
     methods: {
+      // Image Loader
       loadImage(path) {
         return require('../../assets/images/' + path);
       },
+
+      // Change Visibility of "Register" link
       determineVisibility(path) {
         if (path === "/auth/register" || path === "/auth/changepwd") {
           this.showRegister = false;
@@ -100,7 +106,7 @@
       background: $white;
       border-radius: $standard-radius;
       border-top: solid $border-top-size $zucora-blue;
-      padding: ($top-padding-var + $border-top-size) 30px 30px 30px;
+      padding: ($top-padding-var + $border-top-size) 30px 30px;
       width: 40%;
     }
     
@@ -135,7 +141,7 @@
   .mdev-auth-brand {
     display: block;
     width: 60%;
-    margin: 0 auto 70px auto;
+    margin: 0 auto 70px;
   }
 
   .mdev-action-group {
