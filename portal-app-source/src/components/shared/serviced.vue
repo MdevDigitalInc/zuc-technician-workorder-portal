@@ -1,11 +1,13 @@
 <template>
   <div :class="['mdev-serviced-plugin flex flex-hor-between flex-vert-center',{activeInput : successClass} ]">
-    <!-- Temporary
-    <i class="mdev-icon --rounded-icon --size-m --date-icon"></i>
-    -->
     <i v-if="!showSpinner" class="fa fa-fw fa-calendar"></i>
     <i v-if="showSpinner" class="fa fa-circle-o-notch fa-spin fa-fw"></i>
-    <input v-if="!hideInput" @keyup.enter="statusChange" type="text" placeholder="DD/MM/YYYY" v-model="date">
+    
+    <input v-if="!hideInput"
+      @keyup.enter="statusChange"
+      type="text" placeholder="DD/MM/YYYY"
+      v-model="date">
+    
     <span class="--success-active" v-if="hideInput"> SUCCESS </span>
   </div>
 </template>

@@ -1,7 +1,10 @@
 <template>
-  <div class="mdev-mobile-nav u-hidden-desktop" aria-role="navigation" aria-hidden="true" role="navigation">
+  <div class="mdev-mobile-nav u-hidden-desktop"
+    aria-role="navigation"
+    aria-hidden="true" role="navigation">
+    
     <div class="mdev-main-wrapper flex flex-nowrap flex-hor-between flex-vert-center">
-      <!-- -->
+      <!-- Nav Link Component -->
       <navlinks @showModalParent="showModalMaster" @showShybarChild="showShybar($event)"></navlinks>  
     </div>
   </div>
@@ -19,11 +22,11 @@
     },
 
     methods: {
-      //Show Modal
+      // Show Modal Event Relay
       showModalMaster(pwdOrContact) {
-        console.log(pwdOrContact);
         this.$emit('showModalContactMain', pwdOrContact);
       },
+      // Show Shybvar Event Relay
       showShybar(showShybar) {
         this.$emit('showShybarMain', showShybar);
       }

@@ -1,24 +1,29 @@
 <template>
   <!-- Main Container -->
   <section class="mdev-main-content-frame" aria-labelledby="billing-title">
+    
     <!-- Header [FLEX] -->
     <div class="mdev-frame-header flex flex-hor-start flex-hor-between" aria-labelledby="billingTitle">
-      <span id="billing-title">{{ $t("billing.title") }}</span>
+      <span id="billing-title"> {{ $t("billing.title") }} </span>
       <router-link to="/dashboard/list" title="Back" class="flex flex-vert-center">
         <i class="fa fa-fw fa-chevron-left"></i>
-        <!-- Temporary
-        <i class="mdev-icon --size-s --back-icon"></i> -->
         {{ $t("general.navBack") }}
       </router-link>
     </div>
+    
+    <!-- Main Wrapper Content -->
     <div class="mdev-billing-wrap"> 
+      
+      <!-- Billing Header -->
       <div class="mdev-billing-header" aria-labelledby="billing-summary">
           <div class="mdev-provider">
             <h3 id="billing-summary">{{ $t("billing.summary") }}</h3>
             <div class="flex flex-hor-between flex-vert-start">
               <div class="--provider-modifier">
-                <span class="mdev-label">{{ $t("billing.provider") }}</span>
-                <span class="mdev-information --emphasis-modifier">{{ billing.billingWorkOrder.serviceProvider }}</span>
+                <span class="mdev-label"> {{ $t("billing.provider") }} </span>
+                <span class="mdev-information --emphasis-modifier">
+                  {{ billing.billingWorkOrder.serviceProvider }}
+                </span>
               </div>
               <img class="u-hidden-phone" :src="loadImage(mainBrand)" alt="Zucora Inc. Logo">
             </div>
@@ -26,36 +31,69 @@
           <div class="mdev-billing-period">
             <span class="mdev-label">{{ $t("billing.period") }}</span>
             <span class="mdev-information --emphasis-modifier">
+            
             <!-- Previous Billing -->
-            <i v-if="billingIndex > 0" @click="billingPeriod(-1)"class="fa fa-fw fa-chevron-left"></i>
+            <i v-if="billingIndex <= periods.length"
+              @click="billingPeriod(1)"
+              class="fa fa-fw fa-chevron-left mdev-billing-control"></i>
+              
               {{ (billing.billingWorkOrder.periodStart ) | moment("MM/DD/YYYY") }} 
               - 
               {{ (billing.billingWorkOrder.periodEnd ) | moment("MM/DD/YYYY") }}
+            
             <!-- Next Billing -->
-            <i @click="billingPeriod(1)" class="fa fa-fw fa-chevron-right"></i>
+            <i v-if="billingIndex > 0"
+              @click="billingPeriod(-1)"
+              class="fa fa-fw fa-chevron-right mdev-billing-control"></i>
             </span>
           </div>
       </div>
+      
+      <!-- Orders Table -->
       <div class="mdev-light-table" aria-labelledby="billing-table">
         <h3 id="billing-table">{{ $t("billing.orders") }}</h3>
           <div class="mdev-light-table-head flex flex-hor-start flex-hor-between">
-            <span class="mdev-light-cell" id="head-1">{{ $t("billing.table.orderId") }}</span>
-            <span class="u-hidden-phone mdev-light-cell" id="head-2">{{ $t("billing.table.custName") }}</span>
-            <span class="mdev-light-cell" id="head-3">{{ $t("billing.table.dateServ") }}</span>
-            <span class="mdev-light-cell u-hidden-phone" id="head-4">{{ $t("billing.table.authMileage") }}</span>
-            <span class="mdev-light-cell u-hidden-phone" id="head-5">{{ $t("billing.table.authService") }}</span>
-            <span class="mdev-light-cell" id="head-6">{{ $t("billing.table.workOrderVal") }}</span>
+            <span class="mdev-light-cell" id="head-1"> 
+              {{ $t("billing.table.orderId") }} 
+            </span>
+            <span class="u-hidden-phone mdev-light-cell" id="head-2"> 
+              {{ $t("billing.table.custName") }} 
+            </span>
+            <span class="mdev-light-cell" id="head-3"> 
+              {{ $t("billing.table.dateServ") }} 
+            </span>
+            <span class="mdev-light-cell u-hidden-phone" id="head-4"> 
+              {{ $t("billing.table.authMileage") }}
+            </span>
+            <span class="mdev-light-cell u-hidden-phone" id="head-5">
+              {{ $t("billing.table.authService") }}
+            </span>
+            <span class="mdev-light-cell" id="head-6">
+              {{ $t("billing.table.workOrderVal") }}
+            </span>
           </div>
 
           <div
             v-for="order in billing.billingWorkOrder.workOrders"
             class="mdev-light-table-row flex flex-hor-start flex-hor-between">
-            <span class="mdev-light-cell" aria-labelled-by="head-1"> {{ order.workOrderId  }}</span>
-            <span class="u-hidden-phone mdev-light-cell" aria-labelled-by="head-2"> {{ order.customerName  }}</span>
-            <span class="mdev-light-cell" aria-labelled-by="head-3"> {{ order.dateServiced  }}</span>
-            <span class="mdev-light-cell u-hidden-phone" aria-labelled-by="head-4"> {{ order.authorizedMileage  }}</span>
-            <span class="mdev-light-cell u-hidden-phone" aria-labelled-by="head-5"> {{ order.authorizedService }}</span>
-            <span class="mdev-light-cell" aria-labelled-by="head-6"> {{ order.workOrderTotal }}</span>
+            <span class="mdev-light-cell" aria-labelled-by="head-1">
+              {{ order.workOrderId  }}
+            </span>
+            <span class="u-hidden-phone mdev-light-cell" aria-labelled-by="head-2">
+              {{ order.customerName  }}
+            </span>
+            <span class="mdev-light-cell" aria-labelled-by="head-3">
+              {{ order.dateServiced  }}
+            </span>
+            <span class="mdev-light-cell u-hidden-phone" aria-labelled-by="head-4">
+              {{ order.authorizedMileage  }}
+            </span>
+            <span class="mdev-light-cell u-hidden-phone" aria-labelled-by="head-5">
+              {{ order.authorizedService }}
+            </span>
+            <span class="mdev-light-cell" aria-labelled-by="head-6">
+              {{ order.workOrderTotal }}
+            </span>
           </div>
 
           <!-- TOTAL -->
@@ -66,6 +104,7 @@
             </div>
           </div>
       </div>
+      
       <!-- Print -->
       <div class="flex flex-hor-end u-hidden-tablet u-hidden-phone">
         <button 
@@ -77,7 +116,8 @@
           {{ $t("general.print") }} 
         </button>
       </div>
-  </div>
+
+    </div>
   </section>
 </template>
 
@@ -85,65 +125,69 @@
   export default {
     name: "billing",
 
+    // Instance Data Storage
     data: function() {
       return{
         mainBrand: 'zucora-white.svg',
         billingIndex: 0,
-        billing: null 
+        billing: null,
+        periods: null
       };
     },
-    // Call DataFetch on Load
+    
+    // Call fetchData() and retrieve info from API
     created: function() {
        this.fetchData();
     },
-    // Watch for Route Changes and fetch data 
+
+    // Watch for Route Changes and call fetchData() 
     watch: {
       '$route': 'fetchData'
     },
+
     methods: {
+      // Image Loader
       loadImage(path) {
         return require('../../assets/images/' + path);
       },
-
+      
+      // Fetch Data from API
       fetchData() {
-        this.$http.get("/billing")
+        // Reset billingIndex to "0" since fetchData is only called on refreshes
+        this.billingIndex = 0;
+        // Call API with GET request
+        this.$http.get('/billing')
           .then(function(res){
-          console.log(res);
           this.billing = res.body;
-          console.log(this.billing.billingPeriods);
+          // Save out an array of available billing periods
+          this.periods = this.billing.billingPeriods;
           });
       },
-
+      
+      // Change Billing Period
       billingPeriod(step) {
-        var index = 0
-        
+        // When the user hits the beginning of the array, go to the end of the array.
         if (step + this.billingIndex < 0) {
-          console.log('cond 1');
-          this.billingIndex = 0
-          index = 0
+          this.billingIndex = this.periods.length;
         }
-        else if (step + this.billingIndex > this.billing.billingPeriods.length) {
-          console.log('cond 2');
-          this.billingIndex = this.billing.billingPeriods.length
-          index = this.billingIndex
+        // When the user hits the end of the array, fetch the very first record.
+        else if (step + this.billingIndex > this.periods.length) {
+          this.fetchData();
+          return;
         }
 
         else {
-          console.log('cond 3');
-          index += step;
           this.billingIndex += step;
-          console.log(this.billingIndex);
         }
-        
-        this.$http.post("/billing", this.billing.billingPeriods[index])
+        // Retrieve specific Billing Period
+        this.$http.post('/billing', this.periods[this.billingIndex])
           .then(function(res){
-          console.log('special fetch');
-          console.log(res);
-          this.billing = res.body
+          this.billing = res.body;
         });
 
       },
-
+      
+      // Print Page Command
       printPage() {
         window.print();
       }
@@ -192,7 +236,7 @@
     color: $active-grey;
     font-weight: $heading-weight;
 
-    @media screen and ("$phone-only-comp") {
+    @media screen and ('$phone-only-comp') {
       margin-bottom: 10px;
     }
   }
@@ -214,27 +258,34 @@
     border: 2px solid $zucora-blue;
     border-radius: 3px;
 
-    @media screen and ("$tablet-up-comp") {
+    @media screen and ('$tablet-up-comp') {
       width: 20%;
-    }
-
-    --nomargin {
-      margin-bottom: 0;
     }
 
     span {
       margin-left: $medium-spacing;
       font-size: 7vw;
 
-      @media screen and ("$tablet-up-comp") {
+      @media screen and ('$tablet-up-comp') {
         font-size: 1vw;
       }
     }
 
     .h3 {
-      @media screen and("$phone-only-comp") {
+      @media screen and('$phone-only-comp') {
         font-size: 7vw;
       }
+    }
+  }
+
+  .mdev-billing-control {
+    cursor: pointer;
+    transition: all, .3s;
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: $zucora-green;
     }
   }
 

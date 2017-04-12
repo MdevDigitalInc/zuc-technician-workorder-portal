@@ -63,20 +63,22 @@
         
         <span class="mdev-table-cell --side-modifier" aria-labeledby="serviceColumn">
         <!-- Serviced Component -->
-          <serviced-component @statusChanged="orders.serviceDate = $event" :servicedDate="orders.servicedDate" :orderId="orders.WorkOrderId"></serviced-component>
+          <serviced-component
+            @statusChanged="orders.serviceDate = $event"
+            :servicedDate="orders.servicedDate"
+            :orderId="orders.WorkOrderId"></serviced-component>
         </span>
 
         <span class="mdev-table-cell --side-modifier" aria-labeledby="statusColumn">
         <!-- Unreachable Component -->
-        <unreachable-component :orderId="orders.WorkOrderId" :unreachable="orders.unreachable"></unreachable-component>
+        <unreachable-component
+          :orderId="orders.WorkOrderId"
+          :unreachable="orders.unreachable"></unreachable-component>
         </span>
         
         <span class="mdev-table-cell --top-modifier smallColumn" aria-labeledby="statusColumn">
           <router-link class="info-icon" :to="{path:'/dashboard/workorder/' + orders.workOrderId}">
           <i class="fa fa-fw fa-info"></i>
-            <!-- Temporary
-            <i class="mdev-icon --rounded-icon --size-l --info-icon"></i>
-            -->
           </router-link>
         </span>
 
@@ -94,6 +96,7 @@
   export default {
     name: "workOrderList",
 
+    // Instance Data Storage
     data: function (){
       return{
         // Header Titles for view. Can be replaced with props.
@@ -144,17 +147,18 @@
       };
     },
     
-    // Call DataFetch on Load
+    // Call fetchData() To retrieve information from API
     created: function(){
        this.fetchData();
     },
+
     // Watch for Route Changes and fetch data 
     watch: {
       '$route': 'fetchData'
     },
 
     methods: {
-      // Call API for Data
+      // Call API and Retrieve Data
       fetchData() {
         this.$http.get("/workorders/list")
           .then(function(res){

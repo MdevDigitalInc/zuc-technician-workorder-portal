@@ -11,9 +11,7 @@
         <a @click="goBack"
           v-if="showBack"
           class="mdev-back-btn flex flex-hor-between flex-vert-center">
-            <!-- Temporary 
-            <i class="mdev-icon --size-s --back-icon"></i>
-            -->
+            
             <i class="fa fa-fw fa-chevron-left"></i>
             {{ $t('general.back')}}
         </a>

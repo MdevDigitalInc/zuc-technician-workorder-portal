@@ -20,10 +20,8 @@ import Validate from './plugins/validate.js';
 
 // Configure I18n Internationalization Locales
 import en from './locales/en.js';
-import pt from './locales/pt.js';
 const locales = {
-  en,
-  pt
+  en
 };
 
 // Initialize vue-resource | vue-router | vue-i18n
@@ -57,7 +55,6 @@ Object.keys(locales).forEach(function (lang) {
 
 // Set Global Intercept 
 Vue.http.interceptors.push( (request, next) => {
-  console.log(request);
   // To use when defining a single API that is not firebase
   if (request.url[0] === '/'){
     // Point Requests to API server
@@ -69,7 +66,6 @@ Vue.http.interceptors.push( (request, next) => {
     }
   }
   next( function(response){
-    console.log(response);
     if (response.status >= 400){
       alertify.error(response.body.error);
     }

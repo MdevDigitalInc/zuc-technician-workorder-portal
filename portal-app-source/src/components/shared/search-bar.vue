@@ -29,7 +29,7 @@ Global Main
   margin: 5px auto;
   width: 90%;
   position: relative;
-  padding: 10px 10px 10px 30px;
+  padding: 10px 30px 10px;
   background: $white;
   display: block;
   font-size: 2.6vw;
@@ -38,7 +38,7 @@ Global Main
   @media screen and ('$tablet-up-comp') {
     width: 100%;
     margin: 15px 0 0 0;
-    padding: 15px 15px 15px 40px;
+    padding: 15px 40px 15px;
     font-size: 1.6vw;
   }
 
@@ -58,7 +58,10 @@ Global Main
 }
 
 .--icon-layer {
+  /*Disabled because it was necessary for FontAwesome */
+  /*stylelint-disable*/
   font: normal normal normal 14px/1 FontAwesome;
+  /*stylelint-enable*/
   position: relative;
   &:before {
     content: "\f002";
