@@ -80,14 +80,10 @@
 
         //call Emit
         setTimeout(this.successEmit, 600);
-        console.log('called success');
       },
       successEmit() {
-        console.log('syccessEmitter');
         // emit to parent so it can eliminate row
         this.$emit('statusChanged', this.postData.servicedDate); 
-        console.log(this.postData.servicedDate);
-        console.log('EMITTED');
       }
 
     }
