@@ -20,7 +20,7 @@
       <div 
         v-for="orders in workOrders"
         class="mdev-table-row flex flex-start"
-        v-if="!orders.serviceDate">      
+        v-if="!orders.servicedDate">      
         
         <!-- Date Added -->
         <span class="mdev-table-cell" aria-labeledby="dateColumn">
@@ -64,9 +64,9 @@
         <span class="mdev-table-cell --side-modifier" aria-labeledby="serviceColumn">
         <!-- Serviced Component -->
           <serviced-component
-            @statusChanged="orders.serviceDate = $event"
+            @statusChanged="orders.servicedDate = $event"
             :servicedDate="orders.servicedDate"
-            :orderId="orders.WorkOrderId"></serviced-component>
+            :orderId="orders.workOrderId"></serviced-component>
         </span>
 
         <span class="mdev-table-cell --side-modifier" aria-labeledby="statusColumn">

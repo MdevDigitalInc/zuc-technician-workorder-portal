@@ -71,7 +71,7 @@
           this.$http.post("/auth/login", this.user)
             .then(function(res){
               // Store Token
-              this.$auth.setToken(res.body.token, Date.now() + 14400000);
+              this.$auth.setToken(res.body.token, Date.now() + 14400000, res.body.userId);
               // Redirect
               this.$router.push('/dashboard');
             });

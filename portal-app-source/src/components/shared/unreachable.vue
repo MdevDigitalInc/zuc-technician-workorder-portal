@@ -11,13 +11,30 @@
     props: ['unreachable', 'orderId'],
     data: function () {
       return {
-        status: ''
+        status: '',
+        postData: {
+          workOrderId: this.orderId,
+          serviced: false,
+          servicedDate: '',
+          unreachable: false
+        }
       };
     },
 
     methods: {
+      // Toggle Unreachable Status / API & UI
       unreachableToggle() {
-        this.status = !this.status; 
+        // Flip the boolean and send it to API.
+        this.postData.unreachable = !this.status;
+        
+        // Update Work Order Status
+        this.$http.put("/workorders/status", this.postData)
+          .then( function(res) {
+          // Only upon successful response, flip the UI
+          // We simply pass the same data that was sent to the API.
+          this.status = this.postData.unreachable;
+        });
+
       }
     }
   };
