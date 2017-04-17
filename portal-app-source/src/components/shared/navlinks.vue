@@ -5,7 +5,6 @@
       :to="link.route"
       class ="mdev-nav-link flex flex-hor-between flex-vert-center u-bold"
       active-class="--active" 
-      @click="link.method"
       :title="link.linkTitle" 
       aria-role="menuitem" 
       exact>
