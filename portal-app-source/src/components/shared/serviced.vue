@@ -26,15 +26,18 @@
         successClass: false,
 
         postData: {
-          workOrderId: this.orderId,
-          serviced: false,
-          servicedDate: '',
-          unreachable: false
+          workOrderId   : this.orderId,
+          serviced      : false,
+          servicedDate  : '',
+          unreachable   : false
         }
       };
     },
 
     created: function() {
+      // Set Today's date as the default value for all of the 
+      // "Serviced" toggle instances
+
       // Get Today's Date
       var today = new Date();
       var dd = today.getDate();

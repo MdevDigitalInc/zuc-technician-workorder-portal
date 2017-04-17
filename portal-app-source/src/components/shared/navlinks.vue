@@ -38,36 +38,36 @@
 
     data: function(){
       return{
-        showModal: false,
-        showShybarBool: false,
+        showModal       : false,
+        showShybarBool  : false,
         // Refer to routes.js file for available routes.
         links: [
           {
-            linkName: 'Work Orders',
-            linkTitle: 'Available Work Orders',
-            iconClass: '--workorder-icon',
-            iconFa: 'fa-file-text',
-            route: '/dashboard/list'
+            linkName    : 'Work Orders',
+            linkTitle   : 'Available Work Orders',
+            iconClass   : '--workorder-icon',
+            iconFa      : 'fa-file-text',
+            route       : '/dashboard/list'
           },
           {
-            linkName: 'Billing',
-            iconClass: '--billing-icon',
-            iconFa: 'fa-bar-chart',
-            linkTitle: 'Billing Report',
-            route: '/dashboard/billing'
+            linkName    : 'Billing',
+            iconClass   : '--billing-icon',
+            iconFa      : 'fa-bar-chart',
+            linkTitle   : 'Billing Report',
+            route       : '/dashboard/billing'
           }
         ],
         contact: {
-            linkName: 'Contact',
-            iconClass: '--contact-icon',
-            iconFa: 'fa-envelope',
-            linkTitle: 'Contact Information',
+            linkName    : 'Contact',
+            iconClass   : '--contact-icon',
+            iconFa      : 'fa-envelope',
+            linkTitle   : 'Contact Information',
           },
         user: {
-            linkName: 'User',
-            iconClass: '--user-icon',
-            iconFa: 'fa-user',
-            linkTitle: 'User Menu',
+            linkName    : 'User',
+            iconClass   : '--user-icon',
+            iconFa      : 'fa-user',
+            linkTitle   : 'User Menu',
           }
       };
     },

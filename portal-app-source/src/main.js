@@ -2,24 +2,25 @@
 // Author: Lucas Moreira - l.moreira@live.ca
 
 // [ Vue.js ] -------------------------------------------
-import Vue from 'vue';
-import VueI18n from 'vue-i18n';
-import VueResource from 'vue-resource';
-import VueRouter from 'vue-router';
-import App from './App.vue';
+import Vue          from 'vue';
+import VueI18n      from 'vue-i18n';
+import VueResource  from 'vue-resource';
+import VueRouter    from 'vue-router';
+import App          from './App.vue';
 
 // Import Routes & Central Stores
-import { routes  } from './routes.js';
+import { routes  }  from './routes.js';
 //import store from './store/store.js';
 
 // Import Auth Plugin
-import Auth from './plugins/auth.js';
-import Validate from './plugins/validate.js';
+import Auth         from './plugins/auth.js';
+import Validate     from './plugins/validate.js';
 
 // [ i18n - Internationalization ] ----------------------
 
 // Configure I18n Internationalization Locales
 import en from './locales/en.js';
+
 const locales = {
   en
 };

@@ -13,10 +13,10 @@
       return {
         status: '',
         postData: {
-          workOrderId: this.orderId,
-          serviced: false,
-          servicedDate: '',
-          unreachable: false
+          workOrderId   : this.orderId,
+          serviced      : false,
+          servicedDate  : '',
+          unreachable   : false
         }
       };
     },

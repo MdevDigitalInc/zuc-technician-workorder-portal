@@ -48,11 +48,11 @@
     data: function() {
       return{
         user:{
-          oldPwd         : "",
-          newPwd         : "",
+          oldPwd  : "",
+          newPwd  : "",
         },
         // For Comparison Only, not sent to API
-        newPasswordConfirm    : ""
+        newPasswordConfirm  : ""
       };
     },
 
@@ -90,6 +90,4 @@
   };
 </script>
 
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>

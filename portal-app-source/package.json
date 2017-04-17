@@ -1,6 +1,6 @@
 {
-  "name": "blackmesa-vue-base",
-  "description": "A lightweight - fast deploy - vue.js front-end framework that can be appended to any backend.",
+  "name": "zucora-tech-portal",
+  "description": "Vue.js Portal for Zucora's network of technicians",
   "version": "1.0.0",
   "author": "Lucas Moreira <l.moreira@Live.ca>",
   "private": true,

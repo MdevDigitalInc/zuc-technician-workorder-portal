@@ -39,11 +39,11 @@
     data: function(){
       return{
         // Refer to routes.js file for available routes.
-        homeLink: '/',
-        homeTitle: 'Home',
-        homeBrand: 'zucora-white.svg',
-        homeBrandReverse: 'zucora-black.svg',
-        showBack: false
+        homeLink          : '/',
+        homeTitle         : 'Home',
+        homeBrand         : 'zucora-white.svg',
+        homeBrandReverse  : 'zucora-black.svg',
+        showBack          : false
       };
     },
 

@@ -1,17 +1,3 @@
-// BlackMesa - Vue Base App 
-// Webpack 2 Configuration file
-// -----------------------------------------
-// Lucas Moreira - l.moreira@live.ca
-// -----------------------------------------
-//
-// TODO ------------------------------------
-//
-// 2- Setup DB
-// 3- Setup Authentication
-// ----------------------------------------
-//
-// CRITICAL TODO - DEPLOYMENT ------------
-//
 // 1- Server MUST be setup to serve [ index.html ]
 // on all requests and allow Vue to route.
 

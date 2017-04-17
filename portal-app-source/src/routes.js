@@ -1,14 +1,14 @@
 // Import Parent Compontents
-import Dashboard from './components/parent-templates/dashboard.vue';
-import Auth from './components/auth/Authentication.vue';
-import Login from './components/auth/Login.vue';
-import Register from './components/auth/Register.vue';
-import Reset from './components/auth/Reset.vue';
-import ChangePwd from './components/auth/ChangePWD.vue';
-import WorkOrderList from './components/modules/work-order-list.vue';
-import WorkOrderDetail from './components/modules/work-order-details.vue';
-import BillingView from './components/modules/billing.vue';
-import ErrorComponent from './components/parent-templates/errorpage.vue';
+import Dashboard        from './components/parent-templates/dashboard.vue';
+import Auth             from './components/auth/Authentication.vue';
+import Login            from './components/auth/Login.vue';
+import Register         from './components/auth/Register.vue';
+import Reset            from './components/auth/Reset.vue';
+import ChangePwd        from './components/auth/ChangePWD.vue';
+import WorkOrderList    from './components/modules/work-order-list.vue';
+import WorkOrderDetail  from './components/modules/work-order-details.vue';
+import BillingView      from './components/modules/billing.vue';
+import ErrorComponent   from './components/parent-templates/errorpage.vue';
 
 // Export routes as named constant array.
 // Routes consist of desired path + bound parent component

@@ -90,7 +90,7 @@
 <script>
 
   //Local Component Registration
-  import servicedComponent from '../shared/serviced.vue';
+  import servicedComponent    from '../shared/serviced.vue';
   import unreachableComponent from '../shared/unreachable.vue';
 
   export default {
@@ -107,38 +107,38 @@
             special : false
           },
           {
-            title: "Customer Name:",
+            title   : "Customer Name:",
             ariaId  : "customerColumn",
             special : false
           },
           {
-            title: "City:",
-            ariaId: "cityColumn",
+            title   : "City:",
+            ariaId  : "cityColumn",
             special : false
           },
           {
-            title: "Address:",
-            ariaId: "addressColumn",
+            title   : "Address:",
+            ariaId  : "addressColumn",
             special : false
           },
           {
-            title: "Phone:",
-            ariaId: "phoneColumn",
+            title   : "Phone:",
+            ariaId  : "phoneColumn",
             special : false
           },
           {
-            title: "Serviced Date:",
-            ariaId: "serviceColumn",
+            title   : "Serviced Date:",
+            ariaId  : "serviceColumn",
             special : false
           },
           {
-            title: "Status:",
-            ariaId: "statusColumn",
+            title   : "Status:",
+            ariaId  : "statusColumn",
             special : false
           },          
           {
-            title: "Info:",
-            ariaId: "infoColumn",
+            title   : "Info:",
+            ariaId  : "infoColumn",
             special : true
           }
         ],
@@ -168,7 +168,7 @@
     },
     
     components: {
-      'serviced-component'  : servicedComponent,
+      'serviced-component'    : servicedComponent,
       'unreachable-component' : unreachableComponent
     }
   };

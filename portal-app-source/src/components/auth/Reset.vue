@@ -16,7 +16,7 @@
         tab-index="2"
         @click="reset"
         aria-label="Reset Password"
-        class="mdev-base-btn mdev-action-btn"> {{ $t("auth.reset.action") }} </button>
+        class="mdev-base-btn mdev-action-btn">{{ $t("auth.reset.action") }}</button>
     </div>
   </div> 
 </template>
