@@ -21,7 +21,7 @@
   import SearchComponent  from '../shared/search-bar.vue';
   
   export default{
-    name: "404Page",
+    name: "Page404",
     
     // Instance Data Storage
     data: function () {

@@ -51,28 +51,6 @@ Object.keys(locales).forEach(function (lang) {
 });
 //-----------------------------------------------[ i18n ]
 
-// [ Vue Resource ] ------------------------------------
-
-// Set Global Intercept 
-Vue.http.interceptors.push( (request, next) => {
-  // To use when defining a single API that is not firebase
-  if (request.url[0] === '/'){
-    // Point Requests to API server
-    request.url = "http://getpaid.zucora.com:5003" + request.url;
-    // Attach header
-    var token = Vue.auth.getToken();
-    if (token) {
-      request.headers.set('Authorization', token);
-    }
-  }
-  next( function(response){
-    if (response.status >= 400){
-      alertify.error(response.body.error);
-    }
-  }); 
-});
-//--------------------------------------[ vue-resource ]
-
 // [ Vue-Router ] ------------------------------------
 // --------------------------------
 // Server must be set to AWLAYWAS return
@@ -94,6 +72,41 @@ const router = new VueRouter ({
     }
   }
 });
+
+// [ Vue Resource ] ------------------------------------
+
+// Set Global HTTP Request Intercept 
+Vue.http.interceptors.push( (request, next) => {
+  
+  // All paths starting with '/' will default to API server
+  if (request.url[0] === '/'){
+    // Point Requests to API server
+    request.url = "http://getpaid.zucora.com:5003" + request.url;
+    // Get Token and attach to header
+    var token = Vue.auth.getToken();
+    if (token) {
+      request.headers.set('Authorization', token);
+    }
+  }
+  next( function(response){
+    // If server responds with Error Code display error
+    if (response.status >= 400){
+      alertify.error(response.body.error);
+      
+      // If Server responds with invalid session token
+      if (response.status === 422) {
+        // Remove current token storage
+        localStorage.removeItem('authToken');
+        localStorage.removeItem('authTokenExpiration');
+        alertify.error("We're sorry but your session expired. Please Login to resume.");
+        //location.reload();
+        router.push('/');
+      }
+    }
+  }); 
+});
+//--------------------------------------[ vue-resource ]
+
 
 // Navigation Guards
 router.beforeEach(function( to, from, next){
