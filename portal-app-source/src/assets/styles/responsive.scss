@@ -3,11 +3,11 @@
 /-------------------------------------*/
 
 /* Breakpoint Definitions */
-$phone-range:   (0, 640px);
-$tablet-range:  (641px, 1024px);
-$laptop-range:   (1024px, 1440px);
+$phone-range  :   (0, 640px);
+$tablet-range :  (641px, 1024px);
+$laptop-range :   (1024px, 1440px);
 $desktop-range:  (1441px, 1920px); 
-$xl-range: (1921px);       
+$xl-range     : (1921px);       
 
 /* Functions */
 @function lower-bound($range) {
@@ -28,24 +28,24 @@ $xl-range: (1921px);
 
 /* Disabled because I need the quotes for media queries to be valid */
 /* stylelint-disable */
-$screen:       "only screen" !default;
-$landscape:    "#{$screen} and (orientation: landscape)" !default;
-$portrait:     "#{$screen} and (orientation: portrait)" !default;
-$phone-up:     $screen !default;
-$phone-only:   "#{$screen} and (max-width: #{upper-bound($phone-range)})" !default;
+$screen:            "only screen" !default;
+$landscape:         "#{$screen} and (orientation: landscape)" !default;
+$portrait:          "#{$screen} and (orientation: portrait)" !default;
+$phone-up:          $screen !default;
+$phone-only:        "#{$screen} and (max-width: #{upper-bound($phone-range)})" !default;
 $phone-only-comp:   "max-width: #{upper-bound($phone-range)}" !default;
-$tablet-up:    "#{$screen} and (min-width:#{lower-bound($tablet-range)})" !default;
+$tablet-up:         "#{$screen} and (min-width:#{lower-bound($tablet-range)})" !default;
 $tablet-up-comp:    "min-width:#{lower-bound($tablet-range)}" !default;
-$tablet-only:  "#{$screen} and (min-width:#{lower-bound($tablet-range)}) and (max-width:#{upper-bound($tablet-range)})" !default;
+$tablet-only:       "#{$screen} and (min-width:#{lower-bound($tablet-range)}) and (max-width:#{upper-bound($tablet-range)})" !default;
 $tablet-only-comp:  "min-width:#{lower-bound($tablet-range)}) and (max-width:#{upper-bound($tablet-range)}" !default;
-$laptop-up:     "#{$screen} and (min-width:#{lower-bound($laptop-range)})" !default;
-$laptop-up-comp:     "min-width:#{lower-bound($laptop-range)}" !default;
-$laptop-only:   "#{$screen} and (min-width:#{lower-bound($laptop-range)}) and (max-width:#{upper-bound($desktop-range)})" !default;
-$laptop-only-comp:   "min-width:#{lower-bound($laptop-range)}) and (max-width:#{upper-bound($desktop-range)}" !default;
-$desktop-up:    "#{$screen} and (min-width:#{lower-bound($desktop-range)})" !default;
-$desktop-up-comp:    "min-width:#{lower-bound($desktop-range)}" !default;
-$desktop-only:  "#{$screen} and (min-width:#{lower-bound($desktop-range)}) and (max-width:#{upper-bound($desktop-range)})" !default;
-$desktop-only-comp:  "min-width:#{lower-bound($desktop-range)}) and (max-width:#{upper-bound($desktop-range)}" !default;
-$xl-up:   "#{$screen} and (min-width:#{lower-bound($xl-range)})" !default;
-$xl-up-comp:   "min-width:#{lower-bound($xl-range)}" !default;
+$laptop-up:         "#{$screen} and (min-width:#{lower-bound($laptop-range)})" !default;
+$laptop-up-comp:    "min-width:#{lower-bound($laptop-range)}" !default;
+$laptop-only:       "#{$screen} and (min-width:#{lower-bound($laptop-range)}) and (max-width:#{upper-bound($desktop-range)})" !default;
+$laptop-only-comp:  "min-width:#{lower-bound($laptop-range)}) and (max-width:#{upper-bound($desktop-range)}" !default;
+$desktop-up:        "#{$screen} and (min-width:#{lower-bound($desktop-range)})" !default;
+$desktop-up-comp:   "min-width:#{lower-bound($desktop-range)}" !default;
+$desktop-only:      "#{$screen} and (min-width:#{lower-bound($desktop-range)}) and (max-width:#{upper-bound($desktop-range)})" !default;
+$desktop-only-comp: "min-width:#{lower-bound($desktop-range)}) and (max-width:#{upper-bound($desktop-range)}" !default;
+$xl-up:             "#{$screen} and (min-width:#{lower-bound($xl-range)})" !default;
+$xl-up-comp:        "min-width:#{lower-bound($xl-range)}" !default;
 /* stylelint-enable */

@@ -6,9 +6,9 @@
     <input v-if="!hideInput"
       @keyup.enter="statusChange"
       type="text" placeholder="DD/MM/YYYY"
-      v-model="date">
+      v-model="postData.servicedDate">
     
-    <span class="--success-active" v-if="hideInput"> SUCCESS </span>
+    <span class="--success-active" v-if="hideInput"> SERVICED </span>
   </div>
 </template>
 
@@ -23,22 +23,57 @@
         date: '',
         showSpinner: false,
         hideInput: false,
-        successClass: false
+        successClass: false,
+
+        postData: {
+          workOrderId   : this.orderId,
+          serviced      : false,
+          servicedDate  : '',
+          unreachable   : false
+        }
       };
     },
 
+    created: function() {
+      // Set Today's date as the default value for all of the 
+      // "Serviced" toggle instances
+
+      // Get Today's Date
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth()+1;
+      var yyyy = today.getFullYear();
+
+      if (dd < 10) {
+        dd = '0' + dd;
+      }
+      if (mm < 10) {
+        mm = '0' + mm;
+      }
+      
+      // Format it as DD/MM/YYYY
+      var today = dd + '/' + mm + '/' + yyyy;
+
+      // Assign Today's Date as Default
+      this.postData.servicedDate = today;
+    },
+
     methods: {
+      // Update Serviced Status
       statusChange() {
         // Validate Date
-        if ( this.$validate.validateDate(this.date, this.$t("validation.errors.date"))) {
+        if ( this.$validate.validateDate(this.postData.servicedDate, this.$t("validation.errors.date"))) {
             // Start Spinner
             this.showSpinner = true;
+            // Set Object
+            this.postData.serviced = true;
+            this.postData.unreachable = false;
             //Submit & Emit Event
-            //TODO - Add Event Submit via $http
-
-            // Once Success Call function to reset
-            setTimeout(this.successDisplay,2000);
-        }
+            this.$http.put("/workorders/status", this.postData)
+              .then( function(res) {
+                this.successDisplay();
+            });
+         }
       },
       successDisplay() {
         // Show User Visually
@@ -47,11 +82,11 @@
         this.successClass = true;
 
         //call Emit
-        setTimeout(this.successEmit, 1000);
+        setTimeout(this.successEmit, 600);
       },
       successEmit() {
         // emit to parent so it can eliminate row
-        this.$emit('statusChanged', this.date); 
+        this.$emit('statusChanged', this.postData.servicedDate); 
       }
 
     }

@@ -59,7 +59,7 @@ export default {
       email: "Please provide a valid Email address.",
       match: "New Passwords do not match.",
       pwdTooShort: "Passwords need a minimum of 6 characters.",
-      date: "Please ensure the date is in the correct format MM/DD/YYY."
+      date: "Please ensure the date is in the correct format MM/DD/YYYY."
     },
     messages: {
       success: { 

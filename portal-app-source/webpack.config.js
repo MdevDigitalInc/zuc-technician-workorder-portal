@@ -1,17 +1,3 @@
-// BlackMesa - Vue Base App 
-// Webpack 2 Configuration file
-// -----------------------------------------
-// Lucas Moreira - l.moreira@live.ca
-// -----------------------------------------
-//
-// TODO ------------------------------------
-//
-// 2- Setup DB
-// 3- Setup Authentication
-// ----------------------------------------
-//
-// CRITICAL TODO - DEPLOYMENT ------------
-//
 // 1- Server MUST be setup to serve [ index.html ]
 // on all requests and allow Vue to route.
 
@@ -78,47 +64,34 @@ module.exports = {
       // Image Processing
       {
         test: /\.(png|jpg|jpeg|gif|svg)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: 'assets/images/[name].[ext]?[hash]'
-            }
-          },
-          // Image Compression
-          {
-            loader: 'image-webpack-loader',
-            query: {
+        loaders: [ 'file-loader?context=src/images&name=images/[path][name].[ext]', {
+          loader: 'image-webpack-loader',
+          query: {
+            mozjpeg: {
               progressive: true,
-              optimizationLevel: 9,
+              quality: 95
+            },
+            gifsicle: {
               interlaced: false,
-              // .png
-              pngquant: {
-                quality: '85-90',
-                speed: 4
-              },
-              // .jpg/jpeg
-              mozjpeg: {
-                quality: 90
-              },
-              // .svg
-              svgo: {
-                plugins: [
-                  {
-                    removeViewBox: false
-                  },
-                  {
-                    removeEmptyAttrs: false
-                  }
-                ]
-              },
-              gifsicle: {
-                interlaced: false,
-                optimizationLevel: 2
-              }
+              optimizationLevel: 2
+            },
+            pngquant: {
+              quality: '85-90',
+              speed: 4
+            },
+            svgo: {
+              plugins: [
+                {
+                  removeViewBox: false
+                },
+                {
+                  removeEmptyAttrs: false
+                }
+              ]
             }
           }
-        ]
+        
+        }]
       }
     ]
   },

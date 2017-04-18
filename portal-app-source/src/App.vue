@@ -17,21 +17,21 @@
 <script>
   
   //Local Component registration
-  import MainNavigation from './components/shared/navigation.vue';
+  import MainNavigation   from './components/shared/navigation.vue';
   import MobileNavigation from './components/shared/mobile-navigation.vue';
-  import MainFooter from './components/shared/footer.vue';
-  import ModalPanel from './components/shared/modal.vue';
-  import ShyBar from './components/shared/shybar.vue';
+  import MainFooter       from './components/shared/footer.vue';
+  import ModalPanel       from './components/shared/modal.vue';
+  import ShyBar           from './components/shared/shybar.vue';
   
   export default{
     name: 'AppMain',
 
     data: function() {
       return{
-        showNav: true,
-        showModal: false,
-        showShybar: false,
-        pwdOrContact: true
+        showNav       : true,
+        showModal     : false,
+        showShybar    : false,
+        pwdOrContact  : true
       };
     },
     

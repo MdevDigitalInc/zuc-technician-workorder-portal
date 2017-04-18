@@ -51,7 +51,7 @@
 
 <script>
   export default {
-    name: "RegComponent",
+    name: "RegisterComponent",
 
     // Instance Data Storage
     data: function(){
@@ -94,6 +94,4 @@
   };
 </script>
 
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>
