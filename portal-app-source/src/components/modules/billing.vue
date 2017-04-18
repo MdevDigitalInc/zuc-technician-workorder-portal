@@ -128,10 +128,10 @@
     // Instance Data Storage
     data: function() {
       return{
-        mainBrand: 'zucora-white.svg',
-        billingIndex: 0,
-        billing: null,
-        periods: null
+        mainBrand     : 'zucora-white.svg',
+        billingIndex  : 0,
+        billing       : null,
+        periods       : null
       };
     },
     
@@ -146,7 +146,7 @@
     },
 
     methods: {
-      // Image Loader
+      // Image Loader For Webpack
       loadImage(path) {
         return require('../../assets/images/' + path);
       },
@@ -164,7 +164,14 @@
           });
       },
       
-      // Change Billing Period
+      // [ Change Billing Period ] -------------------------------------------------
+      // This function is designed to take the array of available billing periods given by
+      // the API and save it in memory.
+      // It then loops through the array until it reaches the end, at which point it resets 
+      // the array by calling the API to retrieve any updates.
+      //
+      // Note: The action for saving out the array is contained in the fetchData() method.
+
       billingPeriod(step) {
         // When the user hits the beginning of the array, go to the end of the array.
         if (step + this.billingIndex < 0) {
@@ -175,11 +182,11 @@
           this.fetchData();
           return;
         }
-
+        // If the user still hasn't hit an endpoint just go to the next item in the array.
         else {
           this.billingIndex += step;
         }
-        // Retrieve specific Billing Period
+        // Retrieve specific Billing Period leaving this.periods array intact
         this.$http.post('/billing', this.periods[this.billingIndex])
           .then(function(res){
           this.billing = res.body;

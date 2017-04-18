@@ -174,7 +174,7 @@
 <script>
   
   //Local Component Registration
-  import servicedComponent from '../shared/serviced.vue';
+  import servicedComponent    from '../shared/serviced.vue';
   import unreachableComponent from '../shared/unreachable.vue';
 
   export default {
@@ -183,8 +183,8 @@
     // Instance Data Storage
     data: function() {
       return{
-        orderId: this.$route.params.orderId,
-        orderDetails: null
+        orderId       : this.$route.params.orderId,
+        orderDetails  : null
       };
     },
     
@@ -220,7 +220,7 @@
     },
  
     components: {
-      'serviced-component'  : servicedComponent,
+      'serviced-component'    : servicedComponent,
       'unreachable-component' : unreachableComponent
     }
   };

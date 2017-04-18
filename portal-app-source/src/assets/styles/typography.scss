@@ -29,34 +29,34 @@ h6,.h6, {
 
 // Responsive Font Size Maps
 $p-font-sizes: (
-  null  : 3vw,
-  $tablet-up : 1.3vw,
-  $desktop-up: 1vw
+  null        : 3vw,
+  $tablet-up  : 1.3vw,
+  $desktop-up : 1vw
 );
 
 $h1-font-sizes: (
-  null  : 4.5vw,
-  $tablet-up : 1.5vw,
-  $desktop-up: 2vw
+  null        : 4.5vw,
+  $tablet-up  : 1.5vw,
+  $desktop-up : 2vw
 );
 
 $h2-font-sizes: (
-  null  : 30px,
-  $tablet-up : 32px,
-  $desktop-up: 1.5vw
+  null        : 30px,
+  $tablet-up  : 32px,
+  $desktop-up : 1.5vw
 );
 
 $h3-font-sizes: (
-  null  : 5.1vw,
-  $tablet-up : 2.1vw,
-  $laptop-up : 1.4vw,
-  $desktop-up: 1.1vw
+  null        : 5.1vw,
+  $tablet-up  : 2.1vw,
+  $laptop-up  : 1.4vw,
+  $desktop-up : 1.1vw
 );
 
 $h4-font-sizes: (
-  null  : 3.2%,
-  $tablet-up : 1.6%,
-  $desktop-up: .8vw
+  null        : 3.2%,
+  $tablet-up  : 1.6%,
+  $desktop-up : .8vw
 );
 
 $h5-font-sizes: (
@@ -69,25 +69,25 @@ $h6-font-sizes: (
 
 // Links
 $link-font-sizes: (
-  null  : 3vw,
-  $tablet-up : 1.5vw,
-  $laptop-up : 1vw,
-  $desktop-up: .8vw
+  null        : 3vw,
+  $tablet-up  : 1.5vw,
+  $laptop-up  : 1vw,
+  $desktop-up : .8vw
 );
 
 $footer-font-sizes: (
-  null  : 2vw,
-  $tablet-up : 1vw,
-  $laptop-up : .8vw,
-  $desktop-up: .7vw
+  null        : 2vw,
+  $tablet-up  : 1vw,
+  $laptop-up  : .8vw,
+  $desktop-up : .7vw
 );
 
 // Table Header
 $table-header-font-sizes: (
-  null  : 4vw,
-  $tablet-up : 1.2vw,
-  $laptop-up : .8vw,
-  $desktop-up: .7vw
+  null        : 4vw,
+  $tablet-up  : 1.2vw,
+  $laptop-up  : .8vw,
+  $desktop-up : .7vw
 );
 // Responsive Font-Size Mixing (Function Only)
 @mixin font-size($fs-map) {

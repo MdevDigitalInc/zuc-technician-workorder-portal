@@ -11,15 +11,17 @@ var AuthPlugin = {
   // for ease of use and maintenance.
 
   // Save Token to Browser Local Storage
-  setToken: function (token, expiration){
+  setToken: function (token, expiration, userID){
     localStorage.setItem('authToken', token);
     localStorage.setItem('authTokenExpiration', expiration);
+    localStorage.setItem('userID', userID);
   },
   
   // Destroy Stored Token
   destroyToken: function() {
     localStorage.removeItem('authToken');
     localStorage.removeItem('authTokenExpiration');
+    localStorage.removeItem('userID');
   },
 
   // Retrieve Token from Storage

@@ -20,7 +20,7 @@
       <div 
         v-for="orders in workOrders"
         class="mdev-table-row flex flex-start"
-        v-if="!orders.serviceDate">      
+        v-if="!orders.servicedDate">      
         
         <!-- Date Added -->
         <span class="mdev-table-cell" aria-labeledby="dateColumn">
@@ -64,9 +64,9 @@
         <span class="mdev-table-cell --side-modifier" aria-labeledby="serviceColumn">
         <!-- Serviced Component -->
           <serviced-component
-            @statusChanged="orders.serviceDate = $event"
+            @statusChanged="orders.servicedDate = $event"
             :servicedDate="orders.servicedDate"
-            :orderId="orders.WorkOrderId"></serviced-component>
+            :orderId="orders.workOrderId"></serviced-component>
         </span>
 
         <span class="mdev-table-cell --side-modifier" aria-labeledby="statusColumn">
@@ -90,7 +90,7 @@
 <script>
 
   //Local Component Registration
-  import servicedComponent from '../shared/serviced.vue';
+  import servicedComponent    from '../shared/serviced.vue';
   import unreachableComponent from '../shared/unreachable.vue';
 
   export default {
@@ -107,38 +107,38 @@
             special : false
           },
           {
-            title: "Customer Name:",
+            title   : "Customer Name:",
             ariaId  : "customerColumn",
             special : false
           },
           {
-            title: "City:",
-            ariaId: "cityColumn",
+            title   : "City:",
+            ariaId  : "cityColumn",
             special : false
           },
           {
-            title: "Address:",
-            ariaId: "addressColumn",
+            title   : "Address:",
+            ariaId  : "addressColumn",
             special : false
           },
           {
-            title: "Phone:",
-            ariaId: "phoneColumn",
+            title   : "Phone:",
+            ariaId  : "phoneColumn",
             special : false
           },
           {
-            title: "Serviced Date:",
-            ariaId: "serviceColumn",
+            title   : "Serviced Date:",
+            ariaId  : "serviceColumn",
             special : false
           },
           {
-            title: "Status:",
-            ariaId: "statusColumn",
+            title   : "Status:",
+            ariaId  : "statusColumn",
             special : false
           },          
           {
-            title: "Info:",
-            ariaId: "infoColumn",
+            title   : "Info:",
+            ariaId  : "infoColumn",
             special : true
           }
         ],
@@ -168,7 +168,7 @@
     },
     
     components: {
-      'serviced-component'  : servicedComponent,
+      'serviced-component'    : servicedComponent,
       'unreachable-component' : unreachableComponent
     }
   };
