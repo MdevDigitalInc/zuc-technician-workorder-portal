@@ -1,6 +1,6 @@
 <template>
   <!-- Main Container -->
-  <section class="mdev-main-content-frame" aria-labelledby="billing-title">
+  <section v-if="billing" class="mdev-main-content-frame" aria-labelledby="billing-title">
     
     <!-- Header [FLEX] -->
     <div class="mdev-frame-header flex flex-hor-start flex-hor-between" aria-labelledby="billingTitle">

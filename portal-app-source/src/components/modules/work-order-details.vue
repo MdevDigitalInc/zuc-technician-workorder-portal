@@ -1,6 +1,6 @@
 <template>
   <!-- Main Container -->
-  <section class="mdev-main-content-frame" aria-labelledby="details-title">
+  <section v-if="orderDetails" class="mdev-main-content-frame" aria-labelledby="details-title">
     <!-- Header [FLEX] -->
     <div class="mdev-frame-header flex flex-hor-start flex-hor-between">
       <span id="details-title">{{ $t("orderDetails.title") }} {{ orderId }}</span>
@@ -59,9 +59,15 @@
                   <!-- Actions -->
         <div class="mdev-info-actions flex flex-hor-between flex-vert-stretch" aria-label="Actions and Status">
           <!-- Serviced Component -->
-          <serviced-component :servicedDate="orderDetails.items[0].date_of_delivery" :orderId="orderId"></serviced-component> 
+          <serviced-component
+            v-if="orderDetails.plans.length > 0"
+            :servicedDate="orderDetails.plans[0].date_of_delivery"
+            :orderId="orderId"></serviced-component> 
           <!-- Unreachable Component -->
-          <unreachable-component :orderId="orderId" :unreachable="orderDetails.items[0].wod_status"></unreachable-component>
+          <unreachable-component 
+            v-if="orderDetails.plans.length > 0"
+            :orderId="orderId" 
+            :unreachable="orderDetails.plans[0].wod_status"></unreachable-component>
         </div>
       </div>
       </div>
@@ -205,6 +211,8 @@
         this.$http.get("/workorders/" + this.orderId)
           .then(function(res){
           this.orderDetails = res.body;
+          console.log(res);
+          console.log(this.orderDetails);
           });
       },
 

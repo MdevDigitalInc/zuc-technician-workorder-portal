@@ -1,6 +1,6 @@
 <template>
   <!-- Main Container -->
-  <section class="mdev-main-content-frame" aria-labeledby="dashboard-title">
+  <section v-if="workOrders" class="mdev-main-content-frame" aria-labeledby="dashboard-title">
     <!-- Header [FLEX] -->
     <div class="mdev-frame-header flex flex-start flex-hor-between">
       <span id="dashboard-title">{{ $t("orderList.title") }}</span>
