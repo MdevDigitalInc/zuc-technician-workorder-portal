@@ -21,7 +21,7 @@
     data: function () {
       return {
         loading: true
-      }
+      };
     },
     components: {
       'search-component'  : SearchComponent
