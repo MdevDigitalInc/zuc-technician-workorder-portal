@@ -1,6 +1,6 @@
 <template>
   <!-- Main Container -->
-  <section class="mdev-main-content-frame" aria-labelledby="billing-title">
+  <section v-if="billing" class="mdev-main-content-frame" aria-labelledby="billing-title">
     
     <!-- Header [FLEX] -->
     <div class="mdev-frame-header flex flex-hor-start flex-hor-between" aria-labelledby="billingTitle">
@@ -131,7 +131,8 @@
         mainBrand     : 'zucora-white.svg',
         billingIndex  : 0,
         billing       : null,
-        periods       : null
+        periods       : null,
+        loading       : true
       };
     },
     
@@ -142,7 +143,8 @@
 
     // Watch for Route Changes and call fetchData() 
     watch: {
-      '$route': 'fetchData'
+      '$route': 'fetchData',
+      'loading' : 'loadAnimDispatcher'
     },
 
     methods: {
@@ -153,6 +155,8 @@
       
       // Fetch Data from API
       fetchData() {
+        // Set Loading to True
+        this.loading = true;
         // Reset billingIndex to "0" since fetchData is only called on refreshes
         this.billingIndex = 0;
         // Call API with GET request
@@ -161,6 +165,8 @@
           this.billing = res.body;
           // Save out an array of available billing periods
           this.periods = this.billing.billingPeriods;
+          // Set Loading to False
+          this.loading = false;
           });
       },
       
@@ -197,6 +203,10 @@
       // Print Page Command
       printPage() {
         window.print();
+      },
+      //Dispatch Loading Animation Update to parent
+      loadAnimDispatcher() {
+        this.$emit('loadingAnim', this.loading);
       }
     }
   };

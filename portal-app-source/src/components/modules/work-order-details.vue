@@ -1,6 +1,6 @@
 <template>
   <!-- Main Container -->
-  <section class="mdev-main-content-frame" aria-labelledby="details-title">
+  <section v-if="orderDetails" class="mdev-main-content-frame" aria-labelledby="details-title">
     <!-- Header [FLEX] -->
     <div class="mdev-frame-header flex flex-hor-start flex-hor-between">
       <span id="details-title">{{ $t("orderDetails.title") }} {{ orderId }}</span>
@@ -59,9 +59,15 @@
                   <!-- Actions -->
         <div class="mdev-info-actions flex flex-hor-between flex-vert-stretch" aria-label="Actions and Status">
           <!-- Serviced Component -->
-          <serviced-component :servicedDate="orderDetails.items[0].date_of_delivery" :orderId="orderId"></serviced-component> 
+          <serviced-component
+            v-if="orderDetails.plans.length > 0"
+            :servicedDate="orderDetails.plans[0].date_of_delivery"
+            :orderId="orderId"></serviced-component> 
           <!-- Unreachable Component -->
-          <unreachable-component :orderId="orderId" :unreachable="orderDetails.items[0].wod_status"></unreachable-component>
+          <unreachable-component 
+            v-if="orderDetails.plans.length > 0"
+            :orderId="orderId" 
+            :unreachable="orderDetails.plans[0].wod_status"></unreachable-component>
         </div>
       </div>
       </div>
@@ -97,8 +103,8 @@
             </div>
           </div>
         <!-- Plans -->
-        <h3 class="--spacer"> {{ $t("orderDetails.plans") }} </h3>
-        <div class="mdev-light-table">
+        <h3 class="--spacer" v-if="orderDetails.plans.length > 0"> {{ $t("orderDetails.plans") }} </h3>
+        <div class="mdev-light-table" v-if="orderDetails.plans.length > 0">
           <div class="mdev-light-table-head flex flex-hor-start flex-hor-between">
             <span class="mdev-light-cell" id="head-1">{{ $t("orderDetails.table.quantity") }}</span>
             <span  class="mdev-light-cell" id="head-2">{{ $t("orderDetails.table.sku") }}</span>
@@ -125,8 +131,8 @@
           </div> 
         </div>
         <!-- Items -->
-        <h3 class="--spacer"> {{ $t("orderDetails.items") }} </h3>
-        <div class="mdev-light-table">
+        <h3 class="--spacer" v-if="orderDetails.items.length > 0"> {{ $t("orderDetails.items") }} </h3>
+        <div class="mdev-light-table" v-if="orderDetails.items.length > 0">
           <div class="mdev-light-table-head flex flex-hor-start flex-hor-between">
             <span class="mdev-light-cell" id="head-1">{{ $t("orderDetails.table.quantity") }}</span>
             <span  class="mdev-light-cell" id="head-2">{{ $t("orderDetails.table.sku") }}</span>
@@ -184,7 +190,8 @@
     data: function() {
       return{
         orderId       : this.$route.params.orderId,
-        orderDetails  : null
+        orderDetails  : null,
+        loading       : true
       };
     },
     
@@ -195,16 +202,22 @@
 
     // Watch for Route Changes and fetchData() 
     watch: {
-      '$route': 'fetchData'
+      '$route'  : 'fetchData',
+      'loading' : 'loadAnimDispatcher'
     },
 
     methods: {
 
       // Fetch API Data
       fetchData() {
+        // Set loading to True
+        this.loading = true;
+        // Call API
         this.$http.get("/workorders/" + this.orderId)
           .then(function(res){
           this.orderDetails = res.body;
+          // Set loading to False
+          this.loading = false;
           });
       },
 
@@ -216,6 +229,11 @@
       // Print Page Command
       printPage() {
         window.print();
+      },
+
+      //Dispatch Loading Animation Update to parent
+      loadAnimDispatcher() {
+        this.$emit('loadingAnim', this.loading);
       }
     },
  
