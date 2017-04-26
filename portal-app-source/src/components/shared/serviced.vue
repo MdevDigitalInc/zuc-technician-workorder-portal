@@ -3,16 +3,22 @@
     <i v-if="!showSpinner" class="fa fa-fw fa-calendar"></i>
     <i v-if="showSpinner" class="fa fa-circle-o-notch fa-spin fa-fw"></i>
     
-    <input v-if="!hideInput"
-      @keyup.enter="statusChange"
-      type="text" placeholder="DD/MM/YYYY"
-      v-model="postData.servicedDate">
+    <datepicker v-if="!hideInput"
+      placeholder="Select Date"
+      input-class="mdev-date-picker-input"
+      wrapper-class="mdev-date-picker"
+      @selected="statusChange"
+      :format="format"
+      :value="postData.servicedDate"> </datepicker>
     
     <span class="--success-active" v-if="hideInput"> SERVICED </span>
   </div>
 </template>
 
 <script>
+  // Date Picker
+  import Datepicker from 'vuejs-datepicker';
+  
   export default {
     name: 'ServicedComponent',
 
@@ -20,7 +26,7 @@
 
     data: function() {
       return {
-        date: '',
+        format: 'dd/MM/yyyy',
         showSpinner: false,
         hideInput: false,
         successClass: false,
@@ -28,52 +34,29 @@
         postData: {
           workOrderId   : this.orderId,
           serviced      : false,
-          servicedDate  : '',
+          servicedDate  : new Date(),
           unreachable   : false
         }
       };
     },
 
-    created: function() {
-      // Set Today's date as the default value for all of the 
-      // "Serviced" toggle instances
-
-      // Get Today's Date
-      var today = new Date();
-      var dd = today.getDate();
-      var mm = today.getMonth()+1;
-      var yyyy = today.getFullYear();
-
-      if (dd < 10) {
-        dd = '0' + dd;
-      }
-      if (mm < 10) {
-        mm = '0' + mm;
-      }
-      
-      // Format it as DD/MM/YYYY
-      var today = dd + '/' + mm + '/' + yyyy;
-
-      // Assign Today's Date as Default
-      this.postData.servicedDate = today;
-    },
-
     methods: {
+      console(thing) {
+        console.log(thing);
+        console.log(this.postData.servicedDate);
+      },
       // Update Serviced Status
       statusChange() {
-        // Validate Date
-        if ( this.$validate.validateDate(this.postData.servicedDate, this.$t("validation.errors.date"))) {
-            // Start Spinner
-            this.showSpinner = true;
-            // Set Object
-            this.postData.serviced = true;
-            this.postData.unreachable = false;
-            //Submit & Emit Event
-            this.$http.put("/workorders/status", this.postData)
-              .then( function(res) {
-                this.successDisplay();
-            });
-         }
+        // Start Spinner
+        this.showSpinner = true;
+        // Set Object
+        this.postData.serviced = true;
+        this.postData.unreachable = false;
+        //Submit & Emit Event
+        this.$http.put("/workorders/status", this.postData)
+          .then( function(res) {
+            this.successDisplay();
+        });
       },
       successDisplay() {
         // Show User Visually
@@ -82,18 +65,21 @@
         this.successClass = true;
 
         //call Emit
-        setTimeout(this.successEmit, 600);
+        setTimeout(this.successEmit, 1000);
       },
       successEmit() {
         // emit to parent so it can eliminate row
         this.$emit('statusChanged', this.postData.servicedDate); 
+        alertify.success("Order marked as SERVICED and removed from active work orders.");
       }
-
+    },
+    components: {
+      'datepicker':Datepicker
     }
   };  
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   /*--------------------------------------*/
   /* Lean Import for Components           */
   /*--------------------------------------*/
@@ -113,7 +99,7 @@
     background: $active-grey;
     position: relative;
     border-radius: 3px;
-    overflow: hidden;
+    overflow: visible;
     padding: 3px;
     height: 10.2vw;
 
@@ -136,13 +122,6 @@
         font-size: 11px;
         margin: 0 2px;
       }
-
-      /*&:before {
-        display: block;
-        position: relative;
-        top: 50%;
-        transform: translate3d(0, -50%, 0);
-      }*/
     }
 
     .no-spin {
@@ -151,7 +130,7 @@
 
     input {
       margin-top: 0;
-      width: 80%;
+      width: 100%;
       font-size: 3.4vw;
       padding: 8px;
       position: relative;
@@ -161,7 +140,6 @@
       @media screen and ('$tablet-only-comp') {
         font-size: .8vw;
         padding: 3px;
-        width: 88%;
       }
 
       @media screen and ('$laptop-only-comp') {
@@ -203,6 +181,7 @@
     background: $zucora-green !important;
   }
   /* stylelint-enable */
+
 </style>
 
 

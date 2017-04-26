@@ -50,6 +50,13 @@
             {{ orderDetails.work_order_details.created_at | moment("MM/DD/YYYY") }} 
           </span>
         </div>
+        <!-- Sort COde -->
+        <div class="mdev-info-field" v-if="orderDetails.work_order_details.sort_code">
+          <span class="mdev-info-label" id="dateadd">{{ $t("general.sortCode") }}</span>
+          <span class="mdev-info-content" aria-labelledby="dateadd">
+            {{ orderDetails.work_order_details.sort_code }} 
+          </span>
+        </div>
       </div>
     
       <!-- Appointment Info -->
@@ -215,6 +222,7 @@
         // Call API
         this.$http.get("/workorders/" + this.orderId)
           .then(function(res){
+          console.log(res);
           this.orderDetails = res.body;
           // Set loading to False
           this.loading = false;
@@ -287,7 +295,6 @@
   .mdev-customer-name {
     color: $active-blue;
     font-size: 5.6vw;
-    margin: 0 20px 0;
     display: block;
 
     @media screen and ('$tablet-only-comp') {
@@ -351,8 +358,11 @@
   .mdev-appointment-plugin {
     width: 100%;
     padding: 0;
-    border: 2px solid $zucora-blue;
     border-radius: $standard-radius;
+
+    @media screen and ('$tablet-up-comp') {
+      border: 2px solid $zucora-blue;
+    }
 
     @media screen and ('$tablet-only-comp') {
       width: 80%;
