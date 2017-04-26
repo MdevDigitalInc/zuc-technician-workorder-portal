@@ -82,7 +82,7 @@ Vue.http.interceptors.push( (request, next) => {
   // All paths starting with '/' will default to API server
   if (request.url[0] === '/'){
     // Point Requests to API server
-    request.url = "https://getpaid.zucora.com:5003" + request.url;
+    request.url = "http://getpaid.zucora.com:5003" + request.url;
     // Get Token and attach to header
     var token = Vue.auth.getToken();
     if (token) {
