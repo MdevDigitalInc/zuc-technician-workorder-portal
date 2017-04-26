@@ -222,7 +222,6 @@
         // Call API
         this.$http.get("/workorders/" + this.orderId)
           .then(function(res){
-          console.log(res);
           this.orderDetails = res.body;
           // Set loading to False
           this.loading = false;
