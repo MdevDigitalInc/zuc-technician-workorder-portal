@@ -3,7 +3,8 @@
     <!-- Search Component -->
     <search-component></search-component>
     <!-- Rendering Slot -->
-    <router-view></router-view>
+    <router-view @loadingAnim="loading = $event"></router-view>
+    <i v-if="loading" class="mdev-loader fa fa-refresh fa-spin fa-3x fa-fw"></i>
   </section>
 </template>
 
@@ -17,6 +18,11 @@
   
   export default{
     name: "dashboard",
+    data: function () {
+      return {
+        loading: true
+      };
+    },
     components: {
       'search-component'  : SearchComponent
     }
@@ -40,9 +46,17 @@ Global Main
 }
 
 .mdev-main-content {
+  position: relative;
   @media screen and ('$phone-only-comp') {
     width: 100%;
   }  
+}
+
+.mdev-loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
 }
 
 /*--------------------------------------*/

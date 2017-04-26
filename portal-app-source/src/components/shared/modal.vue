@@ -6,7 +6,16 @@
       </a>
       <change-pwd v-if="pwdOrContactShow" @closeModal="closeMe"></change-pwd>
       <div class="mdev-contact-info" v-if="!pwdOrContactShow">
+        <img :src="loadImage(mainBrand)" alt="Zucora Inc. Logo" >
         <h1> Contact Information </h1>
+        <a href="tel:18003882640" class="mdev-contact">
+          <i class="fa fa-fw fa-phone"></i>
+          1 800.388.2640
+        </a>
+        <a href="mailto:info@zucora.com" class="mdev-contact">
+          <i class="fa fa-fw fa-envelope"></i>
+          info@zucora.com
+        </a>
       </div>
       <slot></slot>    
     </div>
@@ -22,7 +31,8 @@
 
     data: function() {
       return{
-        pwdOrContactShow: null
+        pwdOrContactShow  : null,
+        mainBrand         : 'zucora-white.svg'
       };
     },
 
@@ -42,6 +52,10 @@
     
     // Close Modal emitter
     methods: {
+      // Image Loader
+      loadImage(path) {
+        return require('../../assets/images/' + path);
+      },
       closeMe() {
         this.$emit('close');
       }
@@ -122,6 +136,29 @@
       color: $active-grey;
       font-size: 20px;
 
+    }
+
+    .mdev-contact {
+      width: 60%;
+      margin: $medium-spacing auto;
+      text-align: left;
+      font-weight: $heading-weight;
+      display: block;
+      font-size: 18px;
+
+      i {
+        color: $zucora-green;
+        margin-right: 5px;
+      }
+    }
+
+    img {
+      width: 70%;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      margin-bottom: 30px;
     }
 
   }

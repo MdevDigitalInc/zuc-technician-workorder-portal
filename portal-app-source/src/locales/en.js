@@ -9,6 +9,7 @@ export default {
     business: "Business:",
     custId: "Customer ID:",
     dateAdd: "Date Added:",
+    sortCode: "Sort Code:",
     date: "Date:",
     time: "Time:",
     back: "Back",
@@ -66,7 +67,8 @@ export default {
         register: "User successfully created, You will be redirected soon.",
         login: "Success",
         reset: "Password successfully reset.",
-        change: "Password successfully changed."
+        change: "Password successfully changed.",
+        statusChange: "Order Marked as Serviced and Removed From Active Work Orders."
       }
     }
   },

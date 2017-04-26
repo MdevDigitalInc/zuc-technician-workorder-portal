@@ -1,6 +1,6 @@
 <template>
   <!-- Main Container -->
-  <section class="mdev-main-content-frame" aria-labeledby="dashboard-title">
+  <section v-if="workOrders" class="mdev-main-content-frame" aria-labeledby="dashboard-title">
     <!-- Header [FLEX] -->
     <div class="mdev-frame-header flex flex-start flex-hor-between">
       <span id="dashboard-title">{{ $t("orderList.title") }}</span>
@@ -143,7 +143,8 @@
           }
         ],
 
-        workOrders: null
+        workOrders: null,
+        loading: true
       };
     },
     
@@ -154,16 +155,26 @@
 
     // Watch for Route Changes and fetch data 
     watch: {
-      '$route': 'fetchData'
+      '$route'  : 'fetchData',
+      'loading' : 'loadAnimDispatcher'
     },
 
     methods: {
       // Call API and Retrieve Data
       fetchData() {
+        // Set loading to True
+        this.loading = true;
+        // Call API
         this.$http.get("/workorders/list")
           .then(function(res){
             this.workOrders = res.body.orders;
+            // Set Loading to False
+            this.loading = false;
           });
+      },
+      //Dispatch Loading Animation Update to parent
+      loadAnimDispatcher() {
+        this.$emit('loadingAnim', this.loading);
       }
     },
     
