@@ -41,14 +41,15 @@ export default {
       
       // Offset move by Desired Travel for Animation
       $('.mdev-shybar').css({
-        "top"     : (navHeight - desiredTravel) + 'px',
+        "top"     : navHeight + 'px',
+        "height"     : '0',
         "opacity" : "0"
       });
 
       // Send it to it's resting place
       setTimeout(function(){
         $('.mdev-shybar').css({
-          "top"     : navHeight + 'px',
+          "height"     : '',
           "opacity" : "1"
         }); 
       }), 50;
@@ -71,6 +72,11 @@ export default {
         }); 
       }), 50;
     }
+
+    $(window).resize(function(){
+      console.log(resize);
+      this.$emit('closeMe');
+    });
   }
 };
 
@@ -94,7 +100,7 @@ export default {
   
   .mdev-shybar {
     width: 100%;
-    background: $active-grey;
+    background: $inactive-grey;
     position: fixed;
     left: 0;
     transition: all, .3s;
@@ -104,6 +110,22 @@ export default {
 
     @media screen and ('$tablet-up-comp') {
       padding: $medium-spacing;
+      z-index: 15;
+    }
+    
+    .mdev-main-wrapper:before {
+      content: '';
+      position:  absolute;
+      width: 20px;
+      height: 20px;
+      background: $inactive-grey;
+      top: -20px;
+      right: 20px;
+      transform: rotate( 45deg );
+
+      @media screen and ('$tablet-up-comp') {
+        display: block;
+      }
     }
 
     .mdev-shybar-action {
@@ -114,6 +136,7 @@ export default {
 
       @media screen and ('$tablet-up-comp') {
         padding: 0 $medium-spacing;
+        font-size: .8vw;
       }
 
       &:last-child {
