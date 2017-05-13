@@ -1,9 +1,9 @@
 <template>
   <section class="mdev-main-content mdev-main-wrapper">
     <!-- Search Component -->
-    <search-component></search-component>
+    <search-component @userSearch="searchResults = $event"></search-component>
     <!-- Rendering Slot -->
-    <router-view @loadingAnim="loading = $event"></router-view>
+    <router-view @loadingAnim="loading = $event" v-if="!searchResults"></router-view>
     <i v-if="loading" class="mdev-loader fa fa-refresh fa-spin fa-3x fa-fw"></i>
   </section>
 </template>
@@ -20,7 +20,8 @@
     name: "dashboard",
     data: function () {
       return {
-        loading: true
+        loading: true,
+        searchResults: false
       };
     },
     components: {
