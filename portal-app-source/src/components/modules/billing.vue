@@ -156,7 +156,9 @@
       // Fetch Data from API
       fetchData() {
         // Set Loading to True
-        this.loading = true;
+        if (!this.billing) {
+          this.loading = true;
+        }
         // Reset billingIndex to "0" since fetchData is only called on refreshes
         this.billingIndex = 0;
         // Call API with GET request
@@ -184,8 +186,18 @@
           this.billingIndex = this.periods.length;
         }
         // When the user hits the end of the array, fetch the very first record.
-        else if (step + this.billingIndex > this.periods.length) {
+        else if (step + this.billingIndex > this.periods.length || this.billingIndex + step === 0) {
           this.fetchData();
+          return;
+        }
+        else if (this.billingIndex === 0 ) {
+          // Condition created to catch the FIRST user interaction
+          // Retrieve specific Billing Period leaving this.periods array intact
+          this.$http.post('/billing', this.periods[this.billingIndex])
+            .then(function(res){
+            this.billing = res.body;
+          });  
+          this.billingIndex += step;
           return;
         }
         // If the user still hasn't hit an endpoint just go to the next item in the array.
@@ -204,6 +216,7 @@
       printPage() {
         window.print();
       },
+      
       //Dispatch Loading Animation Update to parent
       loadAnimDispatcher() {
         this.$emit('loadingAnim', this.loading);
