@@ -44,13 +44,15 @@
   width: 100%;
   background: $zucora-blue;
   color: $white;
-  padding: 15px;
+  padding: 15px 30px;
   font-weight: $heading-weight; 
-  @include font-size($h3-font-sizes);
+  text-transform: uppercase;
+  @include font-size($h4-font-sizes);
 
   @media #{$phone-only} {
     display: none;
   }
+
 }
 
 // Columns

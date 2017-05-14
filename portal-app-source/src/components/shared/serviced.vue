@@ -148,8 +148,8 @@
       }
 
       @media screen and ('$desktop-only-comp') {
-        font-size: 1vw;
-        padding: 3px;
+        font-size: .8vw;
+        padding: 7px;
       }
 
       @media screen and ('$xl-up-comp') {
@@ -157,7 +157,9 @@
         padding: 10px;
       }
 
-      &:hover {
+      &:hover,
+      &:focus,
+      &:active {
         border: none;
       }
     }

@@ -73,7 +73,7 @@ export default {
     }
   },
   orderList: {
-    title: "Available Work Orders:"
+    title: "Open Work Orders"
   },
   orderDetails: {
     title: "Wokorder Number: ",

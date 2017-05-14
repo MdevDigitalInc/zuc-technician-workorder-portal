@@ -1,5 +1,6 @@
 <template>
  <div class="mdev-search --icon-layer">
+  <i class="fa fa-fw fa-search"></i>
   <input class="mdev-search-form" 
     type="text"
     v-model="query.search"
@@ -17,7 +18,7 @@
       <div class="mdev-table-head flex flex-start">
         <span
           v-for="header in tableHeaders"
-          :class="['mdev-table-cell',{ smallColumn: header.special}]" id="header.ariaId">
+          :class="['mdev-table-cell',{ smallColumn: header.special, mediumColumn: header.medium}]" id="header.ariaId">
             {{ header.title }}
           </span>
       </div>
@@ -29,7 +30,7 @@
         v-if="!result.servicedDate">      
         
         <!-- Date Added -->
-        <span class="mdev-table-cell" aria-labeledby="dateColumn">
+        <span class="mdev-table-cell mediumColumn" aria-labeledby="dateColumn">
           <span class="u-hidden-desktop mdev-hidden-label" aria-hidde="true">
             Date Added:
           </span>
@@ -44,7 +45,7 @@
         </span>
 
         <!-- City -->
-        <span class="mdev-table-cell" aria-labeledby="cityColumn">
+        <span class="mdev-table-cell mediumColumn" aria-labeledby="cityColumn">
           <span class="u-hidden-desktop mdev-hidden-label --column-modifier" aria-hidde="true">
             City:
           </span>
@@ -109,42 +110,50 @@ export default {
         {
           title   : "Date Added:",
           ariaId  : "dateColumn",
-          special : false
+          special : false,
+          medium  : true
         },
         {
           title   : "Customer Name:",
           ariaId  : "customerColumn",
-          special : false
+          special : false,
+          medium  : false
         },
         {
           title   : "City:",
           ariaId  : "cityColumn",
-          special : false
+          special : false,
+          medium  : true
         },
         {
           title   : "Address:",
           ariaId  : "addressColumn",
-          special : false
+          special : false,
+          medium  : false
         },
         {
           title   : "Phone:",
           ariaId  : "phoneColumn",
-          special : false
+          special : false,
+          medium  : false
         },
         {
           title   : "Serviced Date:",
           ariaId  : "serviceColumn",
-          special : false
+          special : false,
+          medium  : false
         },
         {
           title   : "Status:",
           ariaId  : "statusColumn",
-          special : false
+          special : false,
+          medium  : false
         },          
         {
           title   : "Info:",
           ariaId  : "infoColumn",
-          special : true
+          special : true,
+          medium  : false
         }
       ],      
       query: {
@@ -210,12 +219,13 @@ Global Main
   display: block;
   font-size: 2.6vw;
   z-index: 1;
+  color: $inactive-grey;
   
   @media screen and ('$tablet-up-comp') {
     width: 100%;
     margin: 15px 0 0 0;
     padding: 15px 40px 15px;
-    font-size: 1.6vw;
+    font-size: 1.2vw;
   }
 
   @media screen and ('$laptop-only-comp') {
@@ -223,13 +233,32 @@ Global Main
   }
 
   @media screen and ('$desktop-only-comp') {
-    font-size: 1vw;
+    font-size: .9vw;
     padding-left: 50px;
   }
 
   @media screen and ('$xl-up-comp') {
     font-size: 16px;
     padding-left: 60px;
+  }
+}
+
+.mdev-search {
+  position: relative;
+
+  i {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translate3d( 0, -50%, 0);
+    z-index: 4;
+    color: $inactive-grey;
+    font-size: inherit;
+
+    @media screen and ('$tablet-up-comp') {
+      left: 15px;
+    }
+
   }
 }
 
