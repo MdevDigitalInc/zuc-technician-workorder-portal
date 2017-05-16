@@ -1,12 +1,14 @@
 <template>
- <div class="mdev-search --icon-layer">
-  <i class="fa fa-fw fa-search"></i>
-  <input class="mdev-search-form" 
-    type="text"
-    v-model="query.search"
-    @keyup.enter="sendQuery"
-    :placeholder="$t('general.search')"
-    aria-label="Search">
+ <div class="mdev-search">
+  <div class="mdev-container">
+    <i class="fa fa-fw fa-search"></i>
+    <input class="mdev-search-form" 
+      type="text"
+      v-model="query.search"
+      @keyup.enter="sendQuery"
+      :placeholder="$t('general.search')"
+      aria-label="Search">
+  </div>
   <section v-if="results && searching" class="mdev-main-content-frame" aria-labeledby="dashboard-title">
     <!-- Header [FLEX] -->
     <div class="mdev-frame-header flex flex-start flex-hor-between">
@@ -60,11 +62,12 @@
             {{ result.workOrderContent.address }}
           </span>
         <!-- Phone -->
-        <span class="mdev-table-cell" aria-labeledby="phoneColumn">
+        <span class="mdev-table-cell mediumColumn" aria-labeledby="phoneColumn">
           <span class="u-hidden-desktop mdev-hidden-label --column-modifier" aria-hidde="true">
             Phone:
           </span>
-        {{ result.workOrderContent.custHomePhone}}
+
+        {{ formatPhone(result.workOrderContent.custHomePhone) }}
         </span>
 
         
@@ -135,7 +138,7 @@ export default {
           title   : "Phone:",
           ariaId  : "phoneColumn",
           special : false,
-          medium  : false
+          medium  : true
         },
         {
           title   : "Serviced Date:",
@@ -181,7 +184,10 @@ export default {
           this.searching = true;
         });
     },
-   
+    // Format Phone Numbers
+    formatPhone(phone) {
+      return phone.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+    },  
     // Reset views on Navigation 
     resetOnNavigate: function () {
       this.searching = false;
@@ -243,7 +249,8 @@ Global Main
   }
 }
 
-.mdev-search {
+
+.mdev-container {
   position: relative;
 
   i {

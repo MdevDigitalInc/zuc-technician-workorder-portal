@@ -24,9 +24,20 @@
   padding: 8px;
   background: $active-blue;
   color: $white;
+  width: 35px;
+  height: 35px;
+  position: relative;
+
+  i {
+    position: relative;
+    top:50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+  }
 
   @media screen and ('$tablet-only-comp') {
-    padding: 3px;
+    width: 20px;
+    height: 20px;
   }
 }
 
@@ -61,7 +72,7 @@
   }
 
   .--name-modifier {
-    font-size: 6vw;
+    font-size: 5vw;
     margin-bottom: 8px;
   }
 

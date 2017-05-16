@@ -48,8 +48,16 @@
   /* Disable because they are already linted */
   /* stylelint-disable */
   @import '../../assets/styles/component-lean-main.scss';
-  /* stylelint-enable */
 
+  /* stylelint-enable */
+  
+  .mdev-base-btn {
+    height: 35px;
+
+    @media screen and ('$tablet-only-comp') {
+      height:20px;
+    }
+  }
   /*--------------------------------------*/
   /* Main Component Styles                */
   /*--------------------------------------*/

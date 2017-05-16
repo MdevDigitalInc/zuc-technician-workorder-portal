@@ -53,11 +53,11 @@
             {{ orders.workOrderContent.address }}
           </span>
         <!-- Phone -->
-        <span class="mdev-table-cell" aria-labeledby="phoneColumn">
+        <span class="mdev-table-cell mediumColumn" aria-labeledby="phoneColumn">
           <span class="u-hidden-desktop mdev-hidden-label --column-modifier" aria-hidde="true">
             Phone:
           </span>
-        {{ orders.workOrderContent.custHomePhone}}
+        {{ formatPhone(orders.workOrderContent.custHomePhone) }}
         </span>
 
         
@@ -129,7 +129,7 @@
             title   : "Phone:",
             ariaId  : "phoneColumn",
             special : false,
-            medium  : false
+            medium  : true
           },
           {
             title   : "Serviced Date:",
@@ -179,6 +179,10 @@
             // Set Loading to False
             this.loading = false;
           });
+      },
+      // Format Phone Numbers
+      formatPhone(phone) {
+        return phone.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
       },
       //Dispatch Loading Animation Update to parent
       loadAnimDispatcher() {

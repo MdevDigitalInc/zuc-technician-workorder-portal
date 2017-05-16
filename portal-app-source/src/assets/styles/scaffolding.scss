@@ -47,7 +47,7 @@
   padding: 15px 30px;
   font-weight: $heading-weight; 
   text-transform: uppercase;
-  @include font-size($h4-font-sizes);
+  @include font-size($order-header-font-sizes);
 
   @media #{$phone-only} {
     display: none;
