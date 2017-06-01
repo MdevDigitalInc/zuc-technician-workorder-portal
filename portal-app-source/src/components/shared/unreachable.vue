@@ -26,13 +26,10 @@
       unreachableToggle() {
         // Flip the boolean and send it to API.
         this.postData.unreachable = !this.status;
-
-        console.log(this.postData);
         
         // Update Work Order Status
         this.$http.put("/workorders/status", this.postData)
           .then( function(res) {
-          console.log(res);
           // Only upon successful response, flip the UI
           // We simply pass the same data that was sent to the API.
           this.status = this.postData.unreachable;

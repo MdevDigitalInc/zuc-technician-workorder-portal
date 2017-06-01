@@ -13,7 +13,9 @@
       :format="format"
       :value="postData.servicedDate"> </datepicker>
     
-    <span class="--success-active" v-if="hideInput"> SERVICED </span>
+    <span class="--success-active" v-if="hideInput"> 
+       <span class="u-center-hold"> SERVICED </span>
+    </span>
   </div>
 </template>
 <script>
@@ -190,15 +192,20 @@
 
     .--success-active {
       display: block;
-      /*padding-top: 7px;*/
       text-align: center;
       width: 80%;
-      top: 50%;
       position: relative;
-      transform: translate3d(0, -20%, 0);
       color: $white;
       font-weight: $heading-weight;
       font-size: 1vw;
+    }
+
+    .u-center-hold {
+      display: block;
+      height: auto;
+      position: relative;
+      top: 50%;
+      transform: translate3d(0, -50%, 0);
     }
   }
 
