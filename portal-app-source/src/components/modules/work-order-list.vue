@@ -72,7 +72,7 @@
         <span class="mdev-table-cell --side-modifier" aria-labeledby="statusColumn">
         <!-- Unreachable Component -->
         <unreachable-component
-          :orderId="orders.WorkOrderId"
+          :orderId="orders.workOrderId"
           :unreachable="orders.unreachable"></unreachable-component>
         </span>
         

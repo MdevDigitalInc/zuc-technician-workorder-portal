@@ -1,8 +1,8 @@
 <template>
   <div :class="['mdev-serviced-plugin flex flex-hor-between flex-vert-stretch',{activeInput : successClass} ]">
-    <div class="mdev-service-icon">
+    <div class="mdev-service-icon" :class="{activeIcon: successClass}">
       <i v-if="!showSpinner" class="fa fa-fw fa-calendar"></i>
-      <i v-if="showSpinner" class="fa fa-circle-o-notch fa-spin fa-fw"></i>
+      <i v-if="showSpinner" class="fa fa-circle-o-notch fa-fw"></i>
     </div>
     
     <datepicker v-if="!hideInput"
@@ -96,12 +96,11 @@
     position: relative;
     border-radius: 3px;
     overflow: visible;
-    height: 10.2vw;
+    height: 34px;
     position: relative;
 
     @media screen and ('$tablet-up-comp') {
       margin: 0 $small-spacing;
-      height: 2vw;
     }
 
     &:hover {
@@ -144,6 +143,9 @@
         top: 50%;
         transform: translate3d( 0, -50%, 0);
       }
+    }
+    .activeIcon {
+      background: $zucora-green;
     }
     input {
       margin-top: 0;
