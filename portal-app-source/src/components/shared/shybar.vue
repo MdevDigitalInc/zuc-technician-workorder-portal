@@ -74,7 +74,6 @@ export default {
     }
 
     $(window).resize(function(){
-      console.log(resize);
       this.$emit('closeMe');
     });
   }

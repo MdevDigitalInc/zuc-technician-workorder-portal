@@ -78,7 +78,6 @@ const router = new VueRouter ({
 
 // Set Global HTTP Request Intercept 
 Vue.http.interceptors.push( (request, next) => {
-  
   // All paths starting with '/' will default to API server
   if (request.url[0] === '/'){
     // Point Requests to API server

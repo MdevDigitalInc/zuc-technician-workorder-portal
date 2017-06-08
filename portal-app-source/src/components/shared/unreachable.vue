@@ -11,12 +11,12 @@
     props: ['unreachable', 'orderId'],
     data: function () {
       return {
-        status: '',
+        status: this.unreachable,
         postData: {
           workOrderId   : this.orderId,
           serviced      : false,
           servicedDate  : false,
-          unreachable   : !this.unreachable
+          unreachable   : null
         }
       };
     },
