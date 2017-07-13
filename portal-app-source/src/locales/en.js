@@ -110,7 +110,7 @@ export default {
   footer: {
     title: "Questions?",
     action: "Contact Support:",
-    message: "1 800.452.0101 | Copyright ©",
+    message: "1 800.388.2640 | Copyright ©",
     brand: "Zucora"
   }
 };
