@@ -18,7 +18,8 @@
         <i :class="['fa fa-fw', contact.iconFa]"></i>
         <span>{{ contact.linkName  }}</span>
    </a>
-   <a @click="showShybar(!showShybarBool)" class="mdev-nav-link flex flex-hor-between flex-vert-center u-bold">
+   <a @click="showShybar(!showShybarBool)" 
+      :class="['mdev-nav-link flex flex-hor-between flex-vert-center u-bold', { active: showShybarBool}]">
         
         <i :class="['fa fa-fw', user.iconFa]"></i>
         <span>{{ user.linkName  }}</span>
@@ -138,9 +139,10 @@
     
   }
 
-  .--active {
+  .--active, 
+  .active {
     color: $zucora-green;
+    position: relative;
   }
   /*--------------------------------------*/
-
 </style>

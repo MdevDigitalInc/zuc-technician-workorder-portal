@@ -29,7 +29,7 @@ export default {
     register: {
       title: "Work Order Portal Registration",
       action: "register",
-      email: "Email",
+      email: "Email Address",
       firstName: "First Name",
       lastName: "Last Name",
       pwd: "Password"
@@ -38,7 +38,7 @@ export default {
       title: "Work Order Portal Login",
       action: "LogIn",
       reset: "forgot password?",
-      email: "Email",
+      email: "Email Address",
       pwd: "Password"
     },
     change:{
@@ -73,7 +73,7 @@ export default {
     }
   },
   orderList: {
-    title: "Available Work Orders:"
+    title: "Open Work Orders"
   },
   orderDetails: {
     title: "Wokorder Number: ",

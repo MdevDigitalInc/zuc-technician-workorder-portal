@@ -1,75 +1,90 @@
+.mdev-table-cell {
+  width: 14%;
+
+  input {
+    margin-top: 0;
+  }
+}
+
+.smallColumn {
+  width: 4%;
+}
+
+.mediumColumn {
+  width: 10%;
+}
+
+.mdev-serviced-plugin {
+  margin-left: 0;
+}
+
+.info-icon {
+  display: inline-block;
+  border-radius: 3px;
+  padding: 8px;
+  background: $active-blue;
+  color: $white;
+  width: 35px;
+  height: 35px;
+  position: relative;
+
+  i {
+    position: relative;
+    top:50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+  }
+
+  @media screen and ('$tablet-only-comp') {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+
+
+@media screen and ('$phone-only-comp') {
   .mdev-table-cell {
-    width: 14%;
-
-    input {
-      margin-top: 0;
-    }
+    width: 100%;
+    padding: 5px 0;
+  }
+  
+  .mdev-table-row {
+    flex-wrap: wrap;
+    position: relative;
+  }
+  
+  .mdev-table-head {
+    display: none;
+  }
+  
+  .--side-modifier {
+    width: 50%;
+    padding: 0;
+    margin-top: 10px;
+  }
+  
+  .--top-modifier {
+    position: absolute;
+    top: $large-spacing;
+    padding: 0;
+    right: -87%;
   }
 
-  .smallColumn {
-    width: 4%;
+  .--name-modifier {
+    font-size: 5vw;
+    margin-bottom: 8px;
   }
 
-  .mdev-serviced-plugin {
-    margin-left: 0;
-  }
-
-  .info-icon {
+  .--column-modifier {
+    width: 24%;
     display: inline-block;
-    border-radius: 3px;
-    padding: 8px;
-    background: $active-blue;
-    color: $white;
-
-    @media screen and ('$tablet-only-comp') {
-      padding: 3px;
-    }
   }
 
-
-
-  @media screen and ('$phone-only-comp') {
-    .mdev-table-cell {
-      width: 100%;
-      padding: 5px 0;
-    }
-    
-    .mdev-table-row {
-      flex-wrap: wrap;
-      position: relative;
-    }
-    
-    .mdev-table-head {
-      display: none;
-    }
-    
-    .--side-modifier {
-      width: 50%;
-      padding: 0;
-      margin-top: 10px;
-    }
-    
-    .--top-modifier {
-      position: absolute;
-      top: $large-spacing;
-      padding: 0;
-      right: -87%;
-    }
-
-    .--name-modifier {
-      font-size: 6vw;
-      margin-bottom: 8px;
-    }
-
-    .--column-modifier {
-      width: 24%;
-      display: inline-block;
-    }
-
-    .mdev-status-btn {
-      height: 10.2vw;
-      margin: 0 0 0 5px;
-      font-size: 3.4vw;
-      width: 100%;
-    }
+  .mdev-status-btn {
+    height: 10.2vw;
+    margin: 0 0 0 5px;
+    font-size: 3.4vw;
+    width: 100%;
   }
+}

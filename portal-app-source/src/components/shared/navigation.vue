@@ -198,7 +198,7 @@
       /* Temporary */
       i {
         font-size: 1.5vw;
-        padding-right: .5vw;
+        padding-right: .2vw;
       }
     }
     
@@ -222,7 +222,7 @@
 
     .mdev-main-nav-links {
       display: none;
-      color: $charcoal-grey;
+      color: $inactive-grey;
       font-weight: $body-weight;
 
       @media screen and ('$tablet-up-comp') {

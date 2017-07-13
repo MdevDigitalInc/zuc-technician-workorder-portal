@@ -11,7 +11,7 @@
       <div class="mdev-table-head flex flex-start">
         <span
           v-for="header in tableHeaders"
-          :class="['mdev-table-cell',{ smallColumn: header.special}]" id="header.ariaId">
+          :class="['mdev-table-cell',{ smallColumn: header.special, mediumColumn: header.medium}]" id="header.ariaId">
             {{ header.title }}
           </span>
       </div>
@@ -23,7 +23,7 @@
         v-if="!orders.servicedDate">      
         
         <!-- Date Added -->
-        <span class="mdev-table-cell" aria-labeledby="dateColumn">
+        <span class="mdev-table-cell mediumColumn" aria-labeledby="dateColumn">
           <span class="u-hidden-desktop mdev-hidden-label" aria-hidde="true">
             Date Added:
           </span>
@@ -38,7 +38,7 @@
         </span>
 
         <!-- City -->
-        <span class="mdev-table-cell" aria-labeledby="cityColumn">
+        <span class="mdev-table-cell mediumColumn" aria-labeledby="cityColumn">
           <span class="u-hidden-desktop mdev-hidden-label --column-modifier" aria-hidde="true">
             City:
           </span>
@@ -53,11 +53,11 @@
             {{ orders.workOrderContent.address }}
           </span>
         <!-- Phone -->
-        <span class="mdev-table-cell" aria-labeledby="phoneColumn">
+        <span class="mdev-table-cell mediumColumn" aria-labeledby="phoneColumn">
           <span class="u-hidden-desktop mdev-hidden-label --column-modifier" aria-hidde="true">
             Phone:
           </span>
-        {{ orders.workOrderContent.custHomePhone}}
+        {{ formatPhone(orders.workOrderContent.custHomePhone) }}
         </span>
 
         
@@ -72,7 +72,7 @@
         <span class="mdev-table-cell --side-modifier" aria-labeledby="statusColumn">
         <!-- Unreachable Component -->
         <unreachable-component
-          :orderId="orders.WorkOrderId"
+          :orderId="orders.workOrderId"
           :unreachable="orders.unreachable"></unreachable-component>
         </span>
         
@@ -104,42 +104,50 @@
           {
             title   : "Date Added:",
             ariaId  : "dateColumn",
-            special : false
+            special : false,
+            medium  : true
           },
           {
             title   : "Customer Name:",
             ariaId  : "customerColumn",
-            special : false
+            special : false,
+            medium  : false
           },
           {
             title   : "City:",
             ariaId  : "cityColumn",
-            special : false
+            special : false,
+            medium  : true
           },
           {
             title   : "Address:",
             ariaId  : "addressColumn",
-            special : false
+            special : false,
+            medium  : false
           },
           {
             title   : "Phone:",
             ariaId  : "phoneColumn",
-            special : false
+            special : false,
+            medium  : true
           },
           {
             title   : "Serviced Date:",
             ariaId  : "serviceColumn",
-            special : false
+            special : false,
+            medium  : false
           },
           {
             title   : "Status:",
             ariaId  : "statusColumn",
-            special : false
+            special : false,
+            medium  : false
           },          
           {
             title   : "Info:",
             ariaId  : "infoColumn",
-            special : true
+            special : true,
+            medium  : false
           }
         ],
 
@@ -171,6 +179,10 @@
             // Set Loading to False
             this.loading = false;
           });
+      },
+      // Format Phone Numbers
+      formatPhone(phone) {
+        return phone.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
       },
       //Dispatch Loading Animation Update to parent
       loadAnimDispatcher() {

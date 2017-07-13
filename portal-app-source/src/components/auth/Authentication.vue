@@ -108,13 +108,13 @@
       border-top: solid $border-top-size $zucora-blue;
       padding: ($top-padding-var + $border-top-size) 30px 30px;
       width: 40%;
+      transform: translate3D(-50%, -70%, 0);
     }
     
 
 
     h1 {
       font-size: 20px;
-      margin-bottom: 10px;
     }
 
     a {
@@ -145,7 +145,7 @@
   }
 
   .mdev-action-group {
-    margin: 20px 0 10px 0;
+    margin: 35px 0 10px 0;
   }
 
   .mdev-splash-bkg {
@@ -159,6 +159,10 @@
     height: 100vh;
     z-index: 1;
     filter: blur(2px);
+
+    @media screen and ('$tablet-up-comp') {
+      background-position: center -210px;
+    }
 
     &:before {
       content: '';

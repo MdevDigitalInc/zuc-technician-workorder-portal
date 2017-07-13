@@ -81,4 +81,9 @@
    };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+  .mdev-form-title {
+    text-transform: uppercase;
+  }
+
+</style>
