@@ -168,7 +168,6 @@
           // Save out an array of available billing periods
           this.periods = null;
           this.periods = this.billing.billingPeriods.reverse();
-          console.log(this.periods);
           // Set Loading to False
           this.loading = false;
           });
@@ -186,36 +185,20 @@
         // When the user hits the beginning of the array, go to the end of the array.
         if (step + this.billingIndex < 0) {
           this.billingIndex = this.periods.length -1;
-          console.log('condition1');
         }
         // When the user hits the end of the array, fetch the very first record.
-        else if (step + this.billingIndex > this.periods.length) {
-          this.fetchData();
-          console.log('condition2');
-          return;
-        }
-        else if (step + this.billingIndex === 0 ) {
-          // Condition created to catch the FIRST user interaction
-          // Retrieve specific Billing Period leaving this.periods array intact
-          this.$http.post('/billing', this.periods[this.billingIndex])
-            .then(function(res){
-            this.billing = res.body;
-          });  
-          console.log('condition3');
-          return;
+        else if (step + this.billingIndex > (this.periods.length - 1)) {
+          this.billingIndex = 0;
         }
         // If the user still hasn't hit an endpoint just go to the next item in the array.
         else {
           this.billingIndex += step;
-          console.log('condition4');
         }
         // Retrieve specific Billing Period leaving this.periods array intact
         this.$http.post('/billing', this.periods[this.billingIndex])
           .then(function(res){
           this.billing = res.body;
-          console.log(this.billingIndex);
         });
-        console.log(this.billingIndex);
       },
       
       // Print Page Command

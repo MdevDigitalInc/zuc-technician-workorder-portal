@@ -80,7 +80,6 @@ const router = new VueRouter ({
 Vue.http.interceptors.push( (request, next) => {
   // All paths starting with '/' will default to API server
   if (request.url[0] === '/'){
-    console.log(request);
     // Point Requests to API server
     request.url = "https://getpaid.zucora.com:5003" + request.url;
     // Get Token and attach to header
@@ -90,7 +89,6 @@ Vue.http.interceptors.push( (request, next) => {
     }
   }
   next( function(response){
-    console.log(response);
     // If server responds with Error Code display error
     if (response.status >= 400){
       alertify.error(response.body.error);

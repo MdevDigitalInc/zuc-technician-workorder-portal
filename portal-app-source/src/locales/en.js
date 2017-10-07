@@ -20,6 +20,7 @@ export default {
     title: "Manage Work Orders",
     title404: "We're sorry but that URL doesn't exist.",
     changePwd: "Change Password",
+    invoice: "Invoice Number",
     logout: "Logout"
   },
   redirect: {
