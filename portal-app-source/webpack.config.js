@@ -136,7 +136,9 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue.common.js'
+      'vue$': 'vue/dist/vue.common.js',
+      // Fixes Moment.js locales error
+      moment$: 'moment/moment.js'
     }
   },
   devServer: {
