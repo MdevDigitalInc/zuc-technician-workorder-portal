@@ -2,9 +2,9 @@
 clear
 # [ Black Mesa - Vue.js Dependencies ]
 # ------------------------------------------------------------------
-# Lucas Moreira - l.moreira@live.ca 
+# Lucas Moreira - l.moreira@live.ca
 # ------------------------------------------------------------------
-# 
+#
 # Setup Bash Script for installing Node dependencies and running dev server
 # with support for Windows | Mac | Linux architectures.
 
@@ -26,16 +26,28 @@ RED=`tput setaf 1`
 YELLOW=`tput setaf 3`
 NC=`tput sgr0`
 
+# Intro / Continue
+echo "__________________________________________________________________________________________"
+echo
+echo "[ ${YELLOW}Moreira Development - Vue.js App Installation${NC} ]"
+echo
+echo "__________________________________________________________________________________________"
+
 sleep 2s
 echo
 echo "This Script will install and configure all the necessary Software & Dependencies to run the project."
 echo
 echo "${YELLOW}[ Including ]"
 echo
-echo "- Git"
 echo "- Node & NPM"
 echo "- Vue"
 echo "- NPM Dependencies${NC}"
+echo
+echo
+echo "For more information and useful documentation please refer "
+echo "to the [${GREEN} ~/docs ${NC}] folder inside of this repository."
+echo
+echo "It includes information on Linting, Testing and styleguides. "
 echo
 echo "------------------------------------------------------------------------------------------"
 
@@ -50,10 +62,6 @@ echo "${RED}[ SUDO! ]${NC} - This application requires ${YELLOW}SUDO priviledges
 
 sleep 1s
 echo
-# TODO Modify Prompt
-# Ask User for permission
-echo "${YELLOW}--------------------------------------------${NC}"
-echo "${YELLOW}--------------------------------------------${NC}"
 read -p "${YELLOW}|   Continue with installation?   ${NC}|${NC}  " answer
 
 # [ Black Mesa ] Setup Script RUN
@@ -78,22 +86,25 @@ if node -v
     echo
     echo "${GREEN}Preparing to Install Node..."
     sleep 3s
-    
+
     #[ OS BASED NODE INSTALLATION ]
     if [ "$(uname)" == "Darwin" ]
     then
       # OSX Install Script
       clear
-      echo 
+      echo
       echo "${YELLOW}[ Operating System Detected as: ${GREEN}Darwin / OSX${NC} ${YELLOW}]${NC}"
       echo
       sleep 2s
       # Install Node
+      echo "${YELLOW}[ Checking for Software Updates ]${NC}"
+      if gcc --version
+        then
+          echo "${GREEN}[ XCode Already Installed ]{$NC}"
+        else
+          sudo softwareupdate -iva
+          xcode-select --install
       echo
-      echo "${GREEN}Installing Node via Bew. Cheers!${NC}"
-      sleep 2s
-      brew install node
-
     elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]
     then
       # Linux Node Install Script
@@ -102,22 +113,40 @@ if node -v
       echo "${YELLOW}[ Operating System Detected as: ${GREEN}Linux / GNU${NC}${YELLOW}]${NC}"
       sleep 2s
       # Prepare Install
-      curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash
-      # Install Node
-      sudo apt-get install -y nodejs
-    
-    elif [ "$(expr substr $(uname -s) 1 10)" == "MINGW32_NT" ]
-    then
-      # Windows
-      # Install Node VIa Chocolatey
-      cinst nodejs.install
+      sudo apt-get update
+      sudo apt-get install build-essential libssl-dev
     elif *
     then
       error_handle "Could Not Find Your OS. Please Install Node Manually And Try Again."
    fi
+   # Download NVM
+   curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
+
+   if nvm --version
+   then
+     nvm install node
+   elif
+     echo "${RED}[ NVM Did not install properly. ]${NC}"
+   fi
 fi
 # NODE INSTALL FINISH.
 
+if [ "$(uname)" == "Darwin" ]
+then
+  #install brew
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  #install image libraries
+  brew install libpng-dev mozjpeg
+  # Install compilers
+  brew install libtool automake autoconf nasm
+  elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]
+  then
+    sudo apt-get install libpng-dev mozjpeg
+    sudo apt-get install libtool automake autoconf nasm
+  else
+    clear
+    echo "${RED}[ OS Not Found...]${NC}"
+fi
 # Fetch latest master branch
 echo "${GREEN}Fetching latest codebase from Master...${NC}"
 if git fetch && git checkout master && git pull origin master
@@ -159,7 +188,7 @@ echo "${GREEN}Installing Node dependencies...${NC}"
 echo
 echo
 sleep 2s
-if cd portal-app-source/
+if cd vue-app-base/
   then
     npm install
 else
@@ -169,8 +198,10 @@ echo
 
 # Run Test Server
 clear
-echo 
+echo
 echo "${GREEN}SUCCESS! All dependencies installed...${NC}"
+echo
+echo "${GREEN}[ Welcome Aboard The ${ORANGE}Black Mesa${GREEN} ]${NC}"
 echo
 echo "${GREEN}------------------------------------------------------------------------------------------${NC}"
 echo
