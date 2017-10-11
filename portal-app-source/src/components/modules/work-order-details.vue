@@ -85,6 +85,13 @@
         <div class="mdev-order-wrapper">
           <div class="mdev-half-column">
             <h3 id="orderinfo-title">{{ $t("orderDetails.orderInfo") }}</h3>
+            <!-- Invoice Number -->
+            <div class="mdev-info-field">
+              <span class="mdev-info-label" id="invoice">{{ $t("general.invoice") }}</span>
+              <span class="mdev-info-content" aria-labelledby="invoice"> 
+                {{ (orderDetails.work_order_details.invoice_number) }} 
+              </span>
+            </div>            
             <!-- Delivery -->
             <div class="mdev-info-field">
               <span class="mdev-info-label" id="delivery">{{ $t("general.delivery") }}</span>
